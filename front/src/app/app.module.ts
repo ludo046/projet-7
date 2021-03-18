@@ -13,6 +13,9 @@ import { SinglePostComponent } from './single-post/single-post.component';
 import { AccountComponent } from './home/account/account.component';
 import { MessageComponent } from './home/message/message.component';
 import { SingleMessageComponent } from './home/message/single-message/single-message.component';
+import { UsersService } from './service/users.service';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 
 export const ROUTES : Routes = [
   { path: 'register', component: RegisterComponent},
@@ -39,9 +42,11 @@ export const ROUTES : Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UsersService, FormBuilder, HttpClientModule, HttpClient, FooterComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
