@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router'
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -14,9 +15,9 @@ export class UsersService {
   constructor(private http: HttpClient,
               private router: Router) {}
 
-  createUser(newUser){//firstName: string, lastName: string, password: string, email: string, birthDate: number, picture: string) {
+  createUser(firstName: string, lastName: string, password: string, email: string, dateBirth: number, picture: string){//firstName: string, lastName: string, password: string, email: string, birthDate: number, picture: string) {
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/api/users/register',{newUser}).subscribe( //{firstName: firstName, lastName: lastName, password: password, email: email, birthDate: birthDate, picture: picture}).subscribe(
+      this.http.post('http://localhost:8080/api/users/register',{firstName, lastName, password, email, dateBirth, picture}).subscribe( //{firstName: firstName, lastName: lastName, password: password, email: email, birthDate: birthDate, picture: picture}).subscribe(
         (response: { message: string }) => {
           resolve(response);       
         },

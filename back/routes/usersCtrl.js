@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwtUtils = require ('../utils/jwt.utils')
 const models = require('../models')
 const asyncLib = require('async');
-const user = require('../models/user');
+const User = require('../models/user');
 
 const emailRegexp  = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const passwordRegexp = /^(?=.*\d).{4,8}$/;
@@ -12,14 +12,15 @@ const passwordRegexp = /^(?=.*\d).{4,8}$/;
 module.exports={ 
     register: function(req, res) {
 
-        const firstname = req.body.firstname;
-        const lastname = req.body.lastname; 
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName; 
         const password = req.body.password;
         const email = req.body.email;
-        const datebirth = req.body.datebirth;
+        const dateBirth = req.body.dateBirth;
         const picture = req.body.picture;
+        console.log(firstName);
 
-        if (firstname == null || lastname == null || password == null || email == null || datebirth == null ) {
+        if (firstName == null || lastName == null || password == null || email == null || dateBirth == null ) {
             return res.status(400).json({ 'error': 'missing parameters' })
         }
         models.User.findOne({
@@ -30,11 +31,12 @@ module.exports={
             if (!userFound){
                 bcrypt.hash(password, 10, function(err, bcryptedPassword){
                     const newUser = models.User.create({
-                        firstname: firstname,
-                        lastname: lastname,
+                        firstname: firstName,
+                        lastname: lastName,
                         password: bcryptedPassword,
                         email: email,
-                        datebirth: datebirth,
+                        datebirth: dateBirth,
+                        picture: picture,
                         isAdmin:0
                     })
                     .then(function(newUser){
