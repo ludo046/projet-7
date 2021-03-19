@@ -31,33 +31,28 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(): void{
-    // const dataUser = this.signupForm.value;
-    // const newUser = new User(
-    //   dataUser.firstName,
-    //   dataUser.lastName,
-    //   dataUser.password,
-    //   dataUser.email,
-    //   dataUser.dateBirth,
-    //   dataUser.picture
-    // )
-    
-    // console.log(newUser)
-    
-    //  this.userService.createUser(newUser)
-    // //this.router.navigate(["/home"])
     const firstName = this.signupForm.get('firstName').value
     const lastName = this.signupForm.get('lastName').value
     const password = this.signupForm.get('password').value
     const email = this.signupForm.get('email').value
     const dateBirth = this.signupForm.get('dateBirth').value
     const picture = this.signupForm.get('picture').value
-    this.userService.createUser(firstName, lastName, password, email, dateBirth, picture)
-    //console.log(firstName, lastName, password, email, dateBirth);
-    
+    this.userService.createUser(firstName, lastName, password, email, dateBirth, picture).then(
+      (response : {message:string}) => {
+        this.userService.loginUser(email, password).then(
+          () => {
+            this.router.navigate(['/home'])
+          }
+        ).catch (
+          (error) => {
+            this.errorMsg = error.message
+          }
+        );
+      }
+    ).catch((error) => {
+      this.errorMsg = error.message
+    })
 
-
-
-    
   }
   
 }

@@ -16,6 +16,7 @@ import { SingleMessageComponent } from './home/message/single-message/single-mes
 import { UsersService } from './service/users.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { WriteMessageComponent } from './home/write-message/write-message.component';
 
 export const ROUTES : Routes = [
   { path: 'register', component: RegisterComponent},
@@ -38,7 +39,8 @@ export const ROUTES : Routes = [
     SinglePostComponent,
     AccountComponent,
     MessageComponent,
-    SingleMessageComponent
+    SingleMessageComponent,
+    WriteMessageComponent
   ],
   imports: [
     BrowserModule,

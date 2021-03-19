@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 export class UsersService {
   isAuth$ = new BehaviorSubject<boolean>(false);
   private authToken: string;
-  private userId: string;
+  userId: string;
 
   constructor(private http: HttpClient,
               private router: Router) {}

@@ -2,6 +2,7 @@
 const express = require('express');
 
 const usersCtrl = require('./routes/usersCtrl')
+const messagesCtrl = require('./routes/messagesCtrl')
 
 exports.router = (function(){ 
 
@@ -11,6 +12,9 @@ exports.router = (function(){
     apiRouter.route('/users/login/').post(usersCtrl.login);
     apiRouter.route('/users/me/').get(usersCtrl.getUserProfile)
     apiRouter.route('/users/me/').put(usersCtrl.updateUserProfile)
+
+    apiRouter.route('/message/new/').post(messagesCtrl.createMessage)
+    apiRouter.route('/message/').get(messagesCtrl.listMessage)
 
     return apiRouter
 })();
