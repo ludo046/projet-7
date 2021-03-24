@@ -11,7 +11,7 @@ module.exports = {
     // Getting auth header
     var headerAuth  = req.headers['authorization'];
     var userId = jwtUtils.getUserId(headerAuth);
-
+    console.log(headerAuth);
     // Params
     var content = req.body.content;
     console.log(content);
@@ -42,7 +42,9 @@ module.exports = {
             content: content,
             likes  : 0,
             UserId : userFound.id
+            
           })
+          
           .then(function(newMessage) {
             done(newMessage);
           });

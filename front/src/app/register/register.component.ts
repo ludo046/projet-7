@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { UsersService } from 'src/app/service/users.service';
-import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -31,15 +30,17 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(): void{
-    const firstName = this.signupForm.get('firstName').value
-    const lastName = this.signupForm.get('lastName').value
-    const password = this.signupForm.get('password').value
-    const email = this.signupForm.get('email').value
-    const dateBirth = this.signupForm.get('dateBirth').value
-    const picture = this.signupForm.get('picture').value
-    this.userService.createUser(firstName, lastName, password, email, dateBirth, picture).then(
+    const request = {
+      firstName: this.signupForm.get('firstName').value,
+      lastName: this.signupForm.get('lastName').value,
+      password: this.signupForm.get('password').value,
+      email: this.signupForm.get('email').value,
+      dateBirth: this.signupForm.get('dateBirth').value,
+      picture: this.signupForm.get('picture').value
+    }
+    this.userService.createUser(request).then(
       (response : {message:string}) => {
-        this.userService.loginUser(email, password).then(
+        this.userService.loginUser(request.email, request.password).then(
           () => {
             this.router.navigate(['/home'])
           }

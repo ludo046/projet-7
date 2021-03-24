@@ -15,8 +15,10 @@ import { MessageComponent } from './home/message/message.component';
 import { SingleMessageComponent } from './home/message/single-message/single-message.component';
 import { UsersService } from './service/users.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WriteMessageComponent } from './home/write-message/write-message.component';
+import { AuthInterceptor } from './auth.interceptor';
+
 
 export const ROUTES : Routes = [
   { path: 'register', component: RegisterComponent},
@@ -40,15 +42,15 @@ export const ROUTES : Routes = [
     AccountComponent,
     MessageComponent,
     SingleMessageComponent,
-    WriteMessageComponent
+    WriteMessageComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [UsersService, FormBuilder, HttpClientModule, HttpClient, FooterComponent],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},UsersService, FormBuilder, HttpClientModule, HttpClient, FooterComponent,AuthInterceptor ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

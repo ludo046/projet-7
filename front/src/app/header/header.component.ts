@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  fullPathname='assets/images/logo.png'
+  fullPathname ='assets/images/logo.png'
 
   constructor() { }
 

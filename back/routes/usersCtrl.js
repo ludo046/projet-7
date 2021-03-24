@@ -18,7 +18,6 @@ module.exports={
         const email = req.body.email;
         const dateBirth = req.body.dateBirth;
         const picture = req.body.picture;
-        console.log(firstName);
 
         if (firstName == null || lastName == null || password == null || email == null || dateBirth == null ) {
             return res.status(400).json({ 'error': 'missing parameters' })

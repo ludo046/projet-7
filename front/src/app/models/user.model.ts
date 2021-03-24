@@ -11,3 +11,12 @@ export class User{
 
     }
 }
+
+export interface CreateUserRequest {
+    firstName:  string;
+    lastName: string;
+    password: string;
+    email: string;
+    dateBirth: string;
+    picture: string;
+}

@@ -28,10 +28,11 @@ export class WriteMessageComponent implements OnInit {
 
   postMessage():void{
     const content = this.createMessage.get('createOneMessage').value
-    const userId = this.userService.userId
-    console.log(userId);
+    const headerAuth = this.userService.authToken
+    console.log(content);
     
-    this.messageService.postMessage(content, userId)
+    
+    this.messageService.postMessage(content, headerAuth)
   }
 
 }

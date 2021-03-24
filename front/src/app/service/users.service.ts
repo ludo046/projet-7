@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router'
+import { CreateUserRequest } from '../models/user.model';
 
 
 @Injectable({
@@ -9,15 +10,16 @@ import { Router } from '@angular/router'
 })
 export class UsersService {
   isAuth$ = new BehaviorSubject<boolean>(false);
-  private authToken: string;
-  userId: string;
+   authToken: string;
+  private userId: string;
 
   constructor(private http: HttpClient,
               private router: Router) {}
 
-  createUser(firstName: string, lastName: string, password: string, email: string, dateBirth: number, picture: string){//firstName: string, lastName: string, password: string, email: string, birthDate: number, picture: string) {
+  createUser(request: CreateUserRequest){
+
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/api/users/register',{firstName, lastName, password, email, dateBirth, picture}).subscribe( //{firstName: firstName, lastName: lastName, password: password, email: email, birthDate: birthDate, picture: picture}).subscribe(
+      this.http.post('http://localhost:8080/api/users/register',request).subscribe( 
         (response: { message: string }) => {
           resolve(response);       
         },
@@ -42,6 +44,7 @@ export class UsersService {
         (response: {userId: string, token: string}) => {
           this.userId = response.userId;
           this.authToken = response.token;
+          
           this.isAuth$.next(true);
           resolve();
         },
@@ -50,12 +53,5 @@ export class UsersService {
         }
       );
     });
-  }
-
-  logout() {
-    this.authToken = null;
-    this.userId = null;
-    this.isAuth$.next(false);
-    this.router.navigate(['/signup']);
   }
 }

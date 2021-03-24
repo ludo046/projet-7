@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { UsersService } from './users.service';
 
 @Injectable({
@@ -8,16 +7,16 @@ import { UsersService } from './users.service';
 })
 export class MessageService {
 
-  userId: string;
-
   constructor(private http: HttpClient,
-              private userService: UsersService,
-              private router: Router) { }
+              private UsersService: UsersService
+) { }
 
 
-  postMessage(content: string, userId:string){
+  postMessage(content: string, headerAuth:string){
+    let headers = new HttpHeaders ({'Authorization' : headerAuth});
+
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/api/message/new',{content,userId}).subscribe(
+      this.http.post('http://localhost:8080/api/message/new',{content},{headers}).subscribe(
         (response: {message:string}) => {
           resolve(response)
         },
@@ -27,4 +26,13 @@ export class MessageService {
       );
     });
   }
+
+  getMessage(){
+    return this.http.get('http://localhost:8080/api/message',{
+      params: new HttpParams().set(
+        "auth-token", this.UsersService.authToken  
+      ) 
+    })
+  }
+
 }
