@@ -3,8 +3,8 @@
     <li class="list-group-item" *ngFor='let value of allmessage'>
         <div class="post" >
             <div class="top">
-                <h1>{{ value.User.firstName }} {{ value.User.lastName }}</h1>
-                <p>aujourd'hui, à 11:36</p>
+                <h1>{{ value.id }} {{ value.User.firstName }} {{ value.User.lastName }}</h1>
+                <p>publié le {{ value.createdAt | date:'dd/MM/yyyy'}} à {{ value.createdAt | date:'HH:mm'  }}</p>
             </div>
             <img>
             <p>{{value.content}}</p>
