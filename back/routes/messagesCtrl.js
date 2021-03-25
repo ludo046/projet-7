@@ -65,8 +65,8 @@ module.exports = {
     let order   = req.query.order;
 
     models.Message.findAll({
-      order: [(order != null) ? order.split(':') : ['content','ASC']],
-      attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
+      order: [(order != null) ? order.split(':') : ['id','DESC']],
+      //attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       include: [{
         model: models.User,
         attributes: [ 'firstName','lastName' ]

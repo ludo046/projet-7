@@ -6,7 +6,7 @@
                 <h1>{{ value.id }} {{ value.User.firstName }} {{ value.User.lastName }}</h1>
                 <p>publié le {{ value.createdAt | date:'dd/MM/yyyy'}} à {{ value.createdAt | date:'HH:mm'  }}</p>
             </div>
-            <img>
+            <img [src]="value.picture">
             <p>{{value.content}}</p>
         </div>
     </li>
