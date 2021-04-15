@@ -6,7 +6,7 @@
 }
 .post{
     background-color: rgb(65, 65, 68);
-    margin: 10px;
+    margin: 0 10px;
     padding: 10px;
     .top{
         h1{
@@ -31,4 +31,9 @@
         font-size: 18px;
         font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
     }
+}
+.interaction{
+    margin: 0 10px 10px 10px;
+    padding: 10px;
+    background-color: rgb(65, 65, 68);
 }

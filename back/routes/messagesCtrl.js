@@ -66,7 +66,7 @@ module.exports = {
 
     models.Message.findAll({
       order: [(order != null) ? order.split(':') : ['id','DESC']],
-      //attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
+      attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       include: [{
         model: models.User,
         attributes: [ 'firstName','lastName' ]

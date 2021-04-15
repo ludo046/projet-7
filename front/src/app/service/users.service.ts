@@ -13,6 +13,8 @@ export class UsersService {
    authToken: string;
   private userId: string;
 
+  
+
   constructor(private http: HttpClient,
               private router: Router) {}
 
@@ -34,11 +36,13 @@ export class UsersService {
     return this.authToken;
   }
 
+  
+
   getUserId() {
     return this.userId;
   }
 
-  loginUser(email: string, password) {
+  loginUser(email: string, password: string) {
     return new Promise<void>((resolve, reject) => {
       this.http.post('http://localhost:8080/api/users/login', {password: password, email: email}).subscribe(
         (response: {userId: string, token: string}) => {

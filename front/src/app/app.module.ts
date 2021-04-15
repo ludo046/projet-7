@@ -18,6 +18,9 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WriteMessageComponent } from './home/write-message/write-message.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LikeComponent } from './home/like/like.component';
+import { CommentComponent } from './home/comment/comment.component';
 
 
 export const ROUTES : Routes = [
@@ -43,12 +46,15 @@ export const ROUTES : Routes = [
     MessageComponent,
     SingleMessageComponent,
     WriteMessageComponent,
+    LikeComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     HttpClientModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},UsersService, FormBuilder, HttpClientModule, HttpClient, FooterComponent,AuthInterceptor ],
   bootstrap: [AppComponent]

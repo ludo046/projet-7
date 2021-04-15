@@ -11,7 +11,6 @@ h1{
     font-size: 20px;
     text-align: center;
     margin-top: 20px;
-
 }
 .login{
     display: flex;
@@ -27,6 +26,7 @@ h1{
         background-color: white;
     }
     button{
+        
         width: 100px;
         border: 2px solid rgb(0, 121, 177);
         margin: 20px auto;
@@ -48,4 +48,19 @@ h1{
     a{
         color:rgb(0, 121, 177) ;
     }
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    label{
+        color: white;
+        margin: 0 auto
+    }
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
