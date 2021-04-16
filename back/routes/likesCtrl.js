@@ -145,14 +145,12 @@ module.exports = {
           if (messageAlreadyLiked) {
             (function(userAlreadyLikedFound){
               done(null, messageFound, userFound, userAlreadyLikedFound);
-              if (messageAlreadyLiked === LIKED){
                 models.Like.destroy({
                   where: {
-               userId: userId,
-               messageId: messageId
-             }
+                      userId: userId,
+                      messageId: messageId
+                  }
                 })
-              } 
             })();
           } else {
             return res.status(500).json({ 'error': 'unable to verify is user already liked' });
