@@ -11,11 +11,13 @@ const LIKED    = 1;
 module.exports = {
   likePost: function(req, res) {
     // Getting auth header
-    const headerAuth  = req.headers['authorization'];
-    const userId      = jwtUtils.getUserId(headerAuth);
+    let headerAuth  = req.headers['authorization'];
+    let userId      = jwtUtils.getUserId(headerAuth);
+    console.log(userId);
+    console.log(headerAuth);
 
     // Params
-    const messageId = parseInt(req.params.messageId);
+    let messageId = parseInt(req.params.messageId);
 
     if (messageId <= 0) {
       return res.status(400).json({ 'error': 'invalid parameters' });

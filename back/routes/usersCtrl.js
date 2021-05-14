@@ -16,10 +16,11 @@ module.exports={
         const lastName = req.body.lastName; 
         const password = req.body.password;
         const email = req.body.email;
-        const dateBirth = req.body.dateBirth;
-        const picture = req.body.picture;
+        const dateBirth = req.body.dateBirth || '';
+        const picture = req.body.picture || '';
+        console.log(req.body);
 
-        if (firstName == null || lastName == null || password == null || email == null || dateBirth == null ) {
+        if (firstName == null || lastName == null || password == null || email == null) {
             return res.status(400).json({ 'error': 'missing parameters' })
         }
         models.User.findOne({
@@ -34,13 +35,15 @@ module.exports={
                         lastname: lastName,
                         password: bcryptedPassword,
                         email: email,
-                        datebirth: dateBirth,
-                        picture: picture,
+                        datebirth: dateBirth || '',
+                        picture: picture || '',
                         isAdmin:0
                     })
-                    .then(function(newUser){
+                    .then(function (newUser){
                         return res.status(201).json({
-                            'userId': newUser.id
+                            'userId': newUser.id,
+                            token: jwtUtils.generateTokenForUser(newUser)
+                            //TODO add token -> ok
                         })
                     })
                     .catch(function(err){
@@ -70,7 +73,7 @@ module.exports={
                 if (resBycrypt){
                     return res.status(200).json({
                         'userId': userFound.id,
-                        'token': jwtUtils.generateTokenForUser(userFound)
+                        token: jwtUtils.generateTokenForUser(userFound)
                     })
                 } else {
                     return res.status(403).json({ 'error': 'invalid password' })

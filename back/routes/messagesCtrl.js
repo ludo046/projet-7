@@ -9,12 +9,18 @@ const CONTENT_LIMIT = 4;
 module.exports = {
   createMessage: function(req, res) {
     // Getting auth header
-    var headerAuth  = req.headers['authorization'];
-    var userId = jwtUtils.getUserId(headerAuth);
+    let headerAuth  = req.headers['authorization'];
+    let userId = jwtUtils.getUserId(headerAuth);
+    
     console.log(headerAuth);
+    console.log(userId);
     // Params
-    var content = req.body.content;
+    let content = req.body.content;
+    console.log(req.file);
+    let attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+
     console.log(content);
+    console.log(attachment);
 
     if (content == null) {
       return res.status(400).json({ 'error': 'missing parameters' });
@@ -23,7 +29,7 @@ module.exports = {
     if (content.length <= CONTENT_LIMIT) {
       return res.status(400).json({ 'error': 'invalid parameters' });
     }
-
+   
     asyncLib.waterfall([
       function(done) {
         models.User.findOne({
@@ -40,6 +46,7 @@ module.exports = {
         if(userFound) {
           models.Message.create({
             content: content,
+            attachment: attachment,
             likes  : 0,
             UserId : userFound.id
             
@@ -69,8 +76,8 @@ module.exports = {
       attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       include: [{
         model: models.User,
-        attributes: [ 'firstName','lastName' ]
-      }]
+        attributes: [ 'firstName','lastName' ],
+      }],
     }).then(function(messages) {
       if (messages) {
         res.status(200).json(messages);

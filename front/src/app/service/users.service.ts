@@ -1,61 +1,32 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { CreateUserRequest } from '../models/user.model';
-
+import { LoginUser } from '../models/user.model'
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UsersService {
-  isAuth$ = new BehaviorSubject<boolean>(false);
-   authToken: string;
-  private userId: string;
 
+private apiUrl = environment.apiUrl;
+//private headerAuth = JSON.parse(sessionStorage.getItem('session')).token;
   
+constructor(private httpClient: HttpClient,
+                    private router: Router){}
 
-  constructor(private http: HttpClient,
-              private router: Router) {}
+createUser(CreateUserRequest: CreateUserRequest){
+  return this.httpClient.post(`${this.apiUrl}users/register`,CreateUserRequest);
+}
 
-  createUser(request: CreateUserRequest){
+logUser(LoginUser: LoginUser){
+  return this.httpClient.post(`${this.apiUrl}users/login`,LoginUser)
+}
 
-    return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/api/users/register',request).subscribe( 
-        (response: { message: string }) => {
-          resolve(response);       
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
+getUserProfile(){
+  //let headers = new HttpHeaders({ 'Authorization': this.headerAuth });
+  //return this.httpClient.get(`${this.apiUrl}users/me`)
+}
 
-  getToken() {
-    return this.authToken;
-  }
-
-  
-
-  getUserId() {
-    return this.userId;
-  }
-
-  loginUser(email: string, password: string) {
-    return new Promise<void>((resolve, reject) => {
-      this.http.post('http://localhost:8080/api/users/login', {password: password, email: email}).subscribe(
-        (response: {userId: string, token: string}) => {
-          this.userId = response.userId;
-          this.authToken = response.token;
-          
-          this.isAuth$.next(true);
-          resolve();
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
 }

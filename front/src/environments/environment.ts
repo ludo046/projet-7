@@ -3,8 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8080/api/',
+  postUrl: 'http://localhost:8080/api/message/',
+  likeUrl: 'http://localhost:8080/api/message/'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

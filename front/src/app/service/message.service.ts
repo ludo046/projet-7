@@ -1,38 +1,40 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UsersService } from './users.service';
+import { Form } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
+  
+  private postUrl = environment.postUrl;
+  public messageId: String;
+  public FormData: any;
 
-  constructor(private http: HttpClient,
-              private UsersService: UsersService
-) { }
 
+  constructor(private httpClient: HttpClient){
 
-  postMessage(content: string, headerAuth:string){
-    let headers = new HttpHeaders ({'Authorization' : headerAuth});
-
-    return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/api/message/new',{content},{headers}).subscribe(
-        (response: {message:string}) => {
-          resolve(response)
-        },
-        (error) => {
-          reject(error)
-        } 
-      );
-    });
   }
 
-  getMessage(){
-    return this.http.get('http://localhost:8080/api/message',{
-      params: new HttpParams().set(
-        "auth-token", this.UsersService.authToken  
-      ) 
-    })
+  getPost(): Observable<any>{
+    return this.httpClient.get(`${this.postUrl}`//,{
+    //   params: new HttpParams().set(
+    //     'token',this.headerAuth
+    //   )
+    // }
+    );
+  }
+  writePost(content: string,attachment: File):Observable<any>{
+    //let headers = new HttpHeaders({ 'Authorization': headerAuth });
+    let formData = new FormData();  
+    formData.append('content', content);
+    formData.append('image', attachment, attachment.name);
+    console.log(formData);
+    
+    return this.httpClient.post(this.postUrl + 'new',formData);
   }
 
+  
 }

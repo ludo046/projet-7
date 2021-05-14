@@ -1,0 +1,18 @@
+
+<ul class="list-group">
+    <li class="list-group-item" >
+        <div class="post" *ngFor='let post of allPost' >
+            <div class="top">
+                <h1>{{ post.User.firstName }} {{ post.User.lastName }}</h1>
+                <p>publié le {{ post.createdAt | date:'dd/MM/yyyy' }} à {{ post.createdAt | date:'HH:mm' }} </p>
+            </div>
+            <img [src]="post.attachment">
+            <p>{{ post.content }}</p>        
+        <div class="interaction">
+            <app-like [postId]="post.id"></app-like>
+            <app-comment></app-comment>
+        </div>
+        </div>
+
+    </li>
+</ul>

@@ -2,25 +2,26 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { SignupComponent } from './signup/signup.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './composants/auth/register/register.component';
 import { Routes, RouterModule, Router } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home/home.component';
-import { NavComponent } from './home/nav/nav.component';
-import { SinglePostComponent } from './single-post/single-post.component';
-import { AccountComponent } from './home/account/account.component';
-import { MessageComponent } from './home/message/message.component';
-import { SingleMessageComponent } from './home/message/single-message/single-message.component';
+import { HeaderComponent } from './composants/header/header.component';
+import { FooterComponent } from './composants/footer/footer.component';
+import { HomeComponent } from './composants/home/home/home.component';
+import { NavComponent } from './composants/home/nav/nav.component';
+import { SinglePostComponent } from './composants/single-post/single-post.component';
+import { AccountComponent } from './composants/home/account/account.component';
+import { MessageComponent } from './composants/home/message/message.component';
+import { SingleMessageComponent } from './composants/home/message/single-message/single-message.component';
 import { UsersService } from './service/users.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { WriteMessageComponent } from './home/write-message/write-message.component';
-import { AuthInterceptor } from './auth.interceptor';
+import { WriteMessageComponent } from './composants/home/write-message/write-message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LikeComponent } from './home/like/like.component';
-import { CommentComponent } from './home/comment/comment.component';
+import { LikeComponent } from './composants/home/like/like.component';
+import { CommentComponent } from './composants/home/comment/comment.component';
+import { SignupComponent } from './composants/auth/signup/signup.component';
+import { AuthInterceptor } from './auth-interceptor';
+import { MessageService } from './service/message.service';
 
 
 export const ROUTES : Routes = [
@@ -56,7 +57,7 @@ export const ROUTES : Routes = [
     ReactiveFormsModule,
     FontAwesomeModule,
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},UsersService, FormBuilder, HttpClientModule, HttpClient, FooterComponent,AuthInterceptor ],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, UsersService, MessageService, FormBuilder, HttpClientModule, HttpClient, FooterComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
