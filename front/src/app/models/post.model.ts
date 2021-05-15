@@ -1,3 +1,4 @@
 export interface PostMessage {
-    content: String;
+    content: string;
+    attachement: File;
 }

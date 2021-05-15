@@ -20,7 +20,7 @@ h1{
         color: white;
         font-size: 16px;
     }
-    button{
+    .modify-account{
         color: white;
         height: 25px;
         width: 75px;
@@ -46,4 +46,17 @@ h1{
 }
 .input-file{
     display: none;
+}
+.delete-account{
+    color: red;
+    height: 25px;
+    width: 200px;
+    border: 2px solid red;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    margin: 20px 0 0 20px;
+    &:hover{
+        transform: scale(1.1);
+    }
 }

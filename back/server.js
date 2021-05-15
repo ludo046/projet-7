@@ -19,7 +19,7 @@ server.use('/', function(req,res,next){
 });
 
 server.use('/api/', apiRouter);
-server.use('../images', express.static(path.join(__dirname, 'images')));
+server.use('/images', express.static(path.join(__dirname, 'images')));
 
 //launch server
 server.listen(8080, function(){

@@ -19,15 +19,9 @@ export class MessageService {
   }
 
   getPost(): Observable<any>{
-    return this.httpClient.get(`${this.postUrl}`//,{
-    //   params: new HttpParams().set(
-    //     'token',this.headerAuth
-    //   )
-    // }
-    );
+    return this.httpClient.get(`${this.postUrl}`);
   }
   writePost(content: string,attachment: File):Observable<any>{
-    //let headers = new HttpHeaders({ 'Authorization': headerAuth });
     let formData = new FormData();  
     formData.append('content', content);
     formData.append('image', attachment, attachment.name);

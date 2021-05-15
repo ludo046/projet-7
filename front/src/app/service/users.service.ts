@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CreateUserRequest } from '../models/user.model';
 import { LoginUser } from '../models/user.model'
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,6 @@ import { environment } from '../../environments/environment';
 export class UsersService {
 
 private apiUrl = environment.apiUrl;
-//private headerAuth = JSON.parse(sessionStorage.getItem('session')).token;
   
 constructor(private httpClient: HttpClient,
                     private router: Router){}
@@ -24,9 +24,8 @@ logUser(LoginUser: LoginUser){
   return this.httpClient.post(`${this.apiUrl}users/login`,LoginUser)
 }
 
-getUserProfile(){
-  //let headers = new HttpHeaders({ 'Authorization': this.headerAuth });
-  //return this.httpClient.get(`${this.apiUrl}users/me`)
+getUserProfile(): Observable<any>{
+  return this.httpClient.get(`${this.apiUrl}users/me`)
 }
 
 }

@@ -7,7 +7,10 @@
                 <p>publié le {{ post.createdAt | date:'dd/MM/yyyy' }} à {{ post.createdAt | date:'HH:mm' }} </p>
             </div>
             <img [src]="post.attachment">
-            <p>{{ post.content }}</p>        
+            <div class="content">
+               <p>{{ post.content }}</p>  
+            </div>
+                   
         <div class="interaction">
             <app-like [postId]="post.id"></app-like>
             <app-comment></app-comment>

@@ -8,19 +8,19 @@ import { UsersService } from 'src/app/service/users.service';
 })
 export class AccountComponent implements OnInit {
 
-  profile: any
+  oneUserProfil: any
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
 
   }
-  getUserProfile(){
-    // //const headerAuth = JSON.parse(sessionStorage.getItem('session')).token
-    // this.usersService.getUserProfile().subscribe(userProfile => {
-    //   //console.log(userProfile);
+  getUserProfile(): void{
+     this.usersService.getUserProfile().subscribe(userProfile => {
+      this.oneUserProfil = userProfile
+      console.log(this.oneUserProfil);
       
-    //});
+    });
   }
 
 }

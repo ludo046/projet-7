@@ -8,8 +8,8 @@ export class AuthInterceptor implements HttpInterceptor {
     console.log(authToken);
     
     const newRequest = req.clone({
-      //withCredentials: false ,
-      headers: req.headers.set('Authorization', authToken) 
+      withCredentials: false ,
+      headers: req.headers.set('authorization', authToken) 
     });
     return next.handle(newRequest);
   }
