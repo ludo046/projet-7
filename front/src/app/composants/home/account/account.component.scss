@@ -23,11 +23,12 @@ h1{
     .modify-account{
         color: white;
         height: 25px;
-        width: 75px;
+        width: 230px;
         border: 2px solid rgb(165, 165, 165);
         border-radius: 5px;
         outline: none;
         font-size: 16px;
+        margin-left: 20px;
         &:hover{
             transform: scale(1.1);
         }

@@ -8,12 +8,12 @@ import { UsersService } from 'src/app/service/users.service';
 })
 export class AccountComponent implements OnInit {
 
-  oneUserProfil: any
+  public oneUserProfil: any;
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
-
+  this.getUserProfile()
   }
   getUserProfile(): void{
      this.usersService.getUserProfile().subscribe(userProfile => {
@@ -21,6 +21,11 @@ export class AccountComponent implements OnInit {
       console.log(this.oneUserProfil);
       
     });
+  }
+
+  deleteUser(){
+    this.usersService.deleteUser().subscribe()
+    sessionStorage.removeItem('session')
   }
 
 }

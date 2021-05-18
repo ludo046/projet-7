@@ -100,7 +100,7 @@ module.exports={
             where: {id: userId}
         }).then(function(user){
             if (user) {
-                res.status(201).json(user);
+                res.status(201).json([user]);
             } else {
                 res.status(404).json({ 'error': 'user not found' })
             }
@@ -115,15 +115,16 @@ module.exports={
 
         const firstname = req.body.firstname;
         const lastname = req.body.lastname;
-        const password = req.body.password;
-        const email = req.body.password;
+        const email = req.body.email;
         const datebirth = req.body.datebirth;
-        const picture = req.body.picture;
+        const picture = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+        console.log(picture);
+        console.log(req);
          
         asyncLib.waterfall([
             function(done){
                 models.User.findOne({
-                    attributes: ['id', 'firstname', 'lastname', 'password', 'email', 'datebirth', 'picture'],
+                    attributes: ['id', 'firstname', 'lastname', 'email', 'datebirth', 'picture'],
                     where: {id : userId}
                 }).then(function(userFound){
                     done(null,userFound);
@@ -137,7 +138,6 @@ module.exports={
                     userFound.update({
                         firstname: (firstname ? firstname : userFound.firstname),
                         lastname: (lastname ? lastname : userFound.lastname),
-                        password: (password ? password : userFound.password),
                         email: (email ? email : userFound.email),
                         datebirth: (datebirth ? datebirth : userFound.datebirth),
                         picture: (picture ? picture : userFound.picture)
@@ -157,5 +157,29 @@ module.exports={
                 return res.status(500).json({ 'error': 'connot update user profile' })
             }
         })
+    },
+
+    deleteUser: function(req, res){
+        let headerAuth = req.headers['authorization'];
+        let userId = jwtUtils.getUserId(headerAuth)
+
+        if (userId < 0)
+        return res.status(400).json({ 'error': 'wrong token' })
+
+        models.Like.destroy({
+            where: {userId: userId}
+        }),
+        models.Message.destroy({
+            where: {userId: userId}
+        }),
+        models.User.destroy({
+            where: {id: userId}
+        }).then (function(){
+           ( res.status(201).json({'ok' :'user deleted'})) 
+        }).catch (function(err){
+            (res.status(400).json({ 'error': 'user not found' }))
+        })
+        
     }
+
 }

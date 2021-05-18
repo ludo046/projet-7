@@ -1,28 +1,25 @@
 <app-header></app-header>
 <app-nav></app-nav>
 <h1>Paramètres du compte</h1>
-<div class="information" >
-    <div class="modification">
-        <p>Nom : </p>
-        <button class="modify-account">Modifier</button>
+<div class="information" *ngFor="let user of oneUserProfil">
+    <div class="modification" >
+        <p>Nom : {{ user.lastname }} </p>
     </div>
     <div class="modification">
-        <p>Prénom : </p>
-        <button class="modify-account">Modifier</button>
+        <p>Prénom : {{ user.firstname }}</p>
     </div>
     <div class="modification">
-        <p>Email : </p>
-        <button class="modify-account">Modifier</button>
+        <p>Email : {{ user.email }}</p>
     </div>
     <div class="modification">
-        <p>Date de naissance : </p>
-        <button class="modify-account">Modifier</button>
+        <p>Date de naissance : {{ user.datebirth }}</p>
     </div>
     <div class="picture">
-        <p>Photo de profil :</p>
+        <p>Photo de profil : <img [src]="user.picture" alt=""></p>
         <label for="file" class="label-file">Choisir une image</label>
         <input id="file" type="file" class="input-file">
     </div>
-    <button class="delete-account">supprimer le compte</button>
+    <button class="delete-account" (click)="deleteUser()" routerLink="/signup">supprimer le compte</button>
+    <button class="modify-account" routerLink="/modify-account">Modifier les informations</button>
 </div>
 <app-footer></app-footer>

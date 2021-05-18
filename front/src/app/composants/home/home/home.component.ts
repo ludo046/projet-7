@@ -10,9 +10,10 @@ export class HomeComponent implements OnInit {
 
   allPost: any;
 
+
   constructor( private messageService: MessageService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.newPost();
   }
 
@@ -22,5 +23,4 @@ export class HomeComponent implements OnInit {
       console.log(this.allPost);
     });
   }
-
 }

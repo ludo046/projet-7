@@ -12,11 +12,12 @@ exports.router = (function(){
 
     apiRouter.route('/users/register/').post(usersCtrl.register);
     apiRouter.route('/users/login/').post(usersCtrl.login);
-    apiRouter.route('/users/me/').get(usersCtrl.getUserProfile)
-    apiRouter.route('/users/me/').put(usersCtrl.updateUserProfile)
+    apiRouter.route('/users/me/').get(usersCtrl.getUserProfile);
+    apiRouter.route('/users/me/').put(multer,usersCtrl.updateUserProfile);
+    apiRouter.route('/users/delete').delete(usersCtrl.deleteUser);
 
-    apiRouter.route('/message/new/').post(multer,messagesCtrl.createMessage)
-    apiRouter.route('/message/').get(messagesCtrl.listMessage)
+    apiRouter.route('/message/new/').post(multer,messagesCtrl.createMessage);
+    apiRouter.route('/message/').get(messagesCtrl.listMessage);
 
     apiRouter.route('/message/:messageId/like').post(likesCtrl.likePost);
     apiRouter.route('/message/:messageId/dislike').post(likesCtrl.dislikePost);

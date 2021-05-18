@@ -22,6 +22,9 @@ import { CommentComponent } from './composants/home/comment/comment.component';
 import { SignupComponent } from './composants/auth/signup/signup.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { MessageService } from './service/message.service';
+import { DeletePostComponent } from './composants/home/delete-post/delete-post.component';
+import { ModifyPostComponent } from './composants/home/modify-post/modify-post.component';
+import { ModifyAccountComponent } from './composants/home/account/modify-account/modify-account.component';
 
 
 export const ROUTES : Routes = [
@@ -30,6 +33,7 @@ export const ROUTES : Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'account', component: AccountComponent },
   { path: 'message', component: MessageComponent },
+  { path: 'modify-account', component: ModifyAccountComponent },
   { path: '', component: SignupComponent}
 ]
 
@@ -49,6 +53,9 @@ export const ROUTES : Routes = [
     WriteMessageComponent,
     LikeComponent,
     CommentComponent,
+    DeletePostComponent,
+    ModifyPostComponent,
+    ModifyAccountComponent
   ],
   imports: [
     BrowserModule,

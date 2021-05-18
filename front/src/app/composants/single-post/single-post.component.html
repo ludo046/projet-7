@@ -14,6 +14,8 @@
         <div class="interaction">
             <app-like [postId]="post.id"></app-like>
             <app-comment></app-comment>
+            <app-modify-post *ngIf="userId === post.userId"></app-modify-post>
+            <app-delete-post></app-delete-post>
         </div>
         </div>
 

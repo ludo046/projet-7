@@ -31,11 +31,8 @@ export class WriteMessageComponent implements OnInit {
     const content = this.postMessage.get('postOneMessage').value;
     const attachment = this.file;
     console.log(this.file);
-    
-    //const session = JSON.parse(sessionStorage.getItem('session')).token;
     console.log(content);
     console.log(attachment);
-    //console.log(session);
     
     this.messageService.writePost(content,attachment).subscribe(() => this.newPost.emit(true))
   }
