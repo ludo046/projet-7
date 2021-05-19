@@ -1,7 +1,8 @@
 <app-header></app-header>
 <app-nav></app-nav>
-<h1>Modifications du compte</h1>
+
 <form [formGroup]="updateAccountForm">
+    <h1>Modifications du compte</h1>
     <div class="form-group"> 
         <label for="firstname">Nom : </label>
         <input type="text" placeholder="Nom" class="form-control" id="firstname" formControlName="firstName">
@@ -23,6 +24,6 @@
         <label for="file" class="label-file">Choisir une image</label>
         <input id="file" type="file" class="input-file" (change)="onFileAdded($event)">
     </div>     
-    <button (click)="updateUserProfile()">Valider</button>
+    <button (click)="updateUserProfile()" routerLink="/account">Valider</button>
 </form>
 <app-footer></app-footer>

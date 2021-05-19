@@ -1,10 +1,17 @@
-<div class="nav">
-   <nav>
-        <ul>
-            <li routerLink="/home">Accueil</li>
-            <li routerLink="/message">Messages</li>
-            <li routerLink="/account">Compte</li>
-            <li routerLink="/signup" (click)="disconnect()">Deconnexion</li>
-        </ul>
-    </nav> 
-</div>
+<nav role="navigation">
+    <div id="menuToggle">
+
+      <input type="checkbox" />
+      
+      <span></span>
+      <span></span>
+      <span></span>
+
+      <ul id="menu">
+        <li routerLink="/home">Accueil</li>
+        <li routerLink="/message">Messages</li>
+        <li routerLink="/account">Compte</li>
+        <li routerLink="/signup" (click)="disconnect()">Deconnexion</li>
+      </ul>
+    </div>
+  </nav>

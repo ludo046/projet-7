@@ -1,16 +1,29 @@
+::ng-deep * {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(18, 36, 65);
+    
+}
+
 .writeMessage{
     display: flex;
     vertical-align: center;
     margin: 10px auto;
     width: 90%;
-    border-bottom: 1px solid rgb(0, 121, 177);
+    border-bottom: 1px solid rgb(209, 81, 90);
+    border-right: 1px solid rgb(209, 81, 90);
+    border-top: 1px solid rgb(209, 81, 90);
+    border-radius: 0 5px 5px 0;
+    padding: 3px;
+    background-color: rgb(34, 53, 83);
     img{
     width: 60px;
     height: 60px;
     margin: auto 0;
+    background-color: rgb(34, 53, 83);
     }
     .message{
-    width: 300px;
+    width: 280px;
     height: 70px;
     margin-left: 10px;
     padding-left: 10px;
@@ -19,8 +32,11 @@
     color: white;
     font-size: 16px;
     border: none;
+    font-family: "montserrat",Arial, Helvetica, sans-serif;
+    background-color: rgb(34, 53, 83);
     }
     ::placeholder{
+        font-family: "montserrat",Arial, Helvetica, sans-serif;
         position: absolute;
         top: 25px;
         color: white;
@@ -34,9 +50,10 @@
         font-size: 16px;
         color: white;
         padding: 5px 10px;
-        border: 2px solid rgb(0, 121, 177);
+        border: 2px solid rgb(209, 81, 90);
         border-radius: 5px;
         outline: none;
+        background-color: rgb(18, 36, 65);
         &:hover{
             transform: scale(1.1);
         }
@@ -50,9 +67,11 @@
     }
     label{
         color: white;
-        border: 2px solid rgb(0, 121, 177);
+        border: 2px solid rgb(209, 81, 90);
         padding: 5px 10px;
         border-radius: 5px;
+        font-family: "montserrat",Arial, Helvetica, sans-serif;
+        background-color: rgb(18, 36, 65);
         &:hover{
            transform: scale(1.1); 
         }

@@ -165,7 +165,7 @@ module.exports={
 
         if (userId < 0)
         return res.status(400).json({ 'error': 'wrong token' })
-
+        
         models.Like.destroy({
             where: {userId: userId}
         }),

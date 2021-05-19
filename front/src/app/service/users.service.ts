@@ -32,11 +32,6 @@ deleteUser(){
   return this.httpClient.delete(`${this.apiUrl}users/delete`)
 }
 
-// updateUserProfile(picture: File, firstname: string, lastname:string, email:string, datebirth:string ){
-//     let updateUserFormData = new FormData();
-//     updateUserFormData.append('image',picture, picture.name)
-//     return this.httpClient.put(`${this.apiUrl}users/me`, {updateUserFormData, firstname, lastname, email, datebirth})
-//   }
 updateUserProfile(firstname: string, lastname:string, email:string, datebirth:string, picture: File):Observable<any>{
   let formData = new FormData();  
   formData.append('firstname', firstname);

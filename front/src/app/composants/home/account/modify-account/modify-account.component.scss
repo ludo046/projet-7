@@ -13,6 +13,10 @@ h1{
 form{
     display: flex;
     flex-direction: column;
+    border: 2px solid rgb(209, 81, 90);
+    width: 30%;
+    margin: 8% auto 8%;
+    border-radius: 10px;
     input{
         width: 150px;
         margin: 10px auto;
@@ -60,4 +64,8 @@ a{
 }
 .input-file{
     display: none;
+}
+.picture{
+    color: white;
+    margin: 0 auto;
 }

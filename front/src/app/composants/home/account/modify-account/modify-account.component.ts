@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/service/users.service';
 
@@ -11,6 +11,7 @@ export class ModifyAccountComponent implements OnInit {
 
 public updateAccountForm: FormGroup;
 public file: File;
+@Output() newProfile = new EventEmitter<boolean>();
 
   constructor(private formBuilder: FormBuilder,
               private userService: UsersService) { }
@@ -43,7 +44,7 @@ public file: File;
     console.log(email);
     console.log(datebirth);
     
-    this.userService.updateUserProfile(firstname,lastname,email,datebirth,picture).subscribe()
+    this.userService.updateUserProfile(firstname,lastname,email,datebirth,picture).subscribe(() => this.newProfile.emit(true))
   }
   onFileAdded(event: Event) {
     this.file = (event.target as HTMLInputElement).files[0];

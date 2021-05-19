@@ -1,7 +1,7 @@
 <app-header></app-header>
-<div>
-    <h1>Créer votre compte</h1>
+<div class="container">
     <form [formGroup]="signupForm">
+        <h1>Créer votre compte</h1>
         <div class="form-group">
             <label for="firstname">Nom : </label>
             <input type="text" placeholder="Nom" class="form-control" id="firstname" formControlName="firstName">
@@ -19,7 +19,8 @@
             <input type ="email" placeholder="Email" class="form-control" id="email" formControlName="email"> 
         </div>      
         <button  (click)="onRegister()">S'inscrire</button>
+        <p>Si vous avez déjà un compte<br>connectez vous <a routerLink="/signup">ici</a></p>
     </form>
-    <p>Si vous avez déjà un compte<br>connectez vous <a routerLink="/signup">ici</a></p>
+    
 </div>
 <app-footer></app-footer>

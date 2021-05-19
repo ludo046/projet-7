@@ -67,6 +67,7 @@ module.exports = {
       }
     });
   },
+
   listMessage: function(req, res) {
     let fields  = req.query.fields;
     let order   = req.query.order;
@@ -88,5 +89,111 @@ module.exports = {
       console.log(err);
       res.status(500).json({ "error": "invalid fields" });
     });
+  },
+
+//   deletePost: function(req, res){
+//     let headerAuth = req.headers['authorization'];
+//     let userId = jwtUtils.getUserId(headerAuth)
+
+//     if (userId < 0)
+//     return res.status(400).json({ 'error': 'wrong token' })
+
+//     models.Like.destroy({
+//         where: {userId: userId}
+//     }),
+//     models.Message.destroy({
+//         where: {userId: userId}
+//     }).then (function(){
+//        ( res.status(201).json({'ok' :'user deleted'})) 
+//     }).catch (function(err){
+//         (res.status(400).json({ 'error': 'user not found' }))
+//     })
+    
+// }
+deletePost: function(req, res) {
+  // Getting auth header
+  let headerAuth  = req.headers['authorization'];
+  let userId      = jwtUtils.getUserId(headerAuth);
+  console.log(userId);
+  console.log(headerAuth);
+
+  // Params
+  let messageId = parseInt(req.params.messageId);
+
+  if (messageId <= 0) {
+    return res.status(400).json({ 'error': 'invalid parameters' });
   }
+
+  asyncLib.waterfall([
+    function(done) {
+      models.Message.findOne({
+        where: { id: messageId }
+      })
+      .then(function(messageFound) {
+        done(null, messageFound);
+      })
+      .catch(function(err) {
+        return res.status(500).json({ 'error': 'unable to verify message' });
+      });
+    },
+    function(messageFound, done) {
+      if(messageFound) {
+        models.User.findOne({
+          where: { id: userId }
+        })
+        .then(function(userFound) {
+          done(null, messageFound, userFound);
+        })
+        .catch(function(err) {
+          return res.status(500).json({ 'error': 'unable to verify user' });
+        });
+      } else {
+        res.status(404).json({ 'error': 'post already liked' });
+      }
+    },
+    function(messageFound, userFound, done) {
+      if(userFound) {
+        const messageAlreadyLiked = models.Like.findOne({
+          where: {
+            userId: userId,
+            messageId: messageId
+          }
+        });
+        if (Object.keys(messageAlreadyLiked).length === 0) {
+          (function(userAlreadyLikedFound){
+            done(null, messageFound, userFound, userAlreadyLikedFound);
+            if (messageAlreadyLiked !== LIKED){
+              models.Like.create({
+                userId: userId,
+                messageId: messageId,
+                isLike: LIKED
+              })
+            } 
+          })();
+        } else {
+          return res.status(500).json({ 'error': 'unable to verify is user already liked' });
+        }
+      } else {
+        res.status(404).json({ 'error': 'user not exist' });
+      }
+    },
+    function(messageFound, userFound, userAlreadyLikedFound,  done) {
+      if (!userAlreadyLikedFound){
+      messageFound.update({
+        likes: messageFound.likes + 1,
+      }).then(function() {
+        done(messageFound);
+      }).catch(function(err) {
+        res.status(500).json({ 'error': 'cannot update message like counter' });
+      });}
+    },
+  ], function(messageFound) {
+    if (messageFound) {
+      return res.status(201).json(messageFound);
+    } else {
+      return res.status(500).json({ 'error': 'cannot update message' });
+    }
+  });
+},
+
 }

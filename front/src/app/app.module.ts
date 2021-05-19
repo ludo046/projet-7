@@ -55,7 +55,7 @@ export const ROUTES : Routes = [
     CommentComponent,
     DeletePostComponent,
     ModifyPostComponent,
-    ModifyAccountComponent
+    ModifyAccountComponent,
   ],
   imports: [
     BrowserModule,

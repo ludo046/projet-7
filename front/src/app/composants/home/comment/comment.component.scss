@@ -1,23 +1,27 @@
 ::ng-deep * {
     margin: 0;
     padding: 0;
-    //background-color: rgb(65, 65, 68);;
+    //background-color: rgb(18, 36, 65);;
     
 }
-
+.button{
+    background-color: rgb(34, 53, 83);
+}
 button{
     font-size: 16px;
     color: white;
     padding: 5px 10px;
-    border: 2px solid rgb(0, 121, 177);
+    border: 2px solid rgb(209, 81, 90);
     border-radius: 5px;
     outline: none;
     margin-left: 20px;
+    display: flex;
+    background-color: rgb(18, 36, 65);
     &:hover{
         transform: scale(1.1);
     }
     fa-icon{
         margin-left: 10px;
     }
-   
+    
 }

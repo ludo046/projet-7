@@ -1,50 +1,203 @@
 ::ng-deep * {
     margin: 0;
     padding: 0;
-    background-color: rgb(51, 51, 53);
+    background-color: rgb(18, 36, 65);
     
 }
 .post{
-    background-color: rgb(65, 65, 68);
-    margin: 0 10px;
+    background-color: rgb(34, 53, 83);
+    margin: 20px 10px;
     padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, 0.72);
+    @media only screen and (min-width : 1224px) {
+      width: 80%;
+      margin: 40px auto;
+      }
     .top{
+
         h1{
-            background-color: rgb(65, 65, 68);
+            background-color: rgb(34, 53, 83);
             color: white;
             font-size: 20px;
             font-family: "montserrat", Arial, Helvetica, sans-serif;
         }
         p{
-            background-color: rgb(65, 65, 68);
+            background-color: rgb(34, 53, 83);
             color: white;
             font-size: 16px;
             margin-bottom: 5px;
             font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
         }
-        border-bottom: 1px solid rgb(0, 121, 177);
-        background-color: rgb(65, 65, 68);
+        border-bottom: 1px solid rgb(209, 81, 90);
+        background-color: rgb(34, 53, 83);
     }
     .content{
-        background-color: rgb(65, 65, 68);
+        background-color: rgb(34, 53, 83);
         color: white;
         font-size: 18px;
         font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
         display: flex;
         width: 90%;
         margin: 0 auto;
+        p{
+            background: rgb(34, 53, 83);
+        }
     }
     img{
         width: 90%;
         margin: 20px auto 20px;
         border-radius: 10px;
         display: flex;
-
+        @media only screen and (min-width : 1224px) {
+          width: 90%;
+          }
    }
 }
 .interaction{
     margin: 0 10px 10px 10px;
     padding: 10px;
-    background-color: rgb(65, 65, 68);
+    background-color: rgb(34, 53, 83);
+    display: flex;
 }
 
+
+
+
+body
+{
+  margin: 0;
+  padding: 0;
+  background-color: rgb(18, 36, 65);
+  color: rgb(18, 36, 65);
+  font-family: "montserrat", sans-serif;
+}
+
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: -28px;
+  left: 15px;
+  background-color: transparent;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 90%;
+}
+
+#menuToggle li
+{
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+  font-family: "montserrat", Arial, Helvetica, sans-serif;
+  margin-left: 200px;
+}
+
+#menuToggle li:hover
+{
+  color: rgb(209, 81, 90);
+}
+
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; 
+  z-index: 2; 
+  
+  -webkit-touch-callout: none;
+}
+
+
+#menuToggle span
+{
+  display: block;
+  width: 20px;
+  height: 4px;
+  margin-bottom: 2px;
+  position: relative;
+  
+  background: white;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 0px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: rgb(209, 81, 90);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu
+{
+  position: absolute;
+  width: 100%;
+  margin: -35px 0 0 -280px;
+  padding: 10px 70px;
+  
+  background: rgb(18, 36, 65);
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0 0 20px;
+  font-size: 22px;
+  background : rgb(18, 36, 65);
+}
+
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+.top-post{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(34, 53, 83);
+  margin-left: 60px;
+}

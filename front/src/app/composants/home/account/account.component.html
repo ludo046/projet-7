@@ -16,8 +16,6 @@
     </div>
     <div class="picture">
         <p>Photo de profil : <img [src]="user.picture" alt=""></p>
-        <label for="file" class="label-file">Choisir une image</label>
-        <input id="file" type="file" class="input-file">
     </div>
     <button class="delete-account" (click)="deleteUser()" routerLink="/signup">supprimer le compte</button>
     <button class="modify-account" routerLink="/modify-account">Modifier les informations</button>

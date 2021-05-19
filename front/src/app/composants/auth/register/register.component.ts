@@ -12,7 +12,7 @@ import { UsersService } from 'src/app/service/users.service';
 export class RegisterComponent implements OnInit {
 
   signupForm: FormGroup;
-  errorMsg: String
+  fullPathname ='assets/images/logoModif.png';
 
   constructor(private formBuilder: FormBuilder,
               private UserService: UsersService,

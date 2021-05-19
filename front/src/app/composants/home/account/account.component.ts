@@ -13,7 +13,7 @@ export class AccountComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
-  this.getUserProfile()
+  this.getUserProfile();
   }
   getUserProfile(): void{
      this.usersService.getUserProfile().subscribe(userProfile => {

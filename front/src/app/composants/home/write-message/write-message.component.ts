@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'src/app/service/message.service';
+import { UsersService } from 'src/app/service/users.service';
 
 @Component({
   selector: 'app-write-message',
@@ -17,7 +18,8 @@ export class WriteMessageComponent implements OnInit {
   @Output() newPost = new EventEmitter<boolean>();
 
   constructor(private formBuilder: FormBuilder,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private UserService: UsersService) { }
 
   ngOnInit(): void {
     this.postMessage = this.formBuilder.group({
