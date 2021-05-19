@@ -30,5 +30,9 @@ export class MessageService {
     return this.httpClient.post(this.postUrl + 'new',formData);
   }
 
+  deletePost(id: number){
+    return this.httpClient.delete(this.postUrl + id +'/delete')
+  }
+
   
 }

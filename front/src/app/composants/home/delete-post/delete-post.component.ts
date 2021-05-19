@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'app-delete-post',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeletePostComponent implements OnInit {
 
-  userId: string;
+  @Input() postId:number;
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.userId = JSON.parse(sessionStorage.getItem('session')).userId;
+  }
+  deletePost(){
+    this.messageService.deletePost(this.postId).subscribe()
+    console.log(this.postId);
+    
   }
 
 }
