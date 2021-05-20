@@ -12,7 +12,7 @@ button{
     border: 2px solid rgb(0, 121, 177);
     border-radius: 5px;
     outline: none;
-    margin-left: 20px;
+    margin-left: 0px;
     border: 2px solid rgb(209, 81, 90);
     background-color: rgb(18, 36, 65);
     &:hover{
@@ -22,4 +22,7 @@ button{
         margin-left: 10px;
     }
    
+}
+.button{
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output } from '@angular/core';
 import { MessageService } from 'src/app/service/message.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { MessageService } from 'src/app/service/message.service';
 })
 export class HomeComponent implements OnInit {
 
-  allPost: any;
+  @Output() allPost: any;
 
 
   constructor( private messageService: MessageService) { }

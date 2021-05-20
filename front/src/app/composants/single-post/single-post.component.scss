@@ -15,11 +15,22 @@
       margin: 40px auto;
       }
     .top{
-
+      display: flex;
+        .picture{
+          background-color: rgb(34, 53, 83);
+          img{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-left: 20px;
+          }
+        }
         h1{
             background-color: rgb(34, 53, 83);
             color: white;
             font-size: 20px;
+            width: 180px;
+            padding-top: 20px;
             font-family: "montserrat", Arial, Helvetica, sans-serif;
         }
         p{
@@ -77,8 +88,8 @@ body
 {
   display: block;
   position: relative;
-  top: -28px;
-  left: 15px;
+  top: 5px;
+  left: -278px;
   background-color: transparent;
   z-index: 1;
   -webkit-user-select: none;
@@ -170,10 +181,10 @@ body
 #menu
 {
   position: absolute;
-  width: 100%;
-  margin: -35px 0 0 -280px;
-  padding: 10px 70px;
-  
+  width: 230%;
+  margin: -35px 0 0 -270px;
+  padding: 10px 50px;
+  top: 40px;
   background: rgb(18, 36, 65);
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
@@ -186,9 +197,11 @@ body
 
 #menu li
 {
-  padding: 10px 0 0 20px;
   font-size: 22px;
   background : rgb(18, 36, 65);
+  width: 130px;
+  height: 30px;
+  padding: 10px;
 }
 
 #menuToggle input:checked ~ ul
@@ -199,5 +212,5 @@ body
   display: flex;
   flex-direction: column;
   background-color: rgb(34, 53, 83);
-  margin-left: 60px;
+  margin-left: 20px;
 }

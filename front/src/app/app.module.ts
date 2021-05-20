@@ -25,6 +25,7 @@ import { MessageService } from './service/message.service';
 import { DeletePostComponent } from './composants/home/delete-post/delete-post.component';
 import { ModifyPostComponent } from './composants/home/modify-post/modify-post.component';
 import { ModifyAccountComponent } from './composants/home/account/modify-account/modify-account.component';
+import { CommentPostComponent } from './composants/home/comment/comment-post/comment-post.component';
 
 
 export const ROUTES : Routes = [
@@ -56,6 +57,7 @@ export const ROUTES : Routes = [
     DeletePostComponent,
     ModifyPostComponent,
     ModifyAccountComponent,
+    CommentPostComponent,
   ],
   imports: [
     BrowserModule,

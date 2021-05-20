@@ -1,7 +1,7 @@
-<div [formGroup]="postMessage">
+<div [formGroup]="postMessage" *ngFor="let userProfile of oneUserProfil">
     <div class="writeMessage">
         <!-- ici photo de profil -->
-        <img src="{{fullPathname}}">
+        <img [src]="userProfile.picture">
         <textarea placeholder="Que voulez vous dire ?" class="message form-control" formControlName="postOneMessage"></textarea>
     </div>
     <div class="button">

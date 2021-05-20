@@ -16,17 +16,18 @@ export class WriteMessageComponent implements OnInit {
   attachment : File;
   file: File;
   @Output() newPost = new EventEmitter<boolean>();
+  oneUserProfil: any;
 
   constructor(private formBuilder: FormBuilder,
               private messageService: MessageService,
-              private UserService: UsersService) { }
+              private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.postMessage = this.formBuilder.group({
       postOneMessage: this.formBuilder.control('',(Validators.required)),
       attachment:this.formBuilder.control('')
     });
-    
+    this.getUserProfile();
   }
 
   writePost():void{
@@ -43,5 +44,13 @@ export class WriteMessageComponent implements OnInit {
     this.file = (event.target as HTMLInputElement).files[0];
     console.log(this.file);
   }
+
+  getUserProfile(): void{
+    this.usersService.getUserProfile().subscribe(userProfile => {
+     this.oneUserProfil = userProfile
+     console.log(this.oneUserProfil);
+     
+   });
+ }
 
 }

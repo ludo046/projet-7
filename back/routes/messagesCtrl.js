@@ -77,7 +77,7 @@ module.exports = {
       attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       include: [{
         model: models.User,
-        attributes: [ 'firstName','lastName' ],
+        attributes: [ 'firstName','lastName','picture'],
       }],
     }).then(function(messages) {
       if (messages) {
@@ -122,5 +122,31 @@ module.exports = {
     }).catch (function(err){
         (res.status(400).json({ 'error': 'user not found' }))
     })
-}
+},
+
+  modifyPost: function(req,res){
+    let headerAuth = req.headers['authorization'];
+    let userId = jwtUtils.getUserId(headerAuth)
+
+    if (userId < 0){
+      return res.status(400).json({ 'error': 'wrong token' })
+    };
+
+    let messageId = parseInt(req.params.messageId);
+    console.log(messageId);
+
+    if (messageId <= 0) {
+      return res.status(400).json({ 'error': 'invalid parameters' });
+    }
+    models.Message.update({
+      where: {
+        userId: userId,
+        id: messageId
+      }
+    }).then (function(){
+      ( res.status(200).json({'ok' :'post updated'})) 
+   }).catch (function(err){
+       (res.status(400).json({ 'error': 'post not updated' }))
+   })
+  }
 }

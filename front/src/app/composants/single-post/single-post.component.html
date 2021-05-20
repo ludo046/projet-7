@@ -3,6 +3,9 @@
     <li class="list-group-item">
         <div class="post" *ngFor='let post of allPost'>
             <div class="top">
+                <div class="picture">
+                    <img [src]="post.User.picture">
+                </div>
                 <div class="top-post">
                     <h1>{{ post.User.firstName }} {{ post.User.lastName }}</h1>
                     <p>publié le {{ post.createdAt | date:'dd/MM/yyyy' }} à {{ post.createdAt | date:'HH:mm' }} </p>                    
@@ -21,7 +24,7 @@
             </div>
             <img [src]="post.attachment">
             <div class="content">
-               <p>{{ post.content }}</p>  
+               <p>{{ post.content }} </p>  
             </div>
                    
         <div class="interaction">
