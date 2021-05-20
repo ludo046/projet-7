@@ -10,7 +10,7 @@
                     <h1>{{ post.User.firstName }} {{ post.User.lastName }}</h1>
                     <p>publié le {{ post.createdAt | date:'dd/MM/yyyy' }} à {{ post.createdAt | date:'HH:mm' }} </p>                    
                 </div>
-                <div id="menuToggle">
+                <div id="menuToggle" *ngIf="connectUserId === post.UserId">
                     <input type="checkbox" />
                     <span></span>
                     <span></span>

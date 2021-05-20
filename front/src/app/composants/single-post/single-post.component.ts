@@ -11,13 +11,15 @@ export class SinglePostComponent {
 
  @Input() allPost: any;
  public userId: any;
- connectUserId = JSON.parse(sessionStorage.getItem('session')).token; 
+ connectUserId = JSON.parse(sessionStorage.getItem('session')).id; 
 
   constructor(private messageService: MessageService,
               private usersService: UsersService) { }
 
   ngOnInit(): void {  
     this.newPost();
+    console.log(this.connectUserId);
+    
   }
   
   newPost():void{
