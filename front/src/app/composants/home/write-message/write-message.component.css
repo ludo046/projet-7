@@ -1,0 +1,117 @@
+::ng-deep * {
+  margin: 0;
+  padding: 0;
+  background-color: #122441;
+}
+
+.writeMessage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  vertical-align: center;
+  margin: 10px auto;
+  width: 90%;
+  border: 1px solid #d1515a;
+  border-radius: 50px 5px 5px 50px;
+  padding: 3px;
+  background-color: #223553;
+}
+
+.writeMessage img {
+  width: 100px;
+  height: 100px;
+  margin: auto 0;
+  background-color: #223553;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.writeMessage .message {
+  width: 280px;
+  height: 70px;
+  margin-left: 10px;
+  padding-left: 10px;
+  resize: none;
+  outline: none;
+  color: white;
+  font-size: 16px;
+  border: none;
+  font-family: "montserrat",Arial, Helvetica, sans-serif;
+  background-color: #223553;
+}
+
+.writeMessage ::-webkit-input-placeholder {
+  font-family: "montserrat",Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 25px;
+  color: white;
+  font-size: 16px;
+}
+
+.writeMessage :-ms-input-placeholder {
+  font-family: "montserrat",Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 25px;
+  color: white;
+  font-size: 16px;
+}
+
+.writeMessage ::-ms-input-placeholder {
+  font-family: "montserrat",Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 25px;
+  color: white;
+  font-size: 16px;
+}
+
+.writeMessage ::placeholder {
+  font-family: "montserrat",Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 25px;
+  color: white;
+  font-size: 16px;
+}
+
+.button {
+  width: 90%;
+  margin: 0 auto 20px;
+}
+
+.button button {
+  font-size: 16px;
+  color: white;
+  padding: 5px 10px;
+  border: 2px solid #d1515a;
+  border-radius: 5px;
+  outline: none;
+  background-color: #122441;
+}
+
+.button button:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.button .margin {
+  margin-left: 20px;
+}
+
+.button .input-file {
+  display: none;
+}
+
+.button label {
+  color: white;
+  border: 2px solid #d1515a;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: "montserrat",Arial, Helvetica, sans-serif;
+  background-color: #122441;
+}
+
+.button label:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+/*# sourceMappingURL=write-message.component.css.map */

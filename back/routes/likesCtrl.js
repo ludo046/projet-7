@@ -13,8 +13,6 @@ module.exports = {
     // Getting auth header
     let headerAuth  = req.headers['authorization'];
     let userId      = jwtUtils.getUserId(headerAuth);
-    console.log(userId);
-    console.log(headerAuth);
 
     // Params
     let messageId = parseInt(req.params.messageId);

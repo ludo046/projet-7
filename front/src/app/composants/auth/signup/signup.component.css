@@ -1,0 +1,98 @@
+::ng-deep * {
+  margin: 0;
+  padding: 0;
+  background-color: #223553;
+  font-family: "montserrat", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #122441;
+}
+
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 20px;
+}
+
+.login input {
+  margin: 10px auto;
+  width: 180px;
+  height: 30px;
+  padding-left: 10px;
+  outline: none;
+  font-size: 16px;
+  background-color: white;
+}
+
+.login button {
+  width: 100px;
+  border: 2px solid #d1515a;
+  margin: 20px auto;
+  height: 30px;
+  color: white;
+  border-radius: 5px;
+  outline: none;
+}
+
+.login button:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.login p {
+  text-align: center;
+  margin-top: 10px;
+  color: white;
+  margin-bottom: 30px;
+  font-size: 16px;
+  background-color: #122441;
+}
+
+.login a {
+  color: #d1515a;
+  background-color: #122441;
+}
+
+form {
+  padding: 10px;
+  border: 2px solid #d1515a;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 60%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #122441;
+  margin: 13% auto 13%;
+}
+
+.form-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #122441;
+}
+
+.form-group label {
+  margin: 0 auto;
+  color: white;
+  background-color: #122441;
+}
+/*# sourceMappingURL=signup.component.css.map */

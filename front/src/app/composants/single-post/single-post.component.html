@@ -1,7 +1,7 @@
 
 <ul class="list-group">
     <li class="list-group-item">
-        <div class="post" *ngFor='let post of allPost'>
+        <div class="post" *ngFor='let post of allPost' >
             <div class="top">
                 <div class="picture">
                     <img [src]="post.User.picture">
@@ -17,7 +17,11 @@
                     <span></span>
               
                     <ul id="menu">
-                        <li><app-modify-post></app-modify-post></li>
+                        <li>
+                            <div class="button">
+                                <button routerLink="/modify-post">Modifier<fa-icon></fa-icon></button>
+                            </div>
+                        </li>
                         <li><app-delete-post [postId]="post.id"></app-delete-post></li>
                     </ul>
                   </div>
@@ -29,7 +33,17 @@
                    
         <div class="interaction">
             <app-like [postId]="post.id"></app-like>
-            <app-comment></app-comment>
+        </div>
+        <div class="comment-post" >
+            <div class="user-picture" *ngFor="let userProfile of oneUserProfil">
+                <img [src]="userProfile.picture" class="picture-profile">
+            </div>
+            <div class="comment" [formGroup]="postComment">
+                <textarea class="message form-control" placeholder="Votre commentaire ..." formControlName="postOneComment"></textarea>
+            </div>
+            <div class="button">
+                    <button class="comment-button" (click)="writeComment(post.id)"><fa-icon [icon]="faComment"></fa-icon></button>
+            </div>
         </div>
         </div>
     </li>

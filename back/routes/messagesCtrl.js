@@ -11,12 +11,8 @@ module.exports = {
     // Getting auth header
     let headerAuth  = req.headers['authorization'];
     let userId = jwtUtils.getUserId(headerAuth);
-    
-    console.log(headerAuth);
-    console.log(userId);
     // Params
     let content = req.body.content;
-    console.log(req.file);
     let attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 
     console.log(content);
@@ -94,7 +90,6 @@ module.exports = {
   deletePost: function(req, res){
     let headerAuth = req.headers['authorization'];
     let userId = jwtUtils.getUserId(headerAuth)
-    console.log(userId);
 
     if (userId < 0){
       return res.status(400).json({ 'error': 'wrong token' })
@@ -106,6 +101,7 @@ module.exports = {
     if (messageId <= 0) {
       return res.status(400).json({ 'error': 'invalid parameters' });
     }
+
     models.Like.destroy({
         where: {
           userId: userId,
@@ -126,7 +122,10 @@ module.exports = {
 
   modifyPost: function(req,res){
     let headerAuth = req.headers['authorization'];
-    let userId = jwtUtils.getUserId(headerAuth)
+    let userId = jwtUtils.getUserId(headerAuth);
+    let content = req.body.content;
+    console.log(content);
+    console.log(userId);
 
     if (userId < 0){
       return res.status(400).json({ 'error': 'wrong token' })
@@ -138,11 +137,15 @@ module.exports = {
     if (messageId <= 0) {
       return res.status(400).json({ 'error': 'invalid parameters' });
     }
+    if (content < CONTENT_LIMIT){
+      return res.status(400).json({'error': 'ajust caracteres'})
+    }
     models.Message.update({
       where: {
         userId: userId,
         id: messageId
-      }
+      },
+      //content: (content ? content : content),
     }).then (function(){
       ( res.status(200).json({'ok' :'post updated'})) 
    }).catch (function(err){

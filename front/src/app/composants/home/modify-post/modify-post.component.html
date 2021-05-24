@@ -1,4 +1,16 @@
+<app-header></app-header>
+<app-nav></app-nav>
 
-<div class="button">
-    <button>Modifier<fa-icon [icon]=""></fa-icon></button>
-</div>
+<form [formGroup]="modifyPost">
+    <h1>Modifier votre publication : </h1>
+    <div class="form-group"> 
+       <textarea class="message form-control" formControlName="content"></textarea>
+    </div>
+    <div class="picture">
+        <p>Pièce jointe : <img [src]="" alt=""></p>
+        <label for="file" class="label-file">Choisir une image</label>
+        <input id="file" type="file" class="input-file">
+    </div>     
+    <button (click)="updatePost()" routerLink="/home">Valider</button>
+</form>
+<app-footer></app-footer>

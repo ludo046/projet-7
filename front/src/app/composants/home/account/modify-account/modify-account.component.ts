@@ -27,23 +27,12 @@ public file: File;
   }
 
   updateUserProfile(){
-    //const formUpdateProfile = {
       const firstname = this.updateAccountForm.get('firstName').value;
       const lastname = this.updateAccountForm.get('lastName').value;
       const email = this.updateAccountForm.get('email').value;
       const datebirth = this.updateAccountForm.get('dateBirth').value;
-    //};
-    const picture = this.file;
-    console.log(picture);
-    
+      const picture = this.file;
 
-    //console.log(formUpdateProfile);
-    console.log(picture);
-    console.log(firstname);
-    console.log(lastname);
-    console.log(email);
-    console.log(datebirth);
-    
     this.userService.updateUserProfile(firstname,lastname,email,datebirth,picture).subscribe(() => this.newProfile.emit(true))
   }
   onFileAdded(event: Event) {

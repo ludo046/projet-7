@@ -3,14 +3,19 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor() { }
+  newRequest: HttpRequest<any>;
   intercept(req: HttpRequest<any>, next: HttpHandler): any {
-    //const authToken = JSON.parse(sessionStorage.getItem('session')).token; 
-    //console.log(authToken);
+    if (JSON.parse(sessionStorage.getItem('session'))){
+      const authToken = JSON.parse(sessionStorage.getItem('session')).token; 
     
-    const newRequest = req.clone({
-      //withCredentials: false ,
-      //headers: req.headers.set('authorization', authToken) 
-    });
-    return next.handle(newRequest);
+      this.newRequest = req.clone({
+      withCredentials: false ,
+      headers: req.headers.set('authorization', authToken) 
+      });
+    }else{
+      this.newRequest = req.clone();
+    }
+
+    return next.handle(this.newRequest);
   }
 }

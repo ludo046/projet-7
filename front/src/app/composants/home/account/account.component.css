@@ -1,0 +1,93 @@
+::ng-deep * {
+  margin: 0;
+  padding: 0;
+  font-family: "montserrat", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: white;
+  font-size: 20px;
+  margin: 20px 10px 20px;
+}
+
+.information {
+  margin: 0 10px 20px;
+}
+
+.information .modification {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 15px 0;
+}
+
+.information p {
+  color: white;
+  font-size: 16px;
+}
+
+.information .modify-account {
+  color: white;
+  height: 25px;
+  width: 230px;
+  border: 2px solid #a5a5a5;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.information .modify-account:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.information .picture p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.information .picture img {
+  width: 200px;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-top: 20px;
+  border-radius: 50%;
+}
+
+.label-file {
+  color: white;
+}
+
+.input-file {
+  display: none;
+}
+
+.delete-account {
+  color: red;
+  height: 25px;
+  width: 200px;
+  border: 2px solid red;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  margin: 20px 0 0 20px;
+}
+
+.delete-account:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+/*# sourceMappingURL=account.component.css.map */

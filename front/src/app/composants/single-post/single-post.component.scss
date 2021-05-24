@@ -23,6 +23,7 @@
             height: 60px;
             border-radius: 50%;
             margin-left: 20px;
+            object-fit: cover;
           }
         }
         h1{
@@ -214,3 +215,75 @@ body
   background-color: rgb(34, 53, 83);
   margin-left: 20px;
 }
+
+.user-picture{
+  .picture-profile{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0;
+  object-fit: cover;
+}
+}
+.comment-post{
+  display: flex;
+  height: 50px;
+  border-radius: 50px 50px 50px 50px;
+}
+.message{
+  width: 220px;
+  height: 50px;
+  margin-left: 10px;
+  padding-left: 10px;
+  resize: none;
+  outline: none;
+  color: white;
+  font-size: 16px;
+  border: none;
+  font-family: "montserrat",Arial, Helvetica, sans-serif;
+  background-color: rgb(18, 36, 65);
+  border-radius: 0 50px 50px 0;
+  }.comment{
+    border-radius: 0 50px 50px 0;
+  }
+
+
+  ::ng-deep * {
+    margin: 0;
+    padding: 0;
+    //background-color: rgb(18, 36, 65);;
+    
+}
+.button{
+    background-color: #223553;
+    height: 50px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column-;
+}
+button{
+    font-size: 16px;
+    color: white;
+    padding: 5px;
+    border: 2px solid rgb(209, 81, 90);
+    border-radius: 5px;
+    outline: none;
+    margin-left: 10px;
+    display: flex;
+    background-color: rgb(18, 36, 65);
+    &:hover{
+        transform: scale(1.1);
+    }
+    fa-icon{
+        margin: 0 2px;
+        font-size: 10px;
+    }
+    
+}
+.comment-button{
+    border-radius: 50px;
+    height: 25px;
+    margin-top: 20px;
+}
+
+ 

@@ -1,5 +1,6 @@
-import { Component, OnInit, } from '@angular/core';
-import { HomeComponent } from '../home/home.component';
+import { Component, Input, OnInit, } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'app-modify-post',
@@ -8,19 +9,26 @@ import { HomeComponent } from '../home/home.component';
 })
 export class ModifyPostComponent implements OnInit {
 
-  public userId: string;
-  public userPostId: any;
-  
+  modifyPost: FormGroup;
+  @Input() postId: any;
 
-  constructor( public homeComponent: HomeComponent) { }
+  constructor(private formBuilder: FormBuilder,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.userId = JSON.parse(sessionStorage.getItem('session')).userId;
-    this.userPostId = this.homeComponent.allPost
-    //console.log(this.userId);
-    //console.log(this.userPostId);
+    this.modifyPost = this.formBuilder.group({
+      content: this.formBuilder.control('',(Validators.required)),
+      //attachment:this.formBuilder.control('')
+    });
+  }
+
+  updatePost(){
+    const content = this.modifyPost.get('content').value;
+    console.log(content);
     
-    
+    this.messageService.updatePost(content).subscribe()
   }
 
 }
+
+

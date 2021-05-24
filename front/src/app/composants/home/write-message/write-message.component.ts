@@ -32,11 +32,7 @@ export class WriteMessageComponent implements OnInit {
 
   writePost():void{
     const content = this.postMessage.get('postOneMessage').value;
-    const attachment = this.file;
-    console.log(this.file);
-    console.log(content);
-    console.log(attachment);
-    
+    const attachment = this.file;    
     this.messageService.writePost(content,attachment).subscribe(() => this.newPost.emit(true))
   }
 

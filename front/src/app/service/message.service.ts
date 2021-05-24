@@ -34,5 +34,7 @@ export class MessageService {
     return this.httpClient.delete(this.postUrl + id +'/delete')
   }
 
-  
+  updatePost(content: string){
+    return this.httpClient.put(this.postUrl + 129 + '/modify',{content})
+  }
 }

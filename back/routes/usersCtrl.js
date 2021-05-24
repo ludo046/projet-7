@@ -18,7 +18,6 @@ module.exports={
         const email = req.body.email;
         const dateBirth = req.body.dateBirth || '';
         const picture = req.body.picture || '';
-        console.log(req.body);
 
         if (firstName == null || lastName == null || password == null || email == null) {
             return res.status(400).json({ 'error': 'missing parameters' })
@@ -91,7 +90,6 @@ module.exports={
     getUserProfile: function(req, res){
         const headerAuth = req.headers['authorization'];
         const userId = jwtUtils.getUserId(headerAuth);
-        console.log(userId);
         if (userId < 0)
         return res.status(400).json({ 'error': 'wrong token' })
 

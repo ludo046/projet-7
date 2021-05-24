@@ -1,0 +1,97 @@
+::ng-deep * {
+  margin: 0;
+  padding: 0;
+  background-color: #223553;
+  font-family: "montserrat", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  background-color: #122441;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 2px solid #d1515a;
+  border-radius: 10px;
+  padding: 30px;
+  width: 50%;
+  margin: 9% auto 9%;
+  background-color: #122441;
+  position: relative;
+}
+
+form input {
+  width: 150px;
+  margin: 10px auto;
+  padding-left: 10px;
+  background-color: white;
+  height: 30px;
+  outline: none;
+  font-size: 16px;
+}
+
+form button {
+  margin: 30px auto;
+  font-size: 16px;
+  width: 100px;
+  border: 2px solid #d1515a;
+  height: 30px;
+  color: white;
+  border-radius: 5px;
+  outline: none;
+}
+
+form button:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+form button :disabled {
+  background-color: #777777;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+p {
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  background-color: #122441;
+}
+
+a {
+  color: #d1515a;
+  background-color: #122441;
+}
+
+.form-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #122441;
+}
+
+.form-group label {
+  margin: 0 auto;
+  color: white;
+  background-color: #122441;
+}
+
+.input-file {
+  display: none;
+}
+/*# sourceMappingURL=register.component.css.map */

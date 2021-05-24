@@ -1,0 +1,36 @@
+h1 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  background-color: #223553;
+  padding: 5px 10px 5px;
+  border-radius: 5px 5px 0 0;
+}
+
+.private-message {
+  width: 90%;
+  margin: 10px auto;
+  color: white;
+  background-color: #223553;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, 0.72);
+          box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, 0.72);
+}
+
+.private-message .message {
+  width: 100%;
+  background-color: #223553;
+  border-radius: 0 0 5px 5px;
+}
+
+.private-message p {
+  width: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background-color: #223553;
+  padding: 0 10px 5px;
+  border-radius: 0 0 5px 5px;
+}
+/*# sourceMappingURL=single-message.component.css.map */

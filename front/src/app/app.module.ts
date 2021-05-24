@@ -18,14 +18,13 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { WriteMessageComponent } from './composants/home/write-message/write-message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LikeComponent } from './composants/home/like/like.component';
-import { CommentComponent } from './composants/home/comment/comment.component';
 import { SignupComponent } from './composants/auth/signup/signup.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { MessageService } from './service/message.service';
 import { DeletePostComponent } from './composants/home/delete-post/delete-post.component';
 import { ModifyPostComponent } from './composants/home/modify-post/modify-post.component';
 import { ModifyAccountComponent } from './composants/home/account/modify-account/modify-account.component';
-import { CommentPostComponent } from './composants/home/comment/comment-post/comment-post.component';
+
 
 
 export const ROUTES : Routes = [
@@ -35,6 +34,7 @@ export const ROUTES : Routes = [
   { path: 'account', component: AccountComponent },
   { path: 'message', component: MessageComponent },
   { path: 'modify-account', component: ModifyAccountComponent },
+  { path: 'modify-post', component: ModifyPostComponent },
   { path: '', component: SignupComponent}
 ]
 
@@ -53,11 +53,10 @@ export const ROUTES : Routes = [
     SingleMessageComponent,
     WriteMessageComponent,
     LikeComponent,
-    CommentComponent,
     DeletePostComponent,
     ModifyPostComponent,
     ModifyAccountComponent,
-    CommentPostComponent,
+
   ],
   imports: [
     BrowserModule,
