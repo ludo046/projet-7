@@ -107,7 +107,7 @@ module.exports={
         })
     },
 
-    updateUserProfile: function(req, res) {
+   updateUserProfile: function(req, res) {
         let headerAuth = req.headers['authorization'];
         let userId = jwtUtils.getUserId(headerAuth)
 
@@ -155,7 +155,7 @@ module.exports={
                 return res.status(500).json({ 'error': 'connot update user profile' })
             }
         })
-    },
+    }, 
 
     deleteUser: function(req, res){
         let headerAuth = req.headers['authorization'];

@@ -35,6 +35,6 @@ export class MessageService {
   }
 
   updatePost(content: string){
-    return this.httpClient.put(this.postUrl + 129 + '/modify',{content})
+    return this.httpClient.put(this.postUrl + 131 + '/modify',{content})
   }
 }

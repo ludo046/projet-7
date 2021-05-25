@@ -32,7 +32,8 @@ export class WriteMessageComponent implements OnInit {
 
   writePost():void{
     const content = this.postMessage.get('postOneMessage').value;
-    const attachment = this.file;    
+    const attachment = this.file;  
+     
     this.messageService.writePost(content,attachment).subscribe(() => this.newPost.emit(true))
   }
 
@@ -43,9 +44,7 @@ export class WriteMessageComponent implements OnInit {
 
   getUserProfile(): void{
     this.usersService.getUserProfile().subscribe(userProfile => {
-     this.oneUserProfil = userProfile
-     console.log(this.oneUserProfil);
-     
+     this.oneUserProfil = userProfile     
    });
  }
 
