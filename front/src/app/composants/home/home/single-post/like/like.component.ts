@@ -23,6 +23,6 @@ export class LikeComponent implements OnInit {
     this.LikeService.likePost(this.postId).subscribe()
   }
   dislikePost(){
-    this.LikeService.likePost(this.postId).subscribe()
+    this.LikeService.dislike(this.postId).subscribe()
   }
 }

@@ -36,8 +36,11 @@ export class RegisterComponent implements OnInit {
       password: this.signupForm.get('password').value,
       email: this.signupForm.get('email').value,
     }
-    this.UserService.createUser(formRegister).subscribe(result => sessionStorage[`session`] = JSON.stringify(result)
-    )
+    this.UserService.createUser(formRegister).subscribe(result => 
+      {
+        sessionStorage[`session`] = JSON.stringify(result);
+        this.router.navigate['/home'];
+      })
 
   }
   

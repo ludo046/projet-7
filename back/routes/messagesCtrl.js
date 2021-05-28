@@ -165,7 +165,7 @@ module.exports = {
             }
         },
     ],function(messageFound){
-        if (userFound){
+        if (messageFound){
             return res.status(201).json(messageFound);
         } else {
             return res.status(500).json({ 'error': 'post not update' })

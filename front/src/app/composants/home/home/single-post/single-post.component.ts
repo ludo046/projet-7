@@ -15,7 +15,7 @@ export class SinglePostComponent {
 
  @Input() allPost: any;
  public userId: any;
- connectUserId = JSON.parse(sessionStorage.getItem('session')).userId;
+ connectUserId: number = JSON.parse(sessionStorage.getItem('session')).userId;
  oneUserProfil: any;
  faComment = faChevronRight;
  postComment: FormGroup;
@@ -65,7 +65,7 @@ export class SinglePostComponent {
     console.log(content);
     //console.log(attachment);
     
-    this.commentService.writeComment(content,postId).subscribe()
+    this.commentService.writeComment(content,postId).subscribe(() => this.newcomment());
   }
 
   onFileAdded(event: Event) {
