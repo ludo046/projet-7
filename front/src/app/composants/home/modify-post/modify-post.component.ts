@@ -25,8 +25,10 @@ export class ModifyPostComponent implements OnInit {
   updatePost(){
     const content = this.modifyPost.get('content').value;
     console.log(content);
+    console.log(this.postId);
     
-    this.messageService.updatePost(content).subscribe()
+    
+    this.messageService.updatePost(content,this.postId).subscribe()
   }
 
 }

@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output, } from '@angular/core';
 import { MessageService } from 'src/app/service/message.service';
 import { UsersService } from 'src/app/service/users.service';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from 'src/app/service/comment.service';
+
 
 @Component({
   selector: 'app-single-post',
@@ -19,6 +20,9 @@ export class SinglePostComponent {
  faComment = faChevronRight;
  postComment: FormGroup;
  file: File;
+ public comments: [];
+ isAdmin: Boolean = JSON.parse(sessionStorage.getItem('session')).isAdmin;
+
 
 
   constructor(private messageService: MessageService,
@@ -28,6 +32,7 @@ export class SinglePostComponent {
 
   ngOnInit(): void {  
     this.newPost();
+    this.newcomment();
     this.getUserProfile();
     this.postComment = this.formBuilder.group({
       postOneComment: this.formBuilder.control('',(Validators.required)),
@@ -38,6 +43,12 @@ export class SinglePostComponent {
   newPost():void{
     this.messageService.getPost().subscribe(posts => {
       this.userId = posts
+    });
+  }
+  newcomment():void{
+    this.commentService.getComment().subscribe(comments => {
+      this.comments = comments
+      console.log(this.comments);
     });
   }
   getUserProfile(): void{

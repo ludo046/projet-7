@@ -16,7 +16,7 @@ export class WriteMessageComponent implements OnInit {
   attachment : File;
   file: File;
   @Output() newPost = new EventEmitter<boolean>();
-  oneUserProfil: any;
+  oneUserProfil: [];
 
   constructor(private formBuilder: FormBuilder,
               private messageService: MessageService,
@@ -25,7 +25,7 @@ export class WriteMessageComponent implements OnInit {
   ngOnInit(): void {
     this.postMessage = this.formBuilder.group({
       postOneMessage: this.formBuilder.control('',(Validators.required)),
-      attachment:this.formBuilder.control('')
+      attachment:this.formBuilder.control('',)
     });
     this.getUserProfile();
   }

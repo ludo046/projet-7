@@ -1,7 +1,8 @@
 
 <ul class="list-group">
+    <cdk-virtual-scroll-viewport itemSize = "500" class = "viewport"> 
     <li class="list-group-item">
-        <div class="post" *ngFor='let post of allPost' >
+        <div class="post" *cdkVirtualFor='let post of allPost' >
             <div class="top">
                 <div class="picture">
                     <img [src]="post.User.picture">
@@ -10,7 +11,7 @@
                     <h1>{{ post.User.firstName }} {{ post.User.lastName }}</h1>
                     <p>publié le {{ post.createdAt | date:'dd/MM/yyyy' }} à {{ post.createdAt | date:'HH:mm' }} </p>                    
                 </div>
-                <div id="menuToggle" *ngIf="connectUserId === post.UserId">
+                <div id="menuToggle" *ngIf="connectUserId === post.UserId || isAdmin === true">
                     <input type="checkbox" />
                     <span></span>
                     <span></span>
@@ -19,7 +20,7 @@
                     <ul id="menu">
                         <li>
                             <div class="button">
-                                <button routerLink="/modify-post">Modifier<fa-icon></fa-icon></button>
+                                <button routerLink="/modify-post" [postId]="post.id">Modifier<fa-icon></fa-icon></button>
                             </div>
                         </li>
                         <li><app-delete-post [postId]="post.id"></app-delete-post></li>
@@ -32,7 +33,8 @@
             </div>
                    
         <div class="interaction">
-            <app-like [postId]="post.id"></app-like>
+            <app-like [postId]="post.id" [like]="post.like"></app-like>
+            <p *ngIf="post.likes > 0 " class="likes-counter">likes : {{ post.likes }} </p>
         </div>
         <div class="comment-post" >
             <div class="user-picture" *ngFor="let userProfile of oneUserProfil">
@@ -42,9 +44,26 @@
                 <textarea class="message form-control" placeholder="Votre commentaire ..." formControlName="postOneComment"></textarea>
             </div>
             <div class="button">
-                    <button class="comment-button" (click)="writeComment(post.id)"><fa-icon [icon]="faComment"></fa-icon></button>
+                    <button class="comment-button" (click)="writeComment(post.id)"><fa-icon [icon]="faComment" accesskey="enter"></fa-icon></button>
+            </div>
+        </div>
+        <div class="view-comment" *ngFor='let comment of comments'>
+            <div class="comment-container" *ngIf="post.id === comment.messageId">
+            <div class="comment-informations"  >
+                <img [src]="comment.User.picture" class="comment-picture">
+                <div class="name">
+                    <p class="comment-firstname">{{ comment.User.firstName }}</p> 
+                    <p class="comment-lastname">{{ comment.User.lastName }}</p>
+                </div>
+
+            </div>
+            <div>
+                <p class="comment-content">{{ comment.content }}</p>
             </div>
         </div>
         </div>
+        </div>
     </li>
+</cdk-virtual-scroll-viewport> 
 </ul>
+

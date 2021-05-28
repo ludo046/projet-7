@@ -12,6 +12,27 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Comment.hasMany(models.Like)
+
+      models.Comment.belongsTo(models.User, {
+        through: models.Like,
+        foreignKey: 'userId',
+        otherKey: 'messageId'
+    }),
+      models.Comment.belongsTo(models.Message, {
+        through: models.Like,
+        foreignKey: 'messageId',
+        otherKey: 'userId'
+      }),
+
+      models.Comment.belongsTo(models.User, {
+        foreignKey: 'userId',
+        as: 'user',
+      }),
+  
+      models.Comment.belongsTo(models.Message, {
+        foreignKey: 'messageId',
+        as: 'message',
+      });
     }
   };
   Comment.init({

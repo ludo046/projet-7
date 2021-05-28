@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ScrollingModule } from '@angular/cdk/scrolling'
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './composants/auth/register/register.component';
@@ -64,6 +65,7 @@ export const ROUTES : Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    ScrollingModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, UsersService, MessageService, FormBuilder, HttpClientModule, HttpClient, FooterComponent],
   bootstrap: [AppComponent]

@@ -14,4 +14,7 @@ export class LikeService {
   likePost(id: number){
     return this.httpClient.post(this.likeUrl + id +'/like',{id})
   }
+  dislike(id: number){
+    return this.httpClient.post(this.likeUrl + id +'/dislike',{id})
+  }
 }

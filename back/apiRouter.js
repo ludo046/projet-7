@@ -22,7 +22,8 @@ exports.router = (function(){
     apiRouter.route('/message/:messageId/delete/').delete(messagesCtrl.deletePost);
     apiRouter.route('/message/:messageId/modify/').put(messagesCtrl.modifyPost);
 
-    apiRouter.route('/message/:messageId/comment/new/').post(commentCtrl.commentPost);
+    apiRouter.route('/comment/:messageId/comment/new/').post(commentCtrl.commentPost);
+    apiRouter.route('/comment/').get(commentCtrl.listComment);
 
     apiRouter.route('/message/:messageId/like/').post(likesCtrl.likePost);
     apiRouter.route('/message/:messageId/dislike/').post(likesCtrl.dislikePost);

@@ -1,4 +1,5 @@
 import { Component, OnInit,Output } from '@angular/core';
+import { CommentService } from 'src/app/service/comment.service';
 import { MessageService } from 'src/app/service/message.service';
 
 @Component({
@@ -9,9 +10,11 @@ import { MessageService } from 'src/app/service/message.service';
 export class HomeComponent implements OnInit {
 
   @Output() allPost: any;
+  @Output() allComment: any;
 
 
-  constructor( private messageService: MessageService) { }
+  constructor( private messageService: MessageService,
+               private commentService: CommentService) { }
 
   ngOnInit() {
     this.newPost();
@@ -21,6 +24,11 @@ export class HomeComponent implements OnInit {
     this.messageService.getPost().subscribe(posts => {
       this.allPost = posts;
       console.log(this.allPost);
+    });
+  }
+  newComment():void{
+    this.commentService.getComment().subscribe(comments => {
+      console.log(comments);
     });
   }
 }

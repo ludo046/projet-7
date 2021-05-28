@@ -1,29 +1,30 @@
 const models   = require('../models');
 const asyncLib = require('async');
 const jwtUtils = require('../utils/jwt.utils');
-const log = require('simple-node-logger').createSimpleLogger();
 
-
-const CONTENT_LIMIT = 4;
+const CONTENT_LIMIT = 1000;
 
 
 module.exports = {
   createMessage: function(req, res) {
-    // Getting auth header
     let headerAuth  = req.headers['authorization'];
     let userId = jwtUtils.getUserId(headerAuth);
-    // Params
     let content = req.body.content;
-    let attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-
+    let attachment;
+    if(req.file){
+      attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } else {
+      attachment = ''
+    }
     console.log(content);
     console.log(attachment);
+    console.log(req);
 
     if (content == null) {
       return res.status(400).json({ 'error': 'missing parameters' });
     }
 
-    if (content.length <= CONTENT_LIMIT) {
+    if (content.length > CONTENT_LIMIT) {
       return res.status(400).json({ 'error': 'invalid parameters' });
     }
    
@@ -75,7 +76,12 @@ module.exports = {
       include: [{
         model: models.User,
         attributes: [ 'firstName','lastName','picture'],
-      }],
+      },
+      {
+        model: models.Comment,
+        attributes: ['content','messageId']
+      }
+    ],
     }).then(function(messages) {
       if (messages) {
         res.status(200).json(messages);
@@ -121,37 +127,6 @@ module.exports = {
     })
 },
 
-  // modifyPost: function(req,res){
-  //   let headerAuth = req.headers['authorization'];
-  //   let userId = jwtUtils.getUserId(headerAuth);
-  //   let content = req.body.content;
-  //   console.log(content);
-  //   console.log(userId);
-
-  //   if (userId < 0){
-  //     return res.status(400).json({ 'error': 'wrong token' })
-  //   };
-
-  //   let messageId = parseInt(req.params.messageId);
-  //   console.log(messageId);
-
-  //   if (messageId <= 0) {
-  //     return res.status(400).json({ 'error': 'invalid parameters' });
-  //   }
-  //   if (content.length <= CONTENT_LIMIT){
-  //     return res.status(400).json({'error': 'ajust caracteres'})
-  //   }
-  //   models.Message.update({
-  //     where: {
-  //       userId: userId,
-  //       id: messageId
-  //     }
-  //   }).then (function(){
-  //     ( res.status(200).json({'ok' :'post updated'})) 
-  //  }).catch (function(err){
-  //      (res.status(500).json({ 'error': 'post not updated' }))
-  //  })
-  // }
   modifyPost: function(req, res) {
     let headerAuth = req.headers['authorization'];
     let userId = jwtUtils.getUserId(headerAuth)
@@ -178,7 +153,7 @@ module.exports = {
         function(messageFound, done){
             if (messageFound){
                 messageFound.update({
-                  content: content,//(content ? content : messageFound.content),
+                  content: content,
                 }).then(function(){
                     done(messageFound);
                 }).catch(function(err){
@@ -192,7 +167,7 @@ module.exports = {
         if (userFound){
             return res.status(201).json(messageFound);
         } else {
-            return res.status(500).json({ 'error': 'connot update post' })
+            return res.status(500).json({ 'error': 'post not update' })
         }
     })
 }

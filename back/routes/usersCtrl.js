@@ -72,6 +72,7 @@ module.exports={
                 if (resBycrypt){
                     return res.status(200).json({
                         'userId': userFound.id,
+                        'isAdmin': userFound.isAdmin,
                         token: jwtUtils.generateTokenForUser(userFound)
                     })
                 } else {

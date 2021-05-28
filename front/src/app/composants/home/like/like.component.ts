@@ -11,7 +11,7 @@ import { LikeService } from 'src/app/service/like.service';
 export class LikeComponent implements OnInit {
   faThumbsUp = faThumbsUp;
   @Input() postId:number;
-  session
+  @Input() like: number;
   constructor( private LikeService: LikeService) { }
 
   
@@ -20,6 +20,9 @@ export class LikeComponent implements OnInit {
   }
 
   likePost(){
+    this.LikeService.likePost(this.postId).subscribe()
+  }
+  dislikePost(){
     this.LikeService.likePost(this.postId).subscribe()
   }
 }
