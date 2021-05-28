@@ -130,7 +130,7 @@ module.exports = {
   modifyPost: function(req, res) {
     let headerAuth = req.headers['authorization'];
     let userId = jwtUtils.getUserId(headerAuth)
-    let messageId = parseInt(req.params.messageId);
+    const messageId = req.params.messageId
 
     const content = req.body.content;
     //const attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
@@ -138,6 +138,7 @@ module.exports = {
     console.log(userId);
     console.log(messageId);
     console.log(content);
+
      
     asyncLib.waterfall([
         function(done){

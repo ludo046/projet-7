@@ -32,8 +32,8 @@ export class MessageService {
     return this.httpClient.delete(this.postUrl + id +'/delete')
   }
 
-  updatePost(content: string, id: number){
-    return this.httpClient.put(this.postUrl + id + '/modify',{content})
+  updatePost(messageId: string, content: string){
+    return this.httpClient.put(this.postUrl + messageId + '/modify/',{content})
   }
   getComment(): Observable<any>{
     return this.httpClient.get(`${this.postUrl}`);

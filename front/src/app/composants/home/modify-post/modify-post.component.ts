@@ -10,7 +10,7 @@ import { MessageService } from 'src/app/service/message.service';
 export class ModifyPostComponent implements OnInit {
 
   modifyPost: FormGroup;
-  @Input() postId: any;
+  @Input() postId: number;
 
   constructor(private formBuilder: FormBuilder,
               private messageService: MessageService) { }
@@ -24,11 +24,13 @@ export class ModifyPostComponent implements OnInit {
 
   updatePost(){
     const content = this.modifyPost.get('content').value;
+    const messageId = window.location.href.split('post/')[1]
+    console.log(messageId);
+    
     console.log(content);
-    console.log(this.postId);
     
     
-    this.messageService.updatePost(content,this.postId).subscribe()
+    this.messageService.updatePost(messageId, content).subscribe()
   }
 
 }

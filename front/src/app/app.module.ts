@@ -35,7 +35,7 @@ export const ROUTES : Routes = [
   { path: 'account', component: AccountComponent },
   { path: 'message', component: MessageComponent },
   { path: 'modify-account', component: ModifyAccountComponent },
-  { path: 'modify-post', component: ModifyPostComponent },
+  { path: 'modify-post/:postId', component: ModifyPostComponent },
   { path: '', component: SignupComponent}
 ]
 

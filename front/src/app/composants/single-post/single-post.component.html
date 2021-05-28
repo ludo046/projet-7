@@ -20,7 +20,7 @@
                     <ul id="menu">
                         <li>
                             <div class="button">
-                                <button routerLink="/modify-post" [postId]="post.id">Modifier<fa-icon></fa-icon></button>
+                                <button [routerLink]="['/modify-post/',post.id]" [postId]="post.id">Modifier<fa-icon></fa-icon></button>
                             </div>
                         </li>
                         <li><app-delete-post [postId]="post.id"></app-delete-post></li>
