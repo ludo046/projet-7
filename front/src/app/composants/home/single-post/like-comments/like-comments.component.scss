@@ -1,0 +1,19 @@
+button{
+    display: flex;
+    font-size: 16px;
+    color: white;
+    padding: 5px 10px;
+    border: 2px solid rgb(209, 81, 90);
+    border-radius: 50%;
+    outline: none;
+    background-color: rgb(18, 36, 65);
+    height: 40px;
+    &:hover{
+        transform: scale(1.1);
+        border: 2px solid yellowgreen;
+    }
+    fa-icon{
+        margin-top: 5px;
+    }
+   
+}

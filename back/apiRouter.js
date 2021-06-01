@@ -1,11 +1,12 @@
 //imports
 const express = require('express');
-const multer = require('./utils/multer-config')
+const multer = require('./utils/multer-config');
 
-const usersCtrl = require('./routes/usersCtrl')
-const messagesCtrl = require('./routes/messagesCtrl')
-const likesCtrl = require('./routes/likesCtrl')
-const commentCtrl = require('./routes/commentCtrl')
+const usersCtrl = require('./routes/usersCtrl');
+const messagesCtrl = require('./routes/messagesCtrl');
+const likesCtrl = require('./routes/likesCtrl');
+const commentCtrl = require('./routes/commentCtrl');
+const likeComment = require('./routes/likes-comments');
 
 exports.router = (function(){ 
 
@@ -22,8 +23,10 @@ exports.router = (function(){
     apiRouter.route('/message/:messageId/delete/').delete(messagesCtrl.deletePost);
     apiRouter.route('/message/:messageId/modify/').put(messagesCtrl.modifyPost);
 
-    apiRouter.route('/comment/:messageId/comment/new/').post(commentCtrl.commentPost);
+    apiRouter.route('/comment/:messageId/comment/new/').post(multer, commentCtrl.commentPost);
     apiRouter.route('/comment/').get(commentCtrl.listComment);
+    apiRouter.route('/comment/:commentId/like/').post(likeComment.likeCommentPost);
+    apiRouter.route('/comment/:commentId/dislike').post(likeComment.dislikeCommentPost)
 
     apiRouter.route('/message/:messageId/like/').post(likesCtrl.likePost);
     apiRouter.route('/message/:messageId/dislike/').post(likesCtrl.dislikePost);

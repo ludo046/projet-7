@@ -3,7 +3,7 @@ const asyncLib = require('async');
 const jwtUtils = require('../utils/jwt.utils');
 const messagesCtrl = require('./messagesCtrl');
 
-const CONTENT_LIMIT = 4;
+const CONTENT_LIMIT = 1000;
 
 
 module.exports = {
@@ -16,11 +16,15 @@ module.exports = {
 
     let content = req.body.content;
     let messageId = parseInt(req.params.messageId);
-    //console.log(req.file);
-    //let attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    let attachment;
+    if(req.file){
+      attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } else {
+      attachment = ''
+    }
 
     console.log(content);
-    //console.log(attachment);
+    console.log(attachment);
     if (messageId == null) {
         returnres.status(400).json({ 'error': 'missing messageId' })
     }
@@ -28,7 +32,7 @@ module.exports = {
       return res.status(400).json({ 'error': 'missing parameters' });
     }
 
-    if (content.length <= CONTENT_LIMIT) {
+    if (content.length > CONTENT_LIMIT) {
       return res.status(400).json({ 'error': 'invalid parameters' });
     }
    
@@ -49,7 +53,7 @@ module.exports = {
         if(userFound) {
           models.Comment.create({
             content: content,
-            //attachment: attachment,
+            attachment: attachment,
             likes  : 0,
             UserId : userFound.id,
             MessageId: messageId

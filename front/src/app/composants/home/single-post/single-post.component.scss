@@ -225,8 +225,8 @@ body
 
 .user-picture{
   .picture-profile{
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   margin: 0;
   object-fit: cover;
@@ -234,12 +234,12 @@ body
 }
 .comment-post{
   display: flex;
-  height: 50px;
+  height: 70px;
   border-radius: 50px 50px 50px 50px;
 }
 .message{
-  width: 220px;
-  height: 50px;
+  width: 190px;
+  height: 70px;
   margin-left: 10px;
   padding-left: 10px;
   resize: none;
@@ -252,6 +252,11 @@ body
   border-radius: 0 50px 50px 0;
   }.comment{
     border-radius: 0 50px 50px 0;
+    display: flex;
+  }
+  .button-comment{
+    padding-right: 10px;
+    border-radius: 0 50% 50% 0;
   }
 
 
@@ -262,11 +267,10 @@ body
     
 }
 .button{
-    background-color: #223553;
+    background-color: transparent;
     height: 50px;
-    padding-right: 15px;
     display: flex;
-    flex-direction: column-;
+    flex-direction: column;
 }
 button{
     font-size: 16px;
@@ -283,14 +287,20 @@ button{
     }
     fa-icon{
         margin: 0 2px;
-        font-size: 10px;
+        font-size: 14px;
     }
-    
+    .paperclip{
+      font-size: 14px;
+    }    
 }
 .comment-button{
-    border-radius: 50px;
-    height: 25px;
-    margin-top: 20px;
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    margin-top: 5px;
+}
+.comment-send-picture{
+  border-radius: 50%;
 }
 p{
   color: white;
@@ -339,4 +349,23 @@ p{
   width: 100%;
 }
 
- 
+label{
+  margin-bottom: 5px;
+  color: white;
+  border: 2px solid rgb(209, 81, 90);
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.input-file{
+display: none;
+}
+.picture{
+color: white;
+margin: 5px 10px 10px;
+background-color: transparent;
+}
+.likeComment{
+  position: absolute;
+  left: 300px;
+}

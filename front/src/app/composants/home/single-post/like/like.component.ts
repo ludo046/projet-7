@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { LikeService } from 'src/app/service/like.service';
 
@@ -11,7 +11,7 @@ import { LikeService } from 'src/app/service/like.service';
 export class LikeComponent implements OnInit {
   faThumbsUp = faThumbsUp;
   @Input() postId:number;
-  @Input() like: number;
+  @Output() newLike = new EventEmitter<boolean>();
   constructor( private LikeService: LikeService) { }
 
   
@@ -20,7 +20,7 @@ export class LikeComponent implements OnInit {
   }
 
   likePost(){
-    this.LikeService.likePost(this.postId).subscribe()
+    this.LikeService.likePost(this.postId).subscribe(() => this.newLike.emit(true))
   }
   dislikePost(){
     this.LikeService.dislike(this.postId).subscribe()

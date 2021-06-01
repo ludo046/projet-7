@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Comment.hasMany(models.Like)
+      models.Comment.hasMany(models.LikeComment)
 
       models.Comment.belongsTo(models.User, {
         through: models.Like,
@@ -33,6 +33,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'messageId',
         as: 'message',
       });
+
+    //   models.LikeComment.belongsTo(models.User, {
+    //     through: models.LikeComment,
+    //     foreignKey: 'userId',
+    //     otherKey: 'messageId'
+    // }),
+    //   models.LikeComment.belongsTo(models.Comment, {
+    //     through: models.LikeComment,
+    //     foreignKey: 'messageId',
+    //     otherKey: 'userId'
+    //   })
+
     }
   };
   Comment.init({

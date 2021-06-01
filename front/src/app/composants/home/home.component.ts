@@ -23,12 +23,10 @@ export class HomeComponent implements OnInit {
   newPost():void{
     this.messageService.getPost().subscribe(posts => {
       this.allPost = posts;
-      console.log(this.allPost);
     });
   }
   newComment():void{
     this.commentService.getComment().subscribe(comments => {
-      console.log(comments);
     });
   }
 }

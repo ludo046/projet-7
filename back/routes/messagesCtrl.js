@@ -98,7 +98,7 @@ module.exports = {
     let headerAuth = req.headers['authorization'];
     let userId = jwtUtils.getUserId(headerAuth)
 
-    if (userId < 0){
+    if (userId <= 0){
       return res.status(400).json({ 'error': 'wrong token' })
     };
 
@@ -133,7 +133,12 @@ module.exports = {
     const messageId = req.params.messageId
 
     const content = req.body.content;
-    //const attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+    // let attachment;
+    // if(req.file){
+    //   attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    // } else {
+    //   attachment = ''
+    // }
 
     console.log(userId);
     console.log(messageId);

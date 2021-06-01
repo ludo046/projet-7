@@ -13,8 +13,11 @@ export class CommentService {
 
   constructor(private httpClient: HttpClient) { }
 
-  writeComment(content: string, id:number):Observable<any>{
-    return this.httpClient.post(this.comment + id +'/comment/new',{content});
+  writeComment(content: string, attachment:File, id:number):Observable<any>{
+    let formData = new FormData();  
+    formData.append('content', content);
+    formData.append('image', attachment); 
+    return this.httpClient.post(this.comment + id +'/comment/new',formData);
   }
 
   getComment(): Observable<any>{

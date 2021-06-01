@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 export class LikeService {
 
   private likeUrl = environment.postUrl;
+  private commentUrl = environment.comment
 
   constructor(private httpClient: HttpClient){}
 
@@ -16,5 +17,12 @@ export class LikeService {
   }
   dislike(id: number){
     return this.httpClient.post(this.likeUrl + id +'/dislike',{id})
+  }
+
+  likeComment(id: number){
+    return this.httpClient.post(this.commentUrl + id +'/like',{id})
+  }
+  dislikeComment(id: number){
+    return this.httpClient.post(this.commentUrl + id +'dislike',{id})
   }
 }
