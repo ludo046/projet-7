@@ -1,0 +1,18 @@
+<app-header></app-header>
+<app-nav></app-nav>
+<div [formGroup]="modifyComment">
+  <form>
+    <h1>Modifier votre commentaire : </h1>
+    <div class="form-group"> 
+       <textarea class="message form-control" formControlName="content"></textarea>
+    </div>
+    <div class="picture">
+        <p>Pièce jointe : <img [src]="" alt=""></p>
+        <label for="file" class="label-file">Choisir une image</label>
+        <input id="file" type="file" class="input-file">
+    </div>     
+    <button (click)="updateComment()" routerLink="/home">Valider</button>
+  </form>  
+</div>
+
+<app-footer></app-footer>

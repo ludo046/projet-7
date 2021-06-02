@@ -179,4 +179,21 @@ module.exports = {
       }
     });
   },
+  
+  getLikeComment: function(req, res){
+    const headerAuth  = req.headers['authorization'];
+    const userId      = jwtUtils.getUserId(headerAuth);
+    const messageId = req.params.messageId
+    models.LikeComment.findAll()
+    .then(function(likesComment) {
+      if (likesComment) {
+        res.status(200).json(likesComment);
+      } else {
+        res.status(404).json({ "error": "no likes found" });
+      }
+    }).catch(function(err) {
+      console.log(err);
+      res.status(500).json({ "error": "invalid fields" });
+    });
+  }
 }

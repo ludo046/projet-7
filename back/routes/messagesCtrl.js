@@ -18,9 +18,8 @@ module.exports = {
     }
     console.log(content);
     console.log(attachment);
-    console.log(req);
 
-    if (content == null) {
+    if (content === '' && attachment ===  '' ) {
       return res.status(400).json({ 'error': 'missing parameters' });
     }
 

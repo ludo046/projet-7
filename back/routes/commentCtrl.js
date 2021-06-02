@@ -95,5 +95,89 @@ module.exports = {
       console.log(err);
       res.status(500).json({ "error": "invalid fields" });
     });
+},
+
+deleteComment: function(req, res){
+  let headerAuth = req.headers['authorization'];
+  let userId = jwtUtils.getUserId(headerAuth)
+
+  if (userId <= 0){
+    return res.status(400).json({ 'error': 'wrong token' })
+  };
+
+  let commentId = parseInt(req.params.commentId);
+  console.log(commentId);
+
+  if (commentId <= 0) {
+    return res.status(400).json({ 'error': 'invalid parameters' });
+  }
+
+  models.LikeComment.destroy({
+      where: {
+        userId: userId,
+        id: commentId
+      }
+  }),
+  models.Comment.destroy({
+      where: {
+        userId: userId,
+        id: commentId
+      }
+  }).then (function(){
+     ( res.status(201).json({'ok' :'post deleted'})) 
+  }).catch (function(err){
+      (res.status(400).json({ 'error': 'user not found' }))
+  })
+},
+
+modifyComment: function(req, res) {
+  let headerAuth = req.headers['authorization'];
+  let userId = jwtUtils.getUserId(headerAuth)
+  const commentId = req.params.commentId
+
+  const content = req.body.content;
+  // let attachment;
+  // if(req.file){
+  //   attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  // } else {
+  //   attachment = ''
+  // }
+
+  console.log(userId);
+  console.log(commentId);
+  console.log(content);
+
+   
+  asyncLib.waterfall([
+      function(done){
+          models.Comment.findOne({
+              where: {id : commentId}
+          }).then(function(commentFound){
+              done(null,commentFound);
+          })
+          .catch(function(err){
+              return res.status(500).json({ 'error': 'unable to verify' })
+          })
+      },
+      function(commentFound, done){
+          if (commentFound){
+              commentFound.update({
+                content: content,
+              }).then(function(){
+                  done(commentFound);
+              }).catch(function(err){
+                  res.status(500).json({ 'error': 'cannot update post' })
+              });
+          } else { 
+              res.status(404).json({ 'error': 'post not found' })
+          }
+      },
+  ],function(commentFound){
+      if (commentFound){
+          return res.status(201).json(commentFound);
+      } else {
+          return res.status(500).json({ 'error': 'post not update' })
+      }
+  })
 }
 }

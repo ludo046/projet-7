@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { validator } from 'sequelize/types/lib/utils/validator-extras';
 import { MessageService } from 'src/app/service/message.service';
 import { UsersService } from 'src/app/service/users.service';
 
@@ -25,7 +26,7 @@ export class WriteMessageComponent implements OnInit {
   ngOnInit(): void {
     this.postMessage = this.formBuilder.group({
       postOneMessage: this.formBuilder.control('',(Validators.required)),
-      attachment:this.formBuilder.control('',)
+      attachment:this.formBuilder.control('',(Validators.required))
     });
     this.getUserProfile();
   }

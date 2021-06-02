@@ -22,10 +22,12 @@ import { LikeComponent } from './composants/home/single-post/like/like.component
 import { SignupComponent } from './composants/auth/signup/signup.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { MessageService } from './service/message.service';
-import { DeletePostComponent } from './composants/home/delete-post/delete-post.component';
-import { ModifyPostComponent } from './composants/home/modify-post/modify-post.component';
-import { ModifyAccountComponent } from './composants/home/account/modify-account/modify-account.component';
+import { DeletePostComponent } from './composants/home/delete/delete-post/delete-post.component';
+import { ModifyPostComponent } from './composants/home/modify/modify-post/modify-post.component';
+import { ModifyAccountComponent } from './composants/home/modify/modify-account/modify-account.component';
 import { LikeCommentsComponent } from './composants/home/single-post/like-comments/like-comments.component';
+import { DeleteCommentComponent } from './composants/home/delete/delete-comment/delete-comment.component';
+import { ModifyCommentComponent } from './composants/home/modify/modify-comment/modify-comment.component';
 
 
 
@@ -37,6 +39,7 @@ export const ROUTES : Routes = [
   { path: 'message', component: MessageComponent },
   { path: 'modify-account', component: ModifyAccountComponent },
   { path: 'modify-post/:postId', component: ModifyPostComponent },
+  { path: 'modify-comment/:commentId', component: ModifyCommentComponent },
   { path: '', component: SignupComponent}
 ]
 
@@ -59,6 +62,8 @@ export const ROUTES : Routes = [
     ModifyPostComponent,
     ModifyAccountComponent,
     LikeCommentsComponent,
+    DeleteCommentComponent,
+    ModifyCommentComponent,
 
   ],
   imports: [

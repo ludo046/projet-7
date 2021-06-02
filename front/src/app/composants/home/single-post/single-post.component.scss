@@ -104,8 +104,28 @@ body
   user-select: none;
   width: 90%;
 }
+#menuToggleComment
+{
+  display: block;
+  position: relative;
+  top: 5px;
+  left: 0px;
+  background-color: transparent;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 10%;
+}
 
 #menuToggle li
+{
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+  font-family: "montserrat", Arial, Helvetica, sans-serif;
+  margin-left: 200px;
+}
+#menuToggleComment li
 {
   text-decoration: none;
   color: white;
@@ -118,9 +138,29 @@ body
 {
   color: rgb(209, 81, 90);
 }
+#menuToggleComment li:hover
+{
+  color: rgb(209, 81, 90);
+}
 
 
 #menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; 
+  z-index: 2; 
+  
+  -webkit-touch-callout: none;
+}
+#menuToggleComment input
 {
   display: block;
   width: 40px;
@@ -157,8 +197,31 @@ body
               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               opacity 0.55s ease;
 }
+#menuToggleComment span
+{
+  display: block;
+  width: 20px;
+  height: 4px;
+  margin-bottom: 2px;
+  position: relative;
+  
+  background: white;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 0px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
 
 #menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+#menuToggleComment span:first-child
 {
   transform-origin: 0% 0%;
 }
@@ -167,8 +230,18 @@ body
 {
   transform-origin: 0% 100%;
 }
+#menuToggleComment span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
 
 #menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: rgb(209, 81, 90);
+}
+#menuToggleComment input:checked ~ span
 {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
@@ -180,8 +253,17 @@ body
   opacity: 0;
   transform: rotate(0deg) scale(0.2, 0.2);
 }
+#menuToggleComment input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
 
 #menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+#menuToggleComment input:checked ~ span:nth-last-child(2)
 {
   transform: rotate(-45deg) translate(0, -1px);
 }
@@ -213,6 +295,10 @@ body
 }
 
 #menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+#menuToggleComment input:checked ~ ul
 {
   transform: none;
 }

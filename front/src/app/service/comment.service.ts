@@ -23,4 +23,10 @@ export class CommentService {
   getComment(): Observable<any>{
     return this.httpClient.get(`${this.comment}`);
   }
+  deleteComment(id: number){
+    return this.httpClient.delete(this.comment + id +'/delete')
+  }
+  updateComment(id: string, content: string){
+    return this.httpClient.put(this.comment+ id + '/modify/',{content})
+  }
 }
