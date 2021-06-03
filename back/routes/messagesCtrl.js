@@ -1,6 +1,7 @@
 const models   = require('../models');
 const asyncLib = require('async');
 const jwtUtils = require('../utils/jwt.utils');
+const fs = require('fs')
 
 const CONTENT_LIMIT = 1000;
 
@@ -9,23 +10,37 @@ module.exports = {
   createMessage: function(req, res) {
     let headerAuth  = req.headers['authorization'];
     let userId = jwtUtils.getUserId(headerAuth);
-    let content = req.body.content;
-    let attachment;
+    let content = null;
+    let attachment = null;
+    let movie = null;
+    console.log(req);
     if(req.file){
-      attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } else {
-      attachment = ''
+      let media = req.file.filename
+      if (media.includes('mp4')) {
+        movie = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        console.log('truc');
+      } else {
+        attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } 
     }
+
+    if(req.body.content){
+      content = req.body.content
+      if (content.length > CONTENT_LIMIT) {
+        return res.status(400).json({ 'error': 'invalid parameters' });
+      }
+    }
+
     console.log(content);
     console.log(attachment);
+    
+    //console.log(contents);
 
-    if (content === '' && attachment ===  '' ) {
+    if (content === null && attachment === null  && movie === null ) {
       return res.status(400).json({ 'error': 'missing parameters' });
     }
 
-    if (content.length > CONTENT_LIMIT) {
-      return res.status(400).json({ 'error': 'invalid parameters' });
-    }
+
    
     asyncLib.waterfall([
       function(done) {
@@ -41,9 +56,10 @@ module.exports = {
       },
       function(userFound, done) {
         if(userFound) {
-          models.Message.create({
+          models.Messages.create({
             content: content,
             attachment: attachment,
+            movie: movie,
             likes  : 0,
             UserId : userFound.id
             
@@ -69,7 +85,7 @@ module.exports = {
     let fields  = req.query.fields;
     let order   = req.query.order;
 
-    models.Message.findAll({
+    models.Messages.findAll({
       order: [(order != null) ? order.split(':') : ['id','DESC']],
       attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       include: [{
@@ -77,7 +93,7 @@ module.exports = {
         attributes: [ 'firstName','lastName','picture'],
       },
       {
-        model: models.Comment,
+        model: models.Comments,
         attributes: ['content','messageId']
       }
     ],
@@ -107,14 +123,28 @@ module.exports = {
     if (messageId <= 0) {
       return res.status(400).json({ 'error': 'invalid parameters' });
     }
+    models.Messages.findOne({
+      where: {
+        userId: userId,
+        id: messageId
+      }
+    }).then(function(post){
+      const filename = post.attachment.split('/images/')[1]
+      console.log(filename);
+      fs.unlink(`image/${filename}`),() => {
+        filename
+        .then(() => res.status(200).json({ message: 'objet supprimé !'}))
+        .catch(error => res.status(400).json({ error }))
+      }
+    })
 
-    models.Like.destroy({
+    models.Likes.destroy({
         where: {
           userId: userId,
           messageId: messageId
         }
     }),
-    models.Message.destroy({
+    models.Messages.destroy({
         where: {
           userId: userId,
           id: messageId
@@ -146,7 +176,7 @@ module.exports = {
      
     asyncLib.waterfall([
         function(done){
-            models.Message.findOne({
+            models.Messages.findOne({
                 where: {id : messageId}
             }).then(function(messageFound){
                 done(null,messageFound);

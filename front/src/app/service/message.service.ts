@@ -23,7 +23,7 @@ export class MessageService {
   writePost(content: string,attachment: File):Observable<any>{
     let formData = new FormData();  
       formData.append('content', content);
-      formData.append('image', attachment); 
+      formData.append('image', attachment);
     
     return this.httpClient.post(this.postUrl + 'new',formData);
   }

@@ -51,7 +51,7 @@ module.exports = {
       
       function(userFound, done) {
         if(userFound) {
-          models.Comment.create({
+          models.Comments.create({
             content: content,
             attachment: attachment,
             likes  : 0,
@@ -78,7 +78,7 @@ module.exports = {
     let fields  = req.query.fields;
     let order   = req.query.order;
 
-    models.Comment.findAll({
+    models.Comments.findAll({
       order: [(order != null) ? order.split(':') : ['id','DESC']],
       attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       include: [{
@@ -112,13 +112,13 @@ deleteComment: function(req, res){
     return res.status(400).json({ 'error': 'invalid parameters' });
   }
 
-  models.LikeComment.destroy({
+  models.LikeComments.destroy({
       where: {
         userId: userId,
         id: commentId
       }
   }),
-  models.Comment.destroy({
+  models.Comments.destroy({
       where: {
         userId: userId,
         id: commentId
@@ -150,7 +150,7 @@ modifyComment: function(req, res) {
    
   asyncLib.waterfall([
       function(done){
-          models.Comment.findOne({
+          models.Comments.findOne({
               where: {id : commentId}
           }).then(function(commentFound){
               done(null,commentFound);

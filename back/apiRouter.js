@@ -1,6 +1,7 @@
 //imports
 const express = require('express');
 const multer = require('./utils/multer-config');
+const multerMovie = require('./utils/multer-config-movie')
 
 const usersCtrl = require('./routes/usersCtrl');
 const messagesCtrl = require('./routes/messagesCtrl');

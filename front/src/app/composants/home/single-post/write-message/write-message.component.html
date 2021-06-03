@@ -1,12 +1,18 @@
 <div [formGroup]="postMessage" *ngFor="let userProfile of oneUserProfil">
     <div class="writeMessage">
         <!-- ici photo de profil -->
-        <img [src]="userProfile.picture">
+        <div class="picture" *ngIf="userProfile.picture">
+           <img [src]="userProfile.picture"> 
+        </div>
+        <div class="picture" *ngIf="userProfile.picture === null ">
+            <img src="{{fullPathname}}"> 
+        </div> 
         <textarea placeholder="Que voulez vous dire ?" class="message form-control" formControlName="postOneMessage"></textarea>
     </div>
     <div class="button">
-        <label for="file">Ajouter une photo</label>
-        <input type="file" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="onFileAdded($event)"> 
+        <label for="file">média</label>
+        <input type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="onFileAdded($event)">
+
         <button class="margin" (click)="writePost()">Envoyer</button>
     </div>
 </div>

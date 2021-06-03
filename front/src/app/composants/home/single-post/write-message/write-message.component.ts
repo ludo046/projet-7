@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { validator } from 'sequelize/types/lib/utils/validator-extras';
 import { MessageService } from 'src/app/service/message.service';
 import { UsersService } from 'src/app/service/users.service';
 
@@ -10,12 +9,14 @@ import { UsersService } from 'src/app/service/users.service';
   styleUrls: ['./write-message.component.scss']
 })
 export class WriteMessageComponent implements OnInit {
-  fullPathname='assets/images/icon.png'
+  //fullPathname='assets/images/icon.png'
+  fullPathname = 'assets/images/userPicture.png'
 
   postMessage: FormGroup;
   formData = new FormData();
   attachment : File;
   file: File;
+  movie: File;
   @Output() newPost = new EventEmitter<boolean>();
   oneUserProfil: [];
 
@@ -26,14 +27,15 @@ export class WriteMessageComponent implements OnInit {
   ngOnInit(): void {
     this.postMessage = this.formBuilder.group({
       postOneMessage: this.formBuilder.control('',(Validators.required)),
-      attachment:this.formBuilder.control('',(Validators.required))
+      attachment:this.formBuilder.control('',(Validators.required)),
     });
     this.getUserProfile();
   }
 
   writePost():void{
     const content = this.postMessage.get('postOneMessage').value;
-    const attachment = this.file;  
+    const attachment = this.file;
+    
      
     this.messageService.writePost(content,attachment).subscribe(() => this.newPost.emit(true))
   }
@@ -42,7 +44,6 @@ export class WriteMessageComponent implements OnInit {
     this.file = (event.target as HTMLInputElement).files[0];
     console.log(this.file);
   }
-
   getUserProfile(): void{
     this.usersService.getUserProfile().subscribe(userProfile => {
      this.oneUserProfil = userProfile     

@@ -4,8 +4,11 @@
     <li class="list-group-item">
         <div class="post" *cdkVirtualFor='let post of allPost' >
             <div class="top">
-                <div class="picture">
+                <div class="picture" *ngIf="post.User.picture">
                     <img [src]="post.User.picture">
+                </div>
+                <div class="picture" *ngIf="post.User.picture === null">
+                    <img src="{{fullPathname}}">
                 </div>
                 <div class="top-post">
                     <h1>{{ post.User.firstName }} {{ post.User.lastName }}</h1>
@@ -27,15 +30,14 @@
                     </ul>
                   </div>
             </div>
-            <div>
+            <div *ngIf="post.attachment != null">
                 <img [src]="post.attachment" >
             </div>
-            <div *ngIf="post.attachment === mp4">
-                <video controls width="300">
-                    <source [src]="post.attachment">
+            <div *ngIf="post.movie != null">
+                <video controls width="340">
+                    <source [src]="post.movie">
                 </video>
             </div>
-            
             <div class="content">
                <p>{{ post.content }}</p>  
             </div>
@@ -46,7 +48,12 @@
         </div>
         <div class="comment-post">
             <div class="user-picture" *ngFor="let userProfile of oneUserProfil">
-                <img [src]="userProfile.picture" class="picture-profile">
+                <div *ngIf="userProfile.picture">
+                   <img [src]="userProfile.picture" class="picture-profile"> 
+                </div>
+                <div *ngIf="userProfile.picture === null ">
+                    <img src="{{fullPathname}}" class="picture-profile"> 
+                 </div>
             </div>
             <div class="comment" [formGroup]="postComment">
                 <textarea class="message form-control" placeholder="Votre commentaire ..." formControlName="postOneComment"></textarea>

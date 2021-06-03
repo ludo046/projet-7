@@ -23,7 +23,7 @@ module.exports = {
 
     asyncLib.waterfall([
       function(done) {
-        models.Message.findOne({
+        models.Messages.findOne({
           where: { id: messageId }
         })
         .then(function(messageFound) {
@@ -50,7 +50,7 @@ module.exports = {
       },
       function(messageFound, userFound, done) {
         if(userFound) {
-          const messageAlreadyLiked = models.Like.findOne({
+          const messageAlreadyLiked = models.Likes.findOne({
             where: {
               userId: userId,
               messageId: messageId
@@ -60,7 +60,7 @@ module.exports = {
             (function(userAlreadyLikedFound){
               done(null, messageFound, userFound, userAlreadyLikedFound);
               if (messageAlreadyLiked !== LIKED){
-                models.Like.create({
+                models.Likes.create({
                   userId: userId,
                   messageId: messageId,
                   isLike: LIKED
@@ -109,7 +109,7 @@ module.exports = {
 
     asyncLib.waterfall([
       function(done) {
-        models.Message.findOne({
+        models.Messages.findOne({
           where: { id: messageId }
         })
         .then(function(messageFound) {
@@ -136,7 +136,7 @@ module.exports = {
       },
       function(messageFound, userFound, done) {
         if(userFound) {
-          const messageAlreadyLiked = models.Like.findOne({
+          const messageAlreadyLiked = models.Likes.findOne({
             where: {
               userId: userId,
               messageId: messageId
@@ -145,7 +145,7 @@ module.exports = {
           if (messageAlreadyLiked) {
             (function(userAlreadyLikedFound){
               done(null, messageFound, userFound, userAlreadyLikedFound);
-                models.Like.destroy({
+                models.Likes.destroy({
                   where: {
                       userId: userId,
                       messageId: messageId
@@ -182,7 +182,7 @@ module.exports = {
     const headerAuth  = req.headers['authorization'];
     const userId      = jwtUtils.getUserId(headerAuth);
     const messageId = req.params.messageId
-    models.Like.findAll()
+    models.Likes.findAll()
     .then(function(likes) {
       if (likes) {
         res.status(200).json(likes);

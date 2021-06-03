@@ -24,7 +24,7 @@ module.exports = {
 
     asyncLib.waterfall([
       function(done) {
-        models.Comment.findOne({
+        models.Comments.findOne({
           where: { id: messageId }
         })
         .then(function(commentFound) {
@@ -52,7 +52,7 @@ module.exports = {
       },
       function(commentFound, userFound, done) {
         if(userFound) {
-          const messageAlreadyLiked = models.LikeComment.findOne({
+          const messageAlreadyLiked = models.LikeComments.findOne({
             where: {
               userId: userId,
               commentId: messageId
@@ -62,7 +62,7 @@ module.exports = {
             (function(userAlreadyLikedFound){
               done(null, commentFound, userFound, userAlreadyLikedFound);
               if (messageAlreadyLiked !== LIKED){
-                models.LikeComment.create({
+                models.LikeComments.create({
                   userId: userId,
                   commentId: messageId,
                   isLike: LIKED
@@ -111,7 +111,7 @@ module.exports = {
 
     asyncLib.waterfall([
       function(done) {
-        models.Comment.findOne({
+        models.Comments.findOne({
           where: { id: messageId }
         })
         .then(function(commentFound) {
@@ -138,7 +138,7 @@ module.exports = {
       },
       function(commentFound, userFound, done) {
         if(userFound) {
-          const messageAlreadyLiked = models.LikeComment.findOne({
+          const messageAlreadyLiked = models.LikeComments.findOne({
             where: {
               userId: userId,
               commentId: messageId
@@ -147,7 +147,7 @@ module.exports = {
           if (messageAlreadyLiked) {
             (function(userAlreadyLikedFound){
               done(null, commentFound, userFound, userAlreadyLikedFound);
-                models.LikeComment.destroy({
+                models.LikeComments.destroy({
                   where: {
                       userId: userId,
                       commentId: messageId
@@ -184,7 +184,7 @@ module.exports = {
     const headerAuth  = req.headers['authorization'];
     const userId      = jwtUtils.getUserId(headerAuth);
     const messageId = req.params.messageId
-    models.LikeComment.findAll()
+    models.LikeComments.findAll()
     .then(function(likesComment) {
       if (likesComment) {
         res.status(200).json(likesComment);

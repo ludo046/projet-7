@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwtUtils = require ('../utils/jwt.utils')
 const models = require('../models')
 const asyncLib = require('async');
-const User = require('../models/user');
+
 
 const emailRegexp  = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const passwordRegexp = /^(?=.*\d).{4,8}$/;
@@ -16,8 +16,8 @@ module.exports={
         const lastName = req.body.lastName; 
         const password = req.body.password;
         const email = req.body.email;
-        const dateBirth = req.body.dateBirth || '';
-        const picture = req.body.picture || '';
+        const dateBirth =  null;
+        const picture =  null;
 
         if (firstName == null || lastName == null || password == null || email == null) {
             return res.status(400).json({ 'error': 'missing parameters' })
@@ -34,8 +34,8 @@ module.exports={
                         lastname: lastName,
                         password: bcryptedPassword,
                         email: email,
-                        datebirth: dateBirth || '',
-                        picture: picture || '',
+                        datebirth: dateBirth || null,
+                        picture: picture || null,
                         isAdmin:0
                     })
                     .then(function (newUser){
@@ -165,10 +165,10 @@ module.exports={
         if (userId < 0)
         return res.status(400).json({ 'error': 'wrong token' })
         
-        models.Like.destroy({
+        models.Likes.destroy({
             where: {userId: userId}
         }),
-        models.Message.destroy({
+        models.Messages.destroy({
             where: {userId: userId}
         }),
         models.User.destroy({

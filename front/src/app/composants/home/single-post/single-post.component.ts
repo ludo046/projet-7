@@ -12,7 +12,8 @@ import { CommentService } from 'src/app/service/comment.service';
   styleUrls: ['./single-post.component.scss']
 })
 export class SinglePostComponent {
-
+  
+ fullPathname = 'assets/images/userPicture.png'
  @Input() allPost: any;
  public userId: any;
  public connectUserId: number = JSON.parse(sessionStorage.getItem('session')).userId;
