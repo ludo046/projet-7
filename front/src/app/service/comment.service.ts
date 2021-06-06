@@ -9,7 +9,6 @@ import { environment } from '../../environments/environment';
 export class CommentService {
 
   private comment = environment.comment;
-  
 
   constructor(private httpClient: HttpClient) { }
 
@@ -26,7 +25,10 @@ export class CommentService {
   deleteComment(id: number){
     return this.httpClient.delete(this.comment + id +'/delete')
   }
-  updateComment(id: string, content: string){
-    return this.httpClient.put(this.comment+ id + '/modify/',{content})
+  updateComment(id: string, content: string, attachment: File){
+    let formData = new FormData();
+    formData.append('content', content),
+    formData.append('image', attachment)
+    return this.httpClient.put(this.comment+ id + '/modify/',formData)
   }
 }

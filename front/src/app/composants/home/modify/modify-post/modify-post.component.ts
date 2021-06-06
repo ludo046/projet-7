@@ -11,6 +11,7 @@ export class ModifyPostComponent implements OnInit {
 
   modifyPost: FormGroup;
   @Input() postId: number;
+  file: File;
 
   constructor(private formBuilder: FormBuilder,
               private messageService: MessageService) { }
@@ -18,19 +19,26 @@ export class ModifyPostComponent implements OnInit {
   ngOnInit(): void {
     this.modifyPost = this.formBuilder.group({
       content: this.formBuilder.control('',(Validators.required)),
-      //attachment:this.formBuilder.control('')
+      attachment:this.formBuilder.control('')
     });
   }
 
   updatePost(){
     const content = this.modifyPost.get('content').value;
-    const messageId = window.location.href.split('post/')[1]
+    const messageId = window.location.href.split('post/')[1];
+    const attachment = this.file;
     console.log(messageId);
     
     console.log(content);
+    console.log(attachment);
     
     
-    this.messageService.updatePost(messageId, content).subscribe()
+    
+    this.messageService.updatePost(messageId, content, attachment).subscribe()
+  }
+
+  onFileAdded(event: Event) {
+    this.file = (event.target as HTMLInputElement).files[0];
   }
 
 }

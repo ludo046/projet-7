@@ -10,6 +10,7 @@ import { CommentService } from 'src/app/service/comment.service';
 export class ModifyCommentComponent implements OnInit {
 
   modifyComment: FormGroup;
+  file: File;
 
   constructor(private formBuilder: FormBuilder,
               private commentService: CommentService) { }
@@ -17,17 +18,22 @@ export class ModifyCommentComponent implements OnInit {
   ngOnInit(): void {
     this.modifyComment = this.formBuilder.group({
       content: this.formBuilder.control('',(Validators.required)),
-      //attachment:this.formBuilder.control('')
+      attachment:this.formBuilder.control('')
     });
   }
   updateComment(){
     const content = this.modifyComment.get('content').value;
     const commentId = window.location.href.split('comment/')[1]
+    const attachment = this.file
     console.log(commentId);
     
     console.log(content);
     
     
-    this.commentService.updateComment(commentId, content).subscribe()
+    this.commentService.updateComment(commentId, content, attachment).subscribe()
+  }
+
+  onFileAdded(event: Event) {
+    this.file = (event.target as HTMLInputElement).files[0];
   }
 }

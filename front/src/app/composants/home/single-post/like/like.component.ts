@@ -12,8 +12,7 @@ export class LikeComponent implements OnInit {
   faThumbsUp = faThumbsUp;
   @Input() postId:number;
   @Output() newLike = new EventEmitter<boolean>();
-  @Input() isLike: number;
-  @Input() userId: number;
+  messageLiked: boolean;
   userIdConnect;
 
   constructor( private LikeService: LikeService) { }
@@ -26,7 +25,10 @@ export class LikeComponent implements OnInit {
   }
 
   likePost(){
-    this.LikeService.likePost(this.postId).subscribe(() => this.newLike.emit(true))
+    this.LikeService.likePost(this.postId).subscribe(() => {
+      this.newLike.emit(true);
+      this.getLikes();
+    })
 
     // if(this.userId === this.userIdConnect || this.isLike === 0){
     //   this.LikeService.likePost(this.postId).subscribe(() => this.newLike.emit(true))
@@ -39,13 +41,14 @@ export class LikeComponent implements OnInit {
     
   }
   dislikePost(){
-    this.LikeService.dislike(this.postId).subscribe()
+    this.LikeService.dislike(this.postId).subscribe(()=> 
+      this.getLikes()
+    )
   }
   getLikes(){
-    this.LikeService.getLike().subscribe(likes => {
-      this.messageLikes = likes
-      console.log(this.messageLikes)
-    })
+    this.LikeService.getLike(this.postId).subscribe(isLiked => 
+      this.messageLiked = isLiked
+    )
     
     
   }

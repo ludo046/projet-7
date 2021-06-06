@@ -27,7 +27,7 @@ export class LikeService {
   dislikeComment(id: number){
     return this.httpClient.post(this.commentUrl + id +'dislike',{id})
   }
-  getLike(): Observable<any>{
-    return this.httpClient.get(this.like);
+  getLike(messageId: number): Observable<any>{
+    return this.httpClient.get(this.like + messageId);
   }
 }

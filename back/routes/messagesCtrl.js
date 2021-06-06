@@ -31,11 +31,6 @@ module.exports = {
       }
     }
 
-    console.log(content);
-    console.log(attachment);
-    
-    //console.log(contents);
-
     if (content === null && attachment === null  && movie === null ) {
       return res.status(400).json({ 'error': 'missing parameters' });
     }
@@ -161,13 +156,18 @@ module.exports = {
     let userId = jwtUtils.getUserId(headerAuth)
     const messageId = req.params.messageId
 
-    const content = req.body.content;
-    // let attachment;
-    // if(req.file){
-    //   attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    // } else {
-    //   attachment = ''
-    // }
+    let movie = null;
+    let attachment = null
+    let content = req.body.content;
+    if(req.file){
+      let media = req.file.filename
+      if (media.includes('mp4')) {
+        movie = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        console.log('truc');
+      } else {
+        attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } 
+    }
 
     console.log(userId);
     console.log(messageId);
@@ -188,7 +188,9 @@ module.exports = {
         function(messageFound, done){
             if (messageFound){
                 messageFound.update({
-                  content: content,
+                  content: (content ? content : messageFound.content),
+                  attachment: (attachment ? attachment : messageFound.attachment),
+                  movie: (movie ? movie : messageFound.movie),
                 }).then(function(){
                     done(messageFound);
                 }).catch(function(err){

@@ -14,26 +14,34 @@ module.exports = {
     console.log(headerAuth);
     console.log(userId);
 
-    let content = req.body.content;
+    let content = null;
     let messageId = parseInt(req.params.messageId);
-    let attachment;
+    let attachment = null;
+    let movie = null;
     if(req.file){
-      attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } else {
-      attachment = ''
+      let media = req.file.filename
+      if (media.includes('mp4')) {
+        movie = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        console.log('truc');
+      } else {
+        attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } 
     }
 
-    console.log(content);
     console.log(attachment);
     if (messageId == null) {
         returnres.status(400).json({ 'error': 'missing messageId' })
     }
-    if (content == null) {
-      return res.status(400).json({ 'error': 'missing parameters' });
+
+    if(req.body.content){
+      content = req.body.content
+      if (content.length > CONTENT_LIMIT) {
+        return res.status(400).json({ 'error': 'invalid parameters' });
+      }
     }
 
-    if (content.length > CONTENT_LIMIT) {
-      return res.status(400).json({ 'error': 'invalid parameters' });
+    if (content === null && attachment === null  && movie === null ) {
+      return res.status(400).json({ 'error': 'missing parameters' });
     }
    
     asyncLib.waterfall([
@@ -54,6 +62,7 @@ module.exports = {
           models.Comments.create({
             content: content,
             attachment: attachment,
+            movie: movie,
             likes  : 0,
             UserId : userFound.id,
             MessageId: messageId
@@ -135,13 +144,18 @@ modifyComment: function(req, res) {
   let userId = jwtUtils.getUserId(headerAuth)
   const commentId = req.params.commentId
 
-  const content = req.body.content;
-  // let attachment;
-  // if(req.file){
-  //   attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-  // } else {
-  //   attachment = ''
-  // }
+  let movie = null ;
+  let attachment= null 
+  let content = req.body.content;
+  if(req.file){
+    let media = req.file.filename
+    if (media.includes('mp4')) {
+      movie = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      console.log('truc');
+    } else {
+      attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } 
+  }
 
   console.log(userId);
   console.log(commentId);
@@ -162,7 +176,9 @@ modifyComment: function(req, res) {
       function(commentFound, done){
           if (commentFound){
               commentFound.update({
-                content: content,
+                content: (content ? content : commentFound.content),
+                attachment: (attachment ? attachment : commentFound.attachment),
+                movie: (movie ? movie : commentFound.movie),
               }).then(function(){
                   done(commentFound);
               }).catch(function(err){

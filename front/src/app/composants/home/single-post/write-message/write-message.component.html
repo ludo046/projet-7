@@ -8,11 +8,11 @@
             <img src="{{fullPathname}}"> 
         </div> 
         <textarea placeholder="Que voulez vous dire ?" class="message form-control" formControlName="postOneMessage"></textarea>
+        <div class="button">
+            <label for="file"><fa-icon [icon]="faPaperClip"></fa-icon></label>
+            <input type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="onFileAdded($event)">
+            <button class="margin" (click)="writePost()"><fa-icon [icon]="faComment"></fa-icon></button>
+        </div>
     </div>
-    <div class="button">
-        <label for="file">média</label>
-        <input type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="onFileAdded($event)">
 
-        <button class="margin" (click)="writePost()">Envoyer</button>
-    </div>
 </div>

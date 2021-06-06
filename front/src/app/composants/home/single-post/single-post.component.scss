@@ -5,9 +5,10 @@
     
 }
 .post{
+    width: 100%;
     background-color: rgb(34, 53, 83);
-    margin: 20px 10px;
-    padding: 10px;
+    margin: 20px 0px;
+    padding-bottom: 10px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, 0.72);
     @media only screen and (min-width : 1224px) {
@@ -18,9 +19,10 @@
       display: flex;
         .picture{
           background-color: rgb(34, 53, 83);
+          margin: 0;
           img{
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             margin-left: 20px;
             object-fit: cover;
@@ -33,6 +35,9 @@
             width: 180px;
             padding-top: 20px;
             font-family: "montserrat", Arial, Helvetica, sans-serif;
+              @media only screen and (min-width : 1224px){
+            width: 200px;
+          }
         }
         p{
             background-color: rgb(34, 53, 83);
@@ -40,9 +45,15 @@
             font-size: 16px;
             margin-bottom: 5px;
             font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
+              @media only screen and (min-width : 1224px){
+            //width: 220px;
+          }
         }
-        border-bottom: 1px solid rgb(209, 81, 90);
+        border-bottom: 2px solid rgb(209, 81, 90);
         background-color: rgb(34, 53, 83);
+        .user-name{
+          width: 220px;
+        }
     }
     .content{
         background-color: rgb(34, 53, 83);
@@ -50,19 +61,26 @@
         font-size: 18px;
         font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
         display: flex;
-        width: 90%;
-        margin: 0 auto;
+        width: 100%;
+        margin: 0 auto 20px;
+        padding: 20px 0;
+        border-bottom: 2px solid rgb(209, 81, 90) ;
+        @media only screen and (min-width : 1224px){
+
+        }
         p{
             background: rgb(34, 53, 83);
+            margin-left: 50px;
         }
     }
     img{
-        width: 90%;
+        width: 100%;
         margin: 20px auto 20px;
         border-radius: 10px;
         display: flex;
         @media only screen and (min-width : 1224px) {
-          width: 90%;
+          width: 800px;
+          height: 400px;
           }
    }
 }
@@ -72,11 +90,25 @@
     background-color: rgb(34, 53, 83);
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    right: 60px;
+    @media only screen and (min-width : 1224px){
+      right: 100px;
+    }
     .likes-counter{
       font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
-      border: 2px solid rgb(209, 81, 90);
-      border-radius: 10px;
+      border: 1px solid rgb(209, 81, 90);
+      border-radius: 50%;
       padding: 5px;
+      height: 10px;
+      width: 15px;
+      padding: 5px 0px 10px 10px;
+      position: absolute;
+      right: -60px;
+      z-index: 1;
+      @media only screen and (min-width : 1224px){
+        right: -5px;
+      }
     }
 }
 
@@ -96,13 +128,16 @@ body
 {
   display: block;
   position: relative;
-  top: 5px;
-  left: -278px;
+  top: 10px;
+  left: -400px;
   background-color: transparent;
   z-index: 1;
   -webkit-user-select: none;
   user-select: none;
   width: 90%;
+  @media only screen and (min-width : 1224px){
+    left: -350px;
+  }
 }
 #menuToggleComment
 {
@@ -307,27 +342,44 @@ body
   flex-direction: column;
   background-color: rgb(34, 53, 83);
   margin-left: 20px;
+  padding-bottom: 10px;
 }
 
 .user-picture{
+  border-radius: 50% 0 0 50%;
   .picture-profile{
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   margin: 0;
   object-fit: cover;
+  @media only screen and (min-width : 1224px){
+    height: 100px;
+    width: 100px;
+  }
 }
+}
+.user-picture-profile{
+  background-color: rgb(18, 36, 65);
+  border-radius: 50% 0 0 50%;
+  padding-left: 2px;
 }
 .comment-post{
   display: flex;
-  height: 70px;
-  border-radius: 50px 50px 50px 50px;
+  width: 90%;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50px 5px 5px 50px;
+  border: 1px solid rgb(209, 81, 90);
+  @media only screen and (min-width : 1224px){
+    height: 100px;
+  }
+
 }
 .message{
   width: 190px;
-  height: 70px;
-  margin-left: 10px;
-  padding-left: 10px;
+  height: 79px;
+  padding-left: 20px;
   resize: none;
   outline: none;
   color: white;
@@ -335,39 +387,53 @@ body
   border: none;
   font-family: "montserrat",Arial, Helvetica, sans-serif;
   background-color: rgb(18, 36, 65);
-  border-radius: 0 50px 50px 0;
-  }.comment{
+  @media only screen and (min-width : 1224px){
+    width: 590px;
+    height: 95px;
+  }
+  }
+  .comment{
     border-radius: 0 50px 50px 0;
     display: flex;
   }
   .button-comment{
-    padding-right: 10px;
-    border-radius: 0 50% 50% 0;
+    height: 65px;
+    width: 15px;
+    margin:  5px auto 0;
+    position: absolute;
+    right: 53px;
+    @media only screen and (min-width : 1224px){
+      right: 180px;
+      margin-top: 15px;
+    }
   }
-
-
-  ::ng-deep * {
-    margin: 0;
-    padding: 0;
-    //background-color: rgb(18, 36, 65);;
-    
-}
 .button{
     background-color: transparent;
     height: 50px;
     display: flex;
     flex-direction: column;
+    padding: 5px 10px;
+    &:hover{
+      transform: scale(1.1);
+      @keyframes rotate {
+          from{
+              transform: rotate3d(0, 0, 0, 0);
+          } to {
+              transform: rotate3d(1, 1, 1, 360deg);
+          }
+      }
+      animation: rotate 0.5s linear 0s 1 forwards ;
+  }
 }
 button{
     font-size: 16px;
     color: white;
     padding: 5px;
-    border: 2px solid rgb(209, 81, 90);
     border-radius: 5px;
     outline: none;
-    margin-left: 10px;
     display: flex;
     background-color: rgb(18, 36, 65);
+    position: absolute;
     &:hover{
         transform: scale(1.1);
     }
@@ -380,10 +446,10 @@ button{
     }    
 }
 .comment-button{
-    border-radius: 50%;
-    height: 28px;
-    width: 28px;
+    border-radius: 5px;
     margin-top: 5px;
+    padding: 5px 10px;
+    border: 1px solid rgb(209, 81, 90);
 }
 .comment-send-picture{
   border-radius: 50%;
@@ -395,7 +461,8 @@ p{
 .comment-informations{
   display: flex;
   margin-bottom: 10px;
-  border-bottom: 1px solid rgb(209, 81, 90);
+  border-bottom: 2px solid rgb(209, 81, 90);
+  padding-bottom: 10px;
 }
 .view-comment{
   margin: 10px;
@@ -405,6 +472,7 @@ p{
   .comment-container{
     padding: 5px;
     border-radius: 10px;
+    width: 100%;
   }
   .comment-firstname{
     margin-right: 6px;
@@ -414,8 +482,8 @@ p{
     font-family:  "montserrat", Arial, Helvetica, sans-serif;
   }
   .comment-picture{
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     margin: 10px 10px 10px 0 ;
     object-fit: cover;
@@ -433,14 +501,32 @@ p{
   height: 400px;
   margin: 0 auto;
   width: 100%;
+  @media only screen and (min-width : 1224px){
+    height: 610px;
+    width: 1000px;
+  }
+}
+.viewport-comment {
+  height: 300px;
+  margin: 10px auto;
+  width: 100%;
+  border-radius: 10px;
+  @media only screen and (min-width : 1224px){
+    height: 400px;
+  }
 }
 
 label{
-  margin-bottom: 5px;
   color: white;
-  border: 2px solid rgb(209, 81, 90);
-  padding: 5px;
-  border-radius: 50%;
+  border: 1px solid rgb(209, 81, 90);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: "montserrat",Arial, Helvetica, sans-serif;
+  background-color: rgb(18, 36, 65);
+  &:hover{
+     transform: scale(1.1);
+  }
+  
 }
 
 .input-file{
@@ -453,5 +539,21 @@ background-color: transparent;
 }
 .likeComment{
   position: absolute;
-  left: 300px;
+  left: 280px;
+}
+.img-comment{
+  img{
+    width: 100%;
+  }
+}
+video{
+  width: 300px;
+  margin: 0 auto;
+  justify-content: center;
+  display: flex;
+  @media only screen and (min-width : 1224px){
+    width: 500px;
+
+  }
+  
 }

@@ -32,8 +32,11 @@ export class MessageService {
     return this.httpClient.delete(this.postUrl + id +'/delete')
   }
 
-  updatePost(messageId: string, content: string){
-    return this.httpClient.put(this.postUrl + messageId + '/modify/',{content})
+  updatePost(messageId: string, content: string, attachment: File){
+    let formdata = new FormData();
+    formdata.append('content', content);
+    formdata.append('image', attachment);
+    return this.httpClient.put(this.postUrl + messageId + '/modify/',formdata)
   }
   getComment(): Observable<any>{
     return this.httpClient.get(`${this.postUrl}`);

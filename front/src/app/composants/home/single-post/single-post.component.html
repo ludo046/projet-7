@@ -12,7 +12,11 @@
                 </div>
                 <div class="top-post">
                     <h1>{{ post.User.firstName }} {{ post.User.lastName }}</h1>
-                    <p>publié le {{ post.createdAt | date:'dd/MM/yyyy' }} à {{ post.createdAt | date:'HH:mm' }} </p>                    
+                    <p class="user-name">publié le {{ post.createdAt | date:'dd/MM/yyyy' }} à {{ post.createdAt | date:'HH:mm' }} </p>                    
+                </div>
+                <div class="interaction">
+                    <app-like [postId]="post.id" [like]="post.like"></app-like>
+                    <p *ngIf="post.likes > 0 " class="likes-counter"> {{ post.likes }} </p>
                 </div>
                 <div id="menuToggle" *ngIf="connectUserId === post.UserId || isAdmin === true">
                     <input type="checkbox" />
@@ -41,17 +45,15 @@
             <div class="content">
                <p>{{ post.content }}</p>  
             </div>
-                   
-        <div class="interaction">
-            <app-like [postId]="post.id" [like]="post.like"></app-like>
-            <p *ngIf="post.likes > 0 " class="likes-counter">likes : {{ post.likes }} </p>
-        </div>
+
+
+
         <div class="comment-post">
             <div class="user-picture" *ngFor="let userProfile of oneUserProfil">
-                <div *ngIf="userProfile.picture">
+                <div *ngIf="userProfile.picture" class="user-picture-profile">
                    <img [src]="userProfile.picture" class="picture-profile"> 
                 </div>
-                <div *ngIf="userProfile.picture === null ">
+                <div *ngIf="userProfile.picture === null " class="user-picture-profile">
                     <img src="{{fullPathname}}" class="picture-profile"> 
                  </div>
             </div>
@@ -69,7 +71,8 @@
             </div>
             
         </div>
-        <div class="view-comment" *ngFor='let comment of comments'>
+        <cdk-virtual-scroll-viewport itemSize = "100" class = "viewport-comment" *ngIf="post.Comments != 0 "> 
+        <div class="view-comment" *cdkVirtualFor='let comment of comments'>
             <div class="comment-container" *ngIf="post.id === comment.messageId">
                 
             <div class="comment-informations"  >
@@ -88,7 +91,12 @@
                         <li><app-delete-comment [commentId]="comment.id"></app-delete-comment></li>
                     </ul>
                   </div>
-                <img [src]="comment.User.picture" class="comment-picture">
+                  <div *ngIf="post.User.picture">
+                      <img [src]="comment.User.picture" class="comment-picture">
+                  </div>
+                  <div *ngIf="post.User.picture === null">
+                    <img src="{{fullPathname}}" class="comment-picture">
+                  </div>
                 <div class="name">
                     <p class="comment-firstname">{{ comment.User.firstName }}</p> 
                     <p class="comment-lastname">{{ comment.User.lastName }}</p>
@@ -99,10 +107,18 @@
             </div>
             <div>
                 <p class="comment-content">{{ comment.content }}</p>
-                <img [src]="comment.attachment">
+                <div *ngIf="comment.attachment !== null" class="img-comment">
+                   <img [src]="comment.attachment"> 
+                </div>
+                <div *ngIf="comment.movie != null" class="img-comment">
+                    <video controls>
+                        <source [src]="comment.movie" class="movie">
+                    </video>
+                </div>
             </div>
         </div>
         </div>
+        </cdk-virtual-scroll-viewport> 
         </div>
     </li>
 </cdk-virtual-scroll-viewport> 

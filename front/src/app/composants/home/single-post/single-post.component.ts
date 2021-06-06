@@ -34,6 +34,7 @@ export class SinglePostComponent {
   ngOnInit(): void {  
     this.newPost();
     this.getUserProfile();
+    this.newcomment();
     this.postComment = this.formBuilder.group({
       postOneComment: this.formBuilder.control('',(Validators.required)),
       attachmentComment:this.formBuilder.control('')

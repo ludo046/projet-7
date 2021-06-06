@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { faChevronRight, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { MessageService } from 'src/app/service/message.service';
 import { UsersService } from 'src/app/service/users.service';
 
@@ -11,6 +12,8 @@ import { UsersService } from 'src/app/service/users.service';
 export class WriteMessageComponent implements OnInit {
   //fullPathname='assets/images/icon.png'
   fullPathname = 'assets/images/userPicture.png'
+  public faComment = faChevronRight;
+  public faPaperClip = faPaperclip;
 
   postMessage: FormGroup;
   formData = new FormData();

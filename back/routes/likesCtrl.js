@@ -181,13 +181,22 @@ module.exports = {
   getLike: function(req, res){
     const headerAuth  = req.headers['authorization'];
     const userId      = jwtUtils.getUserId(headerAuth);
-    const messageId = req.params.messageId
-    models.Likes.findAll()
+    const messageId = parseInt(req.params.messageId);
+
+
+
+    models.Likes.findOne({
+      where: {
+        userId : userId,
+        messageId: messageId
+      }
+    })
     .then(function(likes) {
+      console.log(likes);
       if (likes) {
-        res.status(200).json(likes);
+        res.status(200).json(true);
       } else {
-        res.status(404).json({ "error": "no likes found" });
+        res.status(200).json(false);
       }
     }).catch(function(err) {
       console.log(err);
