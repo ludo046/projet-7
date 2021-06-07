@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faHandRock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { LikeService } from 'src/app/service/like.service';
 
 
@@ -10,6 +10,7 @@ import { LikeService } from 'src/app/service/like.service';
 })
 export class LikeComponent implements OnInit {
   faThumbsUp = faThumbsUp;
+  faHandRock = faHandRock;
   @Input() postId:number;
   @Output() newLike = new EventEmitter<boolean>();
   messageLiked: boolean;
