@@ -9,7 +9,7 @@
     <div class="picture">
         <p>Pièce jointe : <img [src]="" alt=""></p>
         <label for="file" class="label-file">Choisir une image</label>
-        <input id="file" accept=".png, .jpeg, .jpg, .mp4" type="file" class="input-file" (change)="onFileAdded($event)">
+        <input id="file" accept=".png, .jpeg, .jpg, .mp4, .gif" type="file" class="input-file" (change)="onFileAdded($event)">
     </div>     
     <button (click)="updatePost()" routerLink="/home">Valider</button>
   </form>  

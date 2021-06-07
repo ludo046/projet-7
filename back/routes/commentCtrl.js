@@ -2,6 +2,7 @@ const models   = require('../models');
 const asyncLib = require('async');
 const jwtUtils = require('../utils/jwt.utils');
 const messagesCtrl = require('./messagesCtrl');
+const fs = require('fs')
 
 const CONTENT_LIMIT = 1000;
 
@@ -115,27 +116,77 @@ deleteComment: function(req, res){
   };
 
   let commentId = parseInt(req.params.commentId);
-  console.log(commentId);
 
   if (commentId <= 0) {
     return res.status(400).json({ 'error': 'invalid parameters' });
   }
-
-  models.LikeComments.destroy({
-      where: {
-        userId: userId,
-        id: commentId
-      }
-  }),
-  models.Comments.destroy({
-      where: {
-        userId: userId,
-        id: commentId
-      }
-  }).then (function(){
-     ( res.status(201).json({'ok' :'post deleted'})) 
-  }).catch (function(err){
-      (res.status(400).json({ 'error': 'user not found' }))
+  models.Comments.findOne({
+    where: {
+      userId: userId,
+      id: commentId
+    }
+  }).then(function(comment){
+    console.log(comment);
+    if(comment.attachment){
+      const filename = comment.attachment.split('/images/')[1]
+    fs.unlink(`images/${filename}`,() => {
+      models.LikeComments.destroy({
+        where: {
+          userId: userId,
+          commentId: commentId
+        }
+    }),
+    models.Comments.destroy({
+        where: {
+          userId: userId,
+          id: commentId
+        }
+    }).then(function(){
+      res.status(201).json({ 'ok': 'comment delete' })
+    }).catch(function(err){
+      res.status(400).json({ 'error': 'comment not delete' })
+    })
+  })
+    } else if (comment.movie){
+      const filemoviename = comment.movie.split('/images/')[1]
+      fs.unlink(`images/${filemoviename}`,() => {
+        models.LikeComments.destroy({
+          where: {
+            userId: userId,
+            commentId: commentId
+          }
+      }),
+      models.Comments.destroy({
+          where: {
+            userId: userId,
+            id: commentId
+          }
+      }).then(function(){
+        res.status(201).json({ 'ok': 'comment delete' })
+      }).catch(function(err){
+        res.status(400).json({ 'error': 'comment not delete' })
+      })
+    })
+    } else {
+        models.LikeComments.destroy({
+          where: {
+            userId: userId,
+            commentId: commentId
+          }
+      }),
+      models.Comments.destroy({
+          where: {
+            userId: userId,
+            id: commentId
+          }
+      }).then(function(){
+        res.status(201).json({ 'ok': 'comment delete' })
+      }).catch(function(err){
+        res.status(400).json({ 'error': 'comment not delete' })
+      })
+    }
+  }).catch(function(err){
+    res.status(500).json({ 'error': 'comment not delete' })
   })
 },
 
@@ -145,7 +196,7 @@ modifyComment: function(req, res) {
   const commentId = req.params.commentId
 
   let movie = null ;
-  let attachment= null 
+  let attachment = null 
   let content = req.body.content;
   if(req.file){
     let media = req.file.filename
@@ -161,39 +212,39 @@ modifyComment: function(req, res) {
   console.log(commentId);
   console.log(content);
 
-   
-  asyncLib.waterfall([
-      function(done){
-          models.Comments.findOne({
-              where: {id : commentId}
-          }).then(function(commentFound){
-              done(null,commentFound);
-          })
-          .catch(function(err){
-              return res.status(500).json({ 'error': 'unable to verify' })
-          })
-      },
-      function(commentFound, done){
-          if (commentFound){
-              commentFound.update({
-                content: (content ? content : commentFound.content),
-                attachment: (attachment ? attachment : commentFound.attachment),
-                movie: (movie ? movie : commentFound.movie),
-              }).then(function(){
-                  done(commentFound);
-              }).catch(function(err){
-                  res.status(500).json({ 'error': 'cannot update post' })
-              });
-          } else { 
-              res.status(404).json({ 'error': 'post not found' })
-          }
-      },
-  ],function(commentFound){
-      if (commentFound){
-          return res.status(201).json(commentFound);
-      } else {
-          return res.status(500).json({ 'error': 'post not update' })
-      }
+  models.Comments.findOne({
+    where: {
+      id: commentId
+    }
+  }).then(function(modifyComment){
+    if(modifyComment.attachment){
+      const filename = modifyComment.attachment.split('/images/')[1]
+      console.log(filename);
+      fs.unlink(`images/${filename}`,() => {
+        modifyComment.update({
+          content: (content ? content : modifyComment.content),
+          attachment: (attachment ? attachment : modifyComment.attachment),
+          movie: (movie ? movie : modifyComment.movie)
+        })
+      })
+    }else if(modifyComment.movie){
+      const filemoviename = modifyComment.movie.split('/images/')[1]
+      fs.unlink(`images/${filemoviename}`,() => {
+          modifyComment.update({
+          content: (content ? content : modifyComment.content),
+          attachment: (attachment ? attachment : modifyComment.attachment),
+          movie: (movie ? movie : modifyComment.movie)
+        })
+      })
+    }else{
+      modifyComment.update({
+        content: (content ? content : modifyComment.content),
+        attachment: (attachment ? attachment : modifyComment.attachment),
+        movie: (movie ? movie : modifyComment.movie)
+    })
+  }
+  }).catch(function(err){
+    res.status(500).json({'error': 'post not modify'})
   })
 }
 }

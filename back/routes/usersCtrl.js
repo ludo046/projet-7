@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwtUtils = require ('../utils/jwt.utils')
 const models = require('../models')
 const asyncLib = require('async');
+const fs = require('fs')
 
 
 const emailRegexp  = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -161,24 +162,49 @@ module.exports={
     deleteUser: function(req, res){
         let headerAuth = req.headers['authorization'];
         let userId = jwtUtils.getUserId(headerAuth)
-
-        if (userId < 0)
-        return res.status(400).json({ 'error': 'wrong token' })
-        
-        models.Likes.destroy({
-            where: {userId: userId}
-        }),
-        models.Messages.destroy({
-            where: {userId: userId}
-        }),
-        models.User.destroy({
-            where: {id: userId}
-        }).then (function(){
-           ( res.status(201).json({'ok' :'user deleted'})) 
-        }).catch (function(err){
-            (res.status(400).json({ 'error': 'user not found' }))
+    
+        if (userId <= 0){
+          return res.status(400).json({ 'error': 'wrong token' })
+        };
+    
+        models.User.findOne({
+          where: {
+            id: userId,
+          }
+        }).then(function(user){
+          console.log(user);
+          const filename = user.picture.split('/images/')[1]
+          console.log(filename);
+          fs.unlink(`images/${filename}`,() => {
+            models.Likes.destroy({
+              where: {
+                  userId: userId
+              }
+          }),
+          models.Comments.destroy({
+              where:{
+                userId: userId
+              }
+          }),
+          models.Messages.destroy({
+              where: {
+                userId: userId,
+              }
+          }),
+          models.User.destroy({
+              where: {
+                id: userId
+              }
+          })
+          .then(function(){
+            res.status(201).json({ 'ok': 'post delete' })
+          }).catch(function(err){
+            res.status(400).json({ 'error': 'post not delete' })
+          })
         })
-        
+        }).catch(function(err){
+          res.status(500).json({ 'error': 'post not delete' })
+        })
     }
 
 }

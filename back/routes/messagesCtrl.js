@@ -113,7 +113,6 @@ module.exports = {
     };
 
     let messageId = parseInt(req.params.messageId);
-    console.log(messageId);
 
     if (messageId <= 0) {
       return res.status(400).json({ 'error': 'invalid parameters' });
@@ -124,88 +123,110 @@ module.exports = {
         id: messageId
       }
     }).then(function(post){
-      const filename = post.attachment.split('/images/')[1]
-      console.log(filename);
-      fs.unlink(`image/${filename}`),() => {
-        filename
-        .then(() => res.status(200).json({ message: 'objet supprimé !'}))
-        .catch(error => res.status(400).json({ error }))
-      }
+      console.log(post);
+      if(post.attachment){
+        const filename = post.attachment.split('/images/')[1]
+      fs.unlink(`images/${filename}`,() => {
+        models.Likes.destroy({
+          where: {
+            userId: userId,
+            messageId: messageId
+          }
+      }),
+      models.Messages.destroy({
+          where: {
+            userId: userId,
+            id: messageId
+          }
+      }).then(function(){
+        res.status(201).json({ 'ok': 'post delete' })
+      }).catch(function(err){
+        res.status(400).json({ 'error': 'post not delete' })
+      })
     })
-
-    models.Likes.destroy({
-        where: {
-          userId: userId,
-          messageId: messageId
-        }
-    }),
-    models.Messages.destroy({
-        where: {
-          userId: userId,
-          id: messageId
-        }
-    }).then (function(){
-       ( res.status(201).json({'ok' :'post deleted'})) 
-    }).catch (function(err){
-        (res.status(400).json({ 'error': 'user not found' }))
+      } else {
+        const filemoviename = post.movie.split('/images/')[1]
+        fs.unlink(`images/${filemoviename}`,() => {
+          models.Likes.destroy({
+            where: {
+              userId: userId,
+              messageId: messageId
+            }
+        }),
+        models.Messages.destroy({
+            where: {
+              userId: userId,
+              id: messageId
+            }
+        }).then(function(){
+          res.status(201).json({ 'ok': 'post delete' })
+        }).catch(function(err){
+          res.status(400).json({ 'error': 'post not delete' })
+        })
+      })
+      }
+      
+    }).catch(function(err){
+      res.status(500).json({ 'error': 'post not delete' })
     })
 },
 
-  modifyPost: function(req, res) {
-    let headerAuth = req.headers['authorization'];
-    let userId = jwtUtils.getUserId(headerAuth)
-    const messageId = req.params.messageId
+modifyPost: function(req, res) {
+  let headerAuth = req.headers['authorization'];
+  let userId = jwtUtils.getUserId(headerAuth)
+  const messageId = req.params.messageId
 
-    let movie = null;
-    let attachment = null
-    let content = req.body.content;
-    if(req.file){
-      let media = req.file.filename
-      if (media.includes('mp4')) {
-        movie = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        console.log('truc');
-      } else {
-        attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      } 
+  let movie = null ;
+  let attachment = null 
+  let content = req.body.content;
+  if(req.file){
+    let media = req.file.filename
+    if (media.includes('mp4')) {
+      movie = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      console.log('truc');
+    } else {
+      attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } 
+  }
+
+  console.log(userId);
+  console.log(messageId);
+  console.log(content);
+
+  models.Messages.findOne({
+    where: {
+      id: messageId
     }
-
-    console.log(userId);
-    console.log(messageId);
-    console.log(content);
-
-     
-    asyncLib.waterfall([
-        function(done){
-            models.Messages.findOne({
-                where: {id : messageId}
-            }).then(function(messageFound){
-                done(null,messageFound);
-            })
-            .catch(function(err){
-                return res.status(500).json({ 'error': 'unable to verify' })
-            })
-        },
-        function(messageFound, done){
-            if (messageFound){
-                messageFound.update({
-                  content: (content ? content : messageFound.content),
-                  attachment: (attachment ? attachment : messageFound.attachment),
-                  movie: (movie ? movie : messageFound.movie),
-                }).then(function(){
-                    done(messageFound);
-                }).catch(function(err){
-                    res.status(500).json({ 'error': 'cannot update post' })
-                });
-            } else { 
-                res.status(404).json({ 'error': 'post not found' })
-            }
-        },
-    ],function(messageFound){
-        if (messageFound){
-            return res.status(201).json(messageFound);
-        } else {
-            return res.status(500).json({ 'error': 'post not update' })
-        }
-    })
+  }).then(function(modifyMessage){
+    if(modifyMessage.attachment){
+      const filename = modifyMessage.attachment.split('/images/')[1]
+      console.log(filename);
+      fs.unlink(`images/${filename}`,() => {
+        modifyMessage.update({
+          content: (content ? content : modifyMessage.content),
+          attachment: (attachment ? attachment : modifyMessage.attachment),
+          movie: (movie ? movie : modifyMessage.movie)
+        })
+      })
+    }else if(modifyMessage.movie){
+      const filemoviename = modifyMessage.movie.split('/images/')[1]
+      fs.unlink(`images/${filemoviename}`,() => {
+          modifyMessage.update({
+          content: (content ? content : modifyMessage.content),
+          attachment: (attachment ? attachment : modifyMessage.attachment),
+          movie: (movie ? movie : modifyMessage.movie)
+        })
+      })
+    }else{
+      modifyMessage.update({
+        content: (content ? content : modifyMessage.content),
+        attachment: (attachment ? attachment : modifyMessage.attachment),
+        movie: (movie ? movie : modifyMessage.movie)
+      })
+    }
+  }).catch(function(err){
+    res.status(500).json({'error': 'post not modify'})
+  })
 }
+
 }
