@@ -22,6 +22,9 @@ export class CommentService {
   getComment(): Observable<any>{
     return this.httpClient.get(`${this.comment}`);
   }
+  getOneComment(commentId: string):Observable<any>{
+    return this.httpClient.get(`${this.comment}` + commentId)
+  }
   deleteComment(id: number){
     return this.httpClient.delete(this.comment + id +'/delete')
   }
@@ -31,4 +34,5 @@ export class CommentService {
     formData.append('image', attachment)
     return this.httpClient.put(this.comment+ id + '/modify/',formData)
   }
+  
 }

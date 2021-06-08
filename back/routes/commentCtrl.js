@@ -217,7 +217,7 @@ modifyComment: function(req, res) {
       id: commentId
     }
   }).then(function(modifyComment){
-    if(modifyComment.attachment){
+    if(modifyComment.attachment && content){
       const filename = modifyComment.attachment.split('/images/')[1]
       console.log(filename);
       fs.unlink(`images/${filename}`,() => {
@@ -227,7 +227,7 @@ modifyComment: function(req, res) {
           movie: (movie ? movie : modifyComment.movie)
         })
       })
-    }else if(modifyComment.movie){
+    }else if(modifyComment.movie && content){
       const filemoviename = modifyComment.movie.split('/images/')[1]
       fs.unlink(`images/${filemoviename}`,() => {
           modifyComment.update({
@@ -245,6 +245,26 @@ modifyComment: function(req, res) {
   }
   }).catch(function(err){
     res.status(500).json({'error': 'post not modify'})
+  })
+},
+
+getOneComment: function(req,res){
+  let headerAuth = req.headers['authorization'];
+  let userId = jwtUtils.getUserId(headerAuth)
+  const commentId = req.params.commentId
+
+  if(userId <= 0){
+    return res.status(400).json({ 'message': 'wrong token' })
+  }
+
+  models.Comments.findOne({
+    where: {
+      id: commentId
+    }
+  }).then(function(comment){
+    return res.status(200).json([comment])
+  }).catch(function(err){
+    return req.status(400).json({'message': 'comment not found'})
   })
 }
 }

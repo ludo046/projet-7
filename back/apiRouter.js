@@ -25,6 +25,7 @@ exports.router = (function(){
     apiRouter.route('/message/:messageId/modify/').put(multer, messagesCtrl.modifyPost);
     apiRouter.route('/message/:messageId/like/').post(likesCtrl.likePost);
     apiRouter.route('/message/:messageId/dislike/').post(likesCtrl.dislikePost);
+    apiRouter.route('/message/:messageId/').get(messagesCtrl.getOnePost);
 
     apiRouter.route('/comment/:messageId/comment/new/').post(multer, commentCtrl.commentPost);
     apiRouter.route('/comment/').get(commentCtrl.listComment);
@@ -32,6 +33,7 @@ exports.router = (function(){
     apiRouter.route('/comment/:commentId/dislike').post(likeComment.dislikeCommentPost);
     apiRouter.route('/comment/:commentId/delete').delete(commentCtrl.deleteComment);
     apiRouter.route('/comment/:commentId/modify').put(multer, commentCtrl.modifyComment);
+    apiRouter.route('/comment/:commentId').get(commentCtrl.getOneComment);
 
     apiRouter.route('/like/:messageId').get(likesCtrl.getLike);
     apiRouter.route('/likeComment').get(likeComment.getLikeComment);

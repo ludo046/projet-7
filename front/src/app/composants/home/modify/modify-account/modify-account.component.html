@@ -1,23 +1,23 @@
 <app-header></app-header>
 <app-nav></app-nav>
 
-<form [formGroup]="updateAccountForm">
+<form [formGroup]="updateAccountForm" *ngFor="let profil of oneUserProfil">
     <h1>Modifications du compte</h1>
     <div class="form-group"> 
         <label for="firstname">Nom : </label>
-        <input type="text" placeholder="Nom" class="form-control" id="firstname" formControlName="firstName">
+        <input type="text" [(ngModel)]="profil.lastname" class="form-control" id="firstname" formControlName="firstName">
     </div>
     <div class="form-group">
         <label for="lastname">Prénom : </label>
-        <input type="text" placeholder="Prénom" class="form-control" id="lastname" formControlName="lastName">
+        <input type="text" [(ngModel)]="profil.firstname" placeholder="Prénom" class="form-control" id="lastname" formControlName="lastName">
     </div>
     <div class="form-group">
         <label for="email">Email :</label>
-        <input type ="email" placeholder="Email" class="form-control" id="email" formControlName="email"> 
+        <input type ="email" [(ngModel)]="profil.email" class="form-control" id="email" formControlName="email"> 
     </div>
     <div class="form-group">
         <label for="email">Date de naissance :</label>
-        <input type ="date" class="form-control" id="dateBirth" formControlName="dateBirth"> 
+        <input type ="date" [(ngModel)]="profil.datebirth" class="form-control" id="dateBirth" formControlName="dateBirth"> 
     </div> 
     <div class="picture">
         <p>Photo de profil : <img [src]="" alt=""></p>

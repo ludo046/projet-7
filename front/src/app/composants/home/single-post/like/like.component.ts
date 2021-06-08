@@ -30,16 +30,6 @@ export class LikeComponent implements OnInit {
       this.newLike.emit(true);
       this.getLikes();
     })
-
-    // if(this.userId === this.userIdConnect || this.isLike === 0){
-    //   this.LikeService.likePost(this.postId).subscribe(() => this.newLike.emit(true))
-    // } else {
-    //   this.LikeService.dislike(this.postId).subscribe(() => this.newLike.emit(true))
-    // }
-    // console.log(this.userId);
-    // console.log(this.isLike);
-    
-    
   }
   dislikePost(){
     this.LikeService.dislike(this.postId).subscribe(()=> 

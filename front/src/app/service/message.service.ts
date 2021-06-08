@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -19,6 +19,9 @@ export class MessageService {
 
   getPost(): Observable<any>{
     return this.httpClient.get(`${this.postUrl}`);
+  }
+  getOnePost(messageId: string):Observable<any>{
+    return this.httpClient.get(`${this.postUrl}` + messageId)
   }
   writePost(content: string,attachment: File):Observable<any>{
     let formData = new FormData();  

@@ -16,8 +16,6 @@ export class DeletePostComponent implements OnInit {
   }
   deletePost(){
     this.messageService.deletePost(this.postId).subscribe()
-    console.log(this.postId);
-    
   }
 
 }

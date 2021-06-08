@@ -144,7 +144,7 @@ module.exports = {
         res.status(400).json({ 'error': 'post not delete' })
       })
     })
-      } else {
+      } else if (post.movie){
         const filemoviename = post.movie.split('/images/')[1]
         fs.unlink(`images/${filemoviename}`,() => {
           models.Likes.destroy({
@@ -163,6 +163,23 @@ module.exports = {
         }).catch(function(err){
           res.status(400).json({ 'error': 'post not delete' })
         })
+      })
+      } else {
+        models.Likes.destroy({
+          where: {
+            userId: userId,
+            messageId: messageId
+          }
+      }),
+      models.Messages.destroy({
+          where: {
+            userId: userId,
+            id: messageId
+          }
+      }).then(function(){
+        res.status(201).json({ 'ok': 'post delete' })
+      }).catch(function(err){
+        res.status(400).json({ 'error': 'post not delete' })
       })
       }
       
@@ -198,7 +215,7 @@ modifyPost: function(req, res) {
       id: messageId
     }
   }).then(function(modifyMessage){
-    if(modifyMessage.attachment){
+    if(modifyMessage.attachment && content){
       const filename = modifyMessage.attachment.split('/images/')[1]
       console.log(filename);
       fs.unlink(`images/${filename}`,() => {
@@ -208,7 +225,7 @@ modifyPost: function(req, res) {
           movie: (movie ? movie : modifyMessage.movie)
         })
       })
-    }else if(modifyMessage.movie){
+    }else if(modifyMessage.movie && content){
       const filemoviename = modifyMessage.movie.split('/images/')[1]
       fs.unlink(`images/${filemoviename}`,() => {
           modifyMessage.update({
@@ -226,6 +243,26 @@ modifyPost: function(req, res) {
     }
   }).catch(function(err){
     res.status(500).json({'error': 'post not modify'})
+  })
+},
+
+getOnePost: function(req,res){
+  let headerAuth = req.headers['authorization'];
+  let userId = jwtUtils.getUserId(headerAuth)
+  const messageId = req.params.messageId
+
+  if(userId <= 0){
+    return res.status(400).json({ 'message': 'wrong token' })
+  }
+
+  models.Messages.findOne({
+    where: {
+      id: messageId
+    }
+  }).then(function(post){
+    return res.status(200).json([post])
+  }).catch(function(err){
+    return req.status(400).json({'message': 'message not found'})
   })
 }
 

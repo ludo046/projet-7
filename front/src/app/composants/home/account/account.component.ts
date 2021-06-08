@@ -18,8 +18,6 @@ export class AccountComponent implements OnInit {
   getUserProfile(): void{
      this.usersService.getUserProfile().subscribe(userProfile => {
       this.oneUserProfil = userProfile
-      console.log(this.oneUserProfil);
-      
     });
   }
 

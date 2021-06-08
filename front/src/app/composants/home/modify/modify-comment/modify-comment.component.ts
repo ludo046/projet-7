@@ -11,11 +11,13 @@ export class ModifyCommentComponent implements OnInit {
 
   modifyComment: FormGroup;
   file: File;
+  oneComment: [];
 
   constructor(private formBuilder: FormBuilder,
               private commentService: CommentService) { }
 
   ngOnInit(): void {
+    this.getOneComment();
     this.modifyComment = this.formBuilder.group({
       content: this.formBuilder.control('',(Validators.required)),
       attachment:this.formBuilder.control('')
@@ -31,6 +33,15 @@ export class ModifyCommentComponent implements OnInit {
     
     
     this.commentService.updateComment(commentId, content, attachment).subscribe()
+  }
+
+  getOneComment(){
+    const commentId = window.location.href.split('comment/')[1];
+    this.commentService.getOneComment(commentId).subscribe(singlePost => {
+      this.oneComment = singlePost;
+      console.log(this.oneComment);
+      
+    })
   }
 
   onFileAdded(event: Event) {

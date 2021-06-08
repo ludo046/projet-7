@@ -1,5 +1,5 @@
 <div >
-    <button *ngIf="!messageLiked" (click)="likePost()"  ><fa-icon [icon]="faThumbsUp"></fa-icon></button>  
-    <button *ngIf="messageLiked" (click)="dislikePost()"  ><fa-icon [icon]="faHandRock" class="faHandRock"></fa-icon></button>  
+    <button *ngIf="messageLiked" (click)="dislikePost()" ><fa-icon [icon]="faThumbsUp"></fa-icon></button>  
+    <button *ngIf="!messageLiked" (click)="likePost()"   ><fa-icon [icon]="faHandRock" class="faHandRock"></fa-icon></button>  
 </div>
 

@@ -1,10 +1,10 @@
 <app-header></app-header>
 <app-nav></app-nav>
-<div [formGroup]="modifyPost">
-  <form>
+<div [formGroup]="modifyPost" >
+  <form *ngFor="let post of onePost">
     <h1>Modifier votre publication : </h1>
     <div class="form-group"> 
-       <textarea class="message form-control" formControlName="content"></textarea>
+       <textarea class="message form-control" formControlName="content" [(ngModel)]="post.content"></textarea>
     </div>
     <div class="picture">
         <p>Pièce jointe : <img [src]="" alt=""></p>
@@ -14,5 +14,4 @@
     <button (click)="updatePost()" routerLink="/home">Valider</button>
   </form>  
 </div>
-
 <app-footer></app-footer>
