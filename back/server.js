@@ -1,7 +1,9 @@
 //imports
 const express = require('express');
 const apiRouter = require('./apiRouter').router;
-const path = require('path')
+const path = require('path');
+
+
 
 //instantiate server
 const server = express();
@@ -18,10 +20,26 @@ server.use('/', function(req,res,next){
     next();
 });
 
+const http = require('http');
+const httpServer = http.Server(server);
+
+const socketIO = require('socket.io');
+const io = socketIO(httpServer)
+
 server.use('/api/', apiRouter);
 server.use('/images', express.static(path.join(__dirname, 'images')));
 
 //launch server
 server.listen(8080, function(){
     console.log('Server en écoute :)');
+})
+
+io.on('connection', (socket) => {
+    socket.on('join',(data) => {
+        socket.join(data.room);
+        socket.broadcast.to(data.room).emit('user joined')
+    });
+    socket.on('message', (data) => {
+        io.in(data.room).emit('new message', {user:data.user, message: data.message})
+    })
 })

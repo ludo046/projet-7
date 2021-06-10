@@ -1,6 +1,66 @@
-<div class="private-message">
+<!-- <div class="private-message">
     <h1>henry joseph</h1>
     <div class="message">
         <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
     </div>
+</div> -->
+
+<!-- <div class="container-fluid" *ngIf="showScreen">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="user-list-card">
+                <div class="user-card" [ngClass]="user?.name === selectedUser?.name && 'active'" *ngFor="let user of userList" (click)="selectUserName(user?.name)">
+                    <img [src]="user?.image" [alt]="user?.name" class="avatar">
+                    <p class="username"> {{user?.name}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="chat-container">
+                <ng-container *ngIf="selectedUser">
+                    <div class="chat-header">
+                        <img [src]="selectedUser?.image" [alt]="selectedUser?.name" class="avatar">
+                        <p class="username"> {{selectedUser?.name}}</p>
+                    </div>
+                    <div class="chat-body">
+                        <div $ngFor="let item of messageArray" [ngClass]="item?.user === currentUser?.name && 'same-user'">
+                            <p class="message-container">{{item?.message}}</p>
+                        </div>
+                    </div>
+                    <div class="chat-footer">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group mb-0">
+                                    <input type="text" placeholder="votre message" class="form-control" [(ngModel)]="messageText" (keyup)="$event.keyCode === 13 && sendMessage()">
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center align-self-center">
+                                <button class="btn btn-primary btn-sm px-3" (click)="sendMessage()">envoyer</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
 </div>
+
+<ng-template #popup let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">login</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input type="text" placeholder="entrer votre nom" class="form-control" [(ngModel)]="name">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" (click)="login(d)">login</button>
+    </div>
+</ng-template>
+
+ -->

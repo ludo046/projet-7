@@ -32,7 +32,8 @@
               "src/font"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "scripts": [],
             "vendorChunk": true,

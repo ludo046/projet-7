@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ScrollingModule } from '@angular/cdk/scrolling'
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './composants/auth/register/register.component';
-import { Routes, RouterModule, Router } from '@angular/router';
+import { Routes, RouterModule} from '@angular/router';
 import { HeaderComponent } from './composants/header/header.component';
 import { FooterComponent } from './composants/footer/footer.component';
 import { HomeComponent } from './composants/home/home.component';
@@ -14,7 +16,7 @@ import { AccountComponent } from './composants/home/account/account.component';
 import { MessageComponent } from './composants/home/message/message.component';
 import { SingleMessageComponent } from './composants/home/message/single-message/single-message.component';
 import { UsersService } from './service/users.service';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WriteMessageComponent } from './composants/home/single-post/write-message/write-message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -72,7 +74,11 @@ export const ROUTES : Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    ScrollingModule
+    ScrollingModule,
+    FormsModule,
+    NgbModule,
+    AppRoutingModule,
+
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, UsersService, MessageService, FormBuilder, HttpClientModule, HttpClient, FooterComponent],
   bootstrap: [AppComponent]
