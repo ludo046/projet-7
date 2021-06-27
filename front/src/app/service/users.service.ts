@@ -17,6 +17,7 @@ public updateUserFormData: any;
 constructor(private httpClient: HttpClient){}
 
 createUser(CreateUserRequest: CreateUserRequest){
+  //envoie les informations au backend
   return this.httpClient.post(`${this.apiUrl}users/register`,CreateUserRequest);
 }
 
@@ -25,6 +26,7 @@ logUser(LoginUser: LoginUser){
 }
 
 getUserProfile(): Observable<any>{
+  //appel au backend pour recuperer une reponse dans le composant
   return this.httpClient.get(`${this.apiUrl}users/me`)
 }
 
@@ -39,7 +41,6 @@ updateUserProfile(firstname: string, lastname:string, email:string, datebirth:st
   formData.append('email', email);
   formData.append('datebirth', datebirth);
   formData.append('image', picture, picture.name);
-  console.log(formData);
   
   return this.httpClient.put(`${this.apiUrl}users/me`,formData);
 }

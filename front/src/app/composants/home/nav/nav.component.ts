@@ -10,6 +10,7 @@ export class NavComponent {
 
 
   disconnect(){
+    //vide le session storage a la deconnection de l'utilisateur 
     sessionStorage.clear()
   }
 }

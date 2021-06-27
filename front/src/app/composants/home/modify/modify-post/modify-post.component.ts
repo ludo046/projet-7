@@ -9,47 +9,45 @@ import { MessageService } from 'src/app/service/message.service';
 })
 export class ModifyPostComponent implements OnInit {
 
-  modifyPost: FormGroup;
+  private modifyPost: FormGroup;
   @Input() postId: number;
-  file: File;
+  public file: File;
   public onePost:[];
 
   constructor(private formBuilder: FormBuilder,
               private messageService: MessageService) { }
 
   ngOnInit(): void {
+    //appel de la fonction a l'initialisation du composant 
     this.getOnePost();
+    //reactive form
     this.modifyPost = this.formBuilder.group({
-      content: this.formBuilder.control('',(Validators.required)),
-      attachment:this.formBuilder.control('')
+      //controle des champ du formulaire
+      modifycontent: this.formBuilder.control('',(Validators.required)),
+      modifyattachment:this.formBuilder.control('')
     });
   }
 
 
   updatePost(){
-    const content = this.modifyPost.get('content').value;
-    const messageId = window.location.href.split('post/')[1];
+    //recuperation des valeur du formulaire 
+    const content = this.modifyPost.get('modifycontent').value;
+    //recuperation de l'id du post dans d'url 
+    const messageId = window.location.href.split('post/')[1]
     const attachment = this.file;
-    console.log(messageId);
-    
-    console.log(content);
-    console.log(attachment);
-    
-    
-    
+    //abonnement au service 
     this.messageService.updatePost(messageId, content, attachment).subscribe()
   }
 
   getOnePost(){
     const messageId = window.location.href.split('post/')[1];
     this.messageService.getOnePost(messageId).subscribe(singlePost => {
-      this.onePost = singlePost;
-      console.log(this.onePost);
-      
+      this.onePost = singlePost; 
     })
   }
 
   onFileAdded(event: Event) {
+    //recuperation du fichier ci il yen a un 
     this.file = (event.target as HTMLInputElement).files[0];
   }
 

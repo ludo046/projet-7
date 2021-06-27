@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { MessageService } from 'src/app/service/message.service';
 
 @Component({
@@ -9,13 +9,27 @@ import { MessageService } from 'src/app/service/message.service';
 export class DeletePostComponent implements OnInit {
 
   @Input() postId:number;
+  allPost: [];
 
   constructor(private messageService: MessageService) { }
 
   ngOnInit(): void {
+    //appel de la fonction a l'initialisation du composant 
+    this.newPost()
   }
+  //fonction de suppression d'un post 
   deletePost(){
-    this.messageService.deletePost(this.postId).subscribe()
+    //abonnement au service
+    this.messageService.deletePost(this.postId).subscribe(() => {
+      //appel de la fonction de chargement des post 
+      this.newPost()
+    })
+  }
+ //fonction de chargement des post 
+  newPost(): void {
+    this.messageService.getPost().subscribe((posts) => {
+      this.allPost = posts;
+    });
   }
 
 }

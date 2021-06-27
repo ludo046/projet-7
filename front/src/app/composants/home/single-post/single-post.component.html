@@ -15,36 +15,35 @@
                     <p class="user-name">publié le {{ post.createdAt | date:'dd/MM/yyyy' }} à {{ post.createdAt | date:'HH:mm' }} </p>                    
                 </div>
                 <div class="interaction">
-                    <app-like [postId]="post.id" [like]="post.like"></app-like>
-                    <p *ngIf="post.likes > 0 " class="likes-counter"> {{ post.likes }} </p>
+                    <app-like [postId]="post.id" [like]="post.like" class="like"></app-like>
                 </div>
                 <div id="menuToggle" *ngIf="connectUserId === post.UserId || isAdmin === true">
                     <input type="checkbox" />
                     <span></span>
                     <span></span>
                     <span></span>
-              
                     <ul id="menu">
                         <li>
-                            <div class="button">
-                                <button [routerLink]="['/modify-post/',post.id]" [postId]="post.id">Modifier<fa-icon></fa-icon></button>
+                            <div class="button-menu">
+                                <button class="modify-button" [routerLink]="['/modify-post/',post.id]" [postId]="post.id">Modifier<fa-icon></fa-icon></button>
                             </div>
                         </li>
                         <li><app-delete-post [postId]="post.id"></app-delete-post></li>
                     </ul>
                   </div>
             </div>
-            <div *ngIf="post.attachment != null">
+            <div class="content">
+                <p>{{ post.content }}</p>  
+             </div>
+            <div *ngIf="post.attachment != null" class="attachment-post">
                 <img [src]="post.attachment" >
             </div>
-            <div *ngIf="post.movie != null">
+            <div *ngIf="post.movie != null" class="attachment-post">
                 <video controls width="340">
                     <source [src]="post.movie">
                 </video>
             </div>
-            <div class="content">
-               <p>{{ post.content }}</p>  
-            </div>
+
 
 
 
@@ -67,16 +66,16 @@
                 <div class="button">
                     <button class="comment-button" (click)="writeComment(post.id)"><fa-icon [icon]="faComment"></fa-icon></button>
                 </div>
-            </div>
+                </div>
             </div>
             
         </div>
-        <cdk-virtual-scroll-viewport itemSize = "100" class = "viewport-comment" *ngIf="post.Comments != 0 "> 
-        <div class="view-comment" *cdkVirtualFor='let comment of comments'>
+        <div *ngFor='let comment of comments'>
+        <div class="view-comment" *ngIf="comment.messageId === post.id">
             <div class="comment-container" *ngIf="post.id === comment.messageId">
                 
             <div class="comment-informations"  >
-                <div id="menuToggleComment" *ngIf="connectUserId === comment.UserId || isAdmin === true">
+                <div id="menuToggle" *ngIf="connectUserId === comment.UserId || isAdmin === true">
                     <input type="checkbox" />
                     <span></span>
                     <span></span>
@@ -84,22 +83,22 @@
               
                     <ul id="menu">
                         <li>
-                            <div class="button">
-                                <button [routerLink]="['/modify-comment/',comment.id]" [commentId]="comment.id">Modifier<fa-icon></fa-icon></button>
+                            <div class="button-menu-comment">
+                                <button class="modify-button" [routerLink]="['/modify-comment/',comment.id]" [commentId]="comment.id">Modifier<fa-icon></fa-icon></button>
                             </div>
                         </li>
                         <li><app-delete-comment [commentId]="comment.id"></app-delete-comment></li>
                     </ul>
                   </div>
-                  <div *ngIf="post.User.picture">
+                  <div *ngIf="post.User.picture" class="picture-comment">
                       <img [src]="comment.User.picture" class="comment-picture">
                   </div>
                   <div *ngIf="post.User.picture === null">
                     <img src="{{fullPathname}}" class="comment-picture">
                   </div>
                 <div class="name">
-                    <p class="comment-firstname">{{ comment.User.firstName }}</p> 
-                    <p class="comment-lastname">{{ comment.User.lastName }}</p>
+                    <p class="comment-name">{{ comment.User.firstName }} {{ comment.User.lastName }}</p>
+                    <p class="at">publié le {{ comment.createdAt | date:'dd/MM/yyyy' }} à {{ comment.createdAt | date:'HH:mm' }} </p> 
                 </div>
                 <div class="likeComment">
                     <app-like-comments [commentId]="comment.id"></app-like-comments>
@@ -117,8 +116,8 @@
                 </div>
             </div>
         </div>
-        </div>
-        </cdk-virtual-scroll-viewport> 
+    </div>
+</div>
         </div>
     </li>
 </cdk-virtual-scroll-viewport> 

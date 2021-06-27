@@ -13,6 +13,7 @@ export class CommentService {
   constructor(private httpClient: HttpClient) { }
 
   writeComment(content: string, attachment:File, id:number):Observable<any>{
+    //envoie des donner du formulaire au backend 
     let formData = new FormData();  
     formData.append('content', content);
     formData.append('image', attachment); 

@@ -8,8 +8,8 @@ import { MessageService } from 'src/app/service/message.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  @Output() allPost: any;
-  @Output() allComment: any;
+  @Output() allPost: [];
+  @Output() allComment: [];
 
   constructor(
     private messageService: MessageService,
@@ -17,10 +17,12 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    //appel de la fonction a l'initialisation du composant 
     this.newPost();
   }
 
   newPost(): void {
+    //abonnement au service et recuperation de la repose du backend
     this.messageService.getPost().subscribe((posts) => {
       this.allPost = posts;
     });

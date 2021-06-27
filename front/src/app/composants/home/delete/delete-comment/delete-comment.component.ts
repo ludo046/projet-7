@@ -9,14 +9,26 @@ import { CommentService } from 'src/app/service/comment.service';
 export class DeleteCommentComponent implements OnInit {
 
   @Input() commentId: number;
+  public allComment: [];
 
-  constructor(private commentService: CommentService,) { }
+  constructor(private commentService: CommentService) { }
 
   ngOnInit(): void {
+    //this.deleteComment()
+    this.newComment()
   }
+  //fonction de suppression d'un commentaire 
   deleteComment(){
-    this.commentService.deleteComment(this.commentId).subscribe()
-    console.log(this.commentId);
-    
+    //abonnement au service 
+    this.commentService.deleteComment(this.commentId).subscribe(() => {
+      //rappel de la fonction de recuperation des commentaires
+      this.newComment();
+    })
+  }
+  //fontion de recuperation des commentaire 
+  newComment(): void {
+    this.commentService.getComment().subscribe((comments) => {
+      this.allComment = comments;
+    });
   }
 }

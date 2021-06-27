@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faHandRock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { LikeService } from 'src/app/service/like.service';
+
 
 @Component({
   selector: 'app-like-comments',
@@ -10,17 +11,43 @@ import { LikeService } from 'src/app/service/like.service';
 export class LikeCommentsComponent implements OnInit {
 
   @Input() commentId:number;
-  faThumbsUp = faThumbsUp;
+  public faThumbsUp = faThumbsUp;
+  public faHandRock = faHandRock;
+  public commentLiked: boolean;
+  public likeCommentNumber: {likes: [object]};
 
   constructor(private LikeService: LikeService) { }
 
   ngOnInit(): void {
+    //appel des fonctions a l'initialisation du composant 
+    this.getOneComment();
+    this.getLikesComment();
   }
   likeCommentPost(){
-    this.LikeService.likeComment(this.commentId).subscribe()
+    //abonnement au service 
+    this.LikeService.likeComment(this.commentId).subscribe(() => {
+      //rappel des fonction 
+      this.getLikesComment();
+      this.getOneComment();
+    })
   }
   dislikeCommentPost(){
-    this.LikeService.dislikeComment(this.commentId).subscribe()
+    this.LikeService.dislikeComment(this.commentId).subscribe(() => {
+      this.getLikesComment();
+      this.getOneComment();
+    })
   }
-
+  getLikesComment(){
+    this.LikeService.getLikeComment(this.commentId).subscribe(isLiked => {
+      this.commentLiked = isLiked;
+    })
+  }
+  
+  getOneComment(){
+    this.LikeService.getOneComment(this.commentId).subscribe(like => {
+      this.likeCommentNumber = like;
+      console.log(this.likeCommentNumber);
+      
+    })
+  }
 }

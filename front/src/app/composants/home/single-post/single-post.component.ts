@@ -14,16 +14,15 @@ import { CommentService } from 'src/app/service/comment.service';
 export class SinglePostComponent {
   
  fullPathname = 'assets/images/userPicture.png'
- @Input() allPost: any;
- public userId: any;
- public connectUserId: number = JSON.parse(sessionStorage.getItem('session')).userId;
- public oneUserProfil: any;
+ @Input() allPost: [];
+ public userId: [];
+ public oneUserProfil: [];
  public faComment = faChevronRight;
  public faPaperClip = faPaperclip;
  public postComment: FormGroup;
  public fileComment: File;
  public comments: [];
- public isAdmin: Boolean = JSON.parse(sessionStorage.getItem('session')).isAdmin;
+ public connectUserId = JSON.parse(sessionStorage.getItem('session')).userId;
 
 
   constructor(private messageService: MessageService,
@@ -32,9 +31,11 @@ export class SinglePostComponent {
               private commentService: CommentService) { }
 
   ngOnInit(): void {  
+    //appel des fonctions a l'initialisation du composant 
     this.newPost();
     this.getUserProfile();
     this.newcomment();
+    //controle du formulaire 
     this.postComment = this.formBuilder.group({
       postOneComment: this.formBuilder.control('',(Validators.required)),
       attachmentComment:this.formBuilder.control('')
@@ -42,6 +43,7 @@ export class SinglePostComponent {
   }
 
   newPost():void{
+    //abonnement au service et recuperation de la reponse du backend 
     this.messageService.getPost().subscribe(posts => {
       this.userId = posts
     });
@@ -50,29 +52,25 @@ export class SinglePostComponent {
   newcomment():void{
     this.commentService.getComment().subscribe(comments => {
       this.comments = comments
-      console.log(this.comments);
     });
   }
 
   getUserProfile(): void{
     this.usersService.getUserProfile().subscribe(userProfile => {
      this.oneUserProfil = userProfile
-     console.log(this.oneUserProfil);
    });
   }
 
   writeComment(postId: number):void{
+    //recuperation des valeur du formulaire
     const content = this.postComment.get('postOneComment').value;
     const attachment = this.fileComment;
-    console.log(content);
-    console.log(attachment);
-    
-    
+    //abonnement au service et rappel de fonction 
     this.commentService.writeComment(content,attachment,postId).subscribe(() => this.newcomment());
   }
 
   onFileCommentAdded(event: Event) {
+    //recuperation de l'image ou de la video ci il yen a une
     this.fileComment = (event.target as HTMLInputElement).files[0];
-    console.log(this.fileComment);
   }
 }

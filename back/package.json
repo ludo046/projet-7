@@ -16,7 +16,11 @@
     "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "express-validator": "^6.12.0",
     "fs": "^0.0.1-security",
+    "helmet": "^4.6.0",
+    "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "logwriter": "^1.2.1",
     "multer": "^1.4.2",
@@ -25,10 +29,12 @@
     "nodemon": "^2.0.7",
     "path": "^0.12.7",
     "querystring": "^0.2.0",
+    "ratelimiter": "^3.4.1",
     "save": "^2.4.0",
     "sequelize": "^6.6.2",
     "simple-node-logger": "^18.12.24",
     "socket.io": "^4.1.2",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "ws": "^7.4.6"
   }
 }

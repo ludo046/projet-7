@@ -1,1 +1,5 @@
-<button (click)="likeCommentPost()"><fa-icon [icon]="faThumbsUp"></fa-icon></button>
+<div class="truc-comment">
+    <button *ngIf="commentLiked" (click)="dislikeCommentPost()" ><fa-icon [icon]="faThumbsUp"></fa-icon></button>  
+    <button *ngIf="!commentLiked" (click)="likeCommentPost()"   ><fa-icon [icon]="faHandRock" class="faHandRock"></fa-icon></button>
+    <p class="likes-counter">{{likeCommentNumber?.likes}}</p>
+</div>

@@ -7,16 +7,15 @@ button{
     border-radius: 50%;
     outline: none;
     background-color: rgb(18, 36, 65);
-    position: absolute;
-    right: -40px;
+    //position: absolute;
+    right: 15px;
     height: 40px;
     z-index: 2;
     @media only screen and (min-width : 1224px){
-        right: 15px;
+        right: 40px;
     }
     &:hover{
         transform: scale(1.1);
-        border: 2px solid yellowgreen;
     }
     fa-icon{
         margin-top: 4px;
@@ -24,4 +23,27 @@ button{
     .faHandRock{
         transform: rotate(90deg);
     }
+}
+.likes-counter{
+    font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
+    border: 1px solid rgb(209, 81, 90);
+    border-radius: 50%;
+    height: 10px;
+    width: 25px;
+    font-size: 14px;
+    padding: 5px 0px 20px 10px;
+    position: absolute;
+    right: 30px;
+    top: -10px;
+    z-index: 1;
+    color: white;
+    @media only screen and (min-width : 1224px){
+      left: -15px;
+    }
+  }
+fa-icon{
+    background-color: rgb(18, 36, 65);
+}
+.truc{
+    background-color: rgb(18, 36, 65);
 }

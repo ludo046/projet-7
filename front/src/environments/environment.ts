@@ -8,7 +8,9 @@ export const environment = {
   postUrl: 'http://localhost:8080/api/message/',
   likeUrl: 'http://localhost:8080/api/message/',
   comment: 'http://localhost:8080/api/comment/',
-  likes: 'http://localhost:8080/api/like/'
+  likes: 'http://localhost:8080/api/like/',
+  likeComment: 'http://localhost:8080/api/likeComment/',
+  userUrl: 'http://localhost:8080/api/users/',
 };
 
 

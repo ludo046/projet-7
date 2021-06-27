@@ -20,7 +20,9 @@ export class RegisterComponent implements OnInit {
  
 
   ngOnInit(): void {
+    //formulaire reactive
     this.signupForm = this.formBuilder.group({
+      //controle des champs requis avec un minimum de caractères
       firstName: this.formBuilder.control('',[Validators.required, Validators.minLength(2)]),
       lastName: this.formBuilder.control('',[Validators.required, Validators.minLength(2)]),
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
@@ -31,13 +33,16 @@ export class RegisterComponent implements OnInit {
   }
   onRegister(): void{
     const formRegister = {
+      //recupération des valeur des champs du formulaire 
       firstName: this.signupForm.get('firstName').value,
       lastName: this.signupForm.get('lastName').value,
       password: this.signupForm.get('password').value,
       email: this.signupForm.get('email').value,
     }
+    //abonnementn au service et recupération de la reponse du backend 
     this.UserService.createUser(formRegister).subscribe(result => 
       {
+        //ajout de la reponse au session storage 
         sessionStorage[`session`] = JSON.stringify(result);
         this.router.navigate['/home'];
       })

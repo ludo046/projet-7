@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       models.User.hasMany(models.Messages)
       models.User.hasMany(models.Likes)
       models.User.hasMany(models.Comments)
-      models.User.hasMany(models.Chat)
     }
   };
   User.init({

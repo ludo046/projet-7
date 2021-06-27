@@ -21,7 +21,9 @@ export class SignupComponent implements OnInit {
               private UserService: UsersService) { }
 
   ngOnInit(): void {
+    //reactive form
     this.loginForm = this.formBuilder.group({
+      //controle des champ du formulaire 
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
     });
@@ -29,13 +31,16 @@ export class SignupComponent implements OnInit {
 
   onLogin() {
     const formLogin = {
+      //recupération des valeurs des champs 
         email:  this.loginForm.get('email').value,
         password: this.loginForm.get('password').value        
     };
-    console.log(formLogin);
     
-    this.UserService.logUser(formLogin).subscribe(result => sessionStorage[`session`] = JSON.stringify(result))
-    this.UserService.logUser(formLogin).subscribe(result => this.router.navigate(['home']))
+    //abonnement au service et recuperation de la reponse du backend 
+    //ajout de la reponse au session storage 
+    this.UserService.logUser(formLogin).subscribe(result => sessionStorage[`session`] = JSON.stringify(result));
+    //renvoie vers la page home 
+    this.UserService.logUser(formLogin).subscribe(() => this.router.navigate(['home']));
     
 
   }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -18,6 +18,7 @@ export class MessageService {
   }
 
   getPost(): Observable<any>{
+    //appel au backend pour recuperer une reponse dans le composant
     return this.httpClient.get(`${this.postUrl}`);
   }
   getOnePost(messageId: string):Observable<any>{

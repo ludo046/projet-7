@@ -19,3 +19,5 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(this.newRequest);
   }
 }
+
+//intercepte chaque requette pour y injecter le headers d'autorization 

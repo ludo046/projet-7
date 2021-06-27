@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component';
@@ -13,8 +12,6 @@ import { HomeComponent } from './composants/home/home.component';
 import { NavComponent } from './composants/home/nav/nav.component';
 import { SinglePostComponent } from './composants/home/single-post/single-post.component';
 import { AccountComponent } from './composants/home/account/account.component';
-import { MessageComponent } from './composants/home/message/message.component';
-import { SingleMessageComponent } from './composants/home/message/single-message/single-message.component';
 import { UsersService } from './service/users.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -38,7 +35,6 @@ export const ROUTES : Routes = [
   { path: 'signup', component: SignupComponent},
   { path: 'home', component: HomeComponent },
   { path: 'account', component: AccountComponent },
-  { path: 'message', component: MessageComponent },
   { path: 'modify-account', component: ModifyAccountComponent },
   { path: 'modify-post/:postId', component: ModifyPostComponent },
   { path: 'modify-comment/:commentId', component: ModifyCommentComponent },
@@ -56,8 +52,6 @@ export const ROUTES : Routes = [
     NavComponent,
     SinglePostComponent,
     AccountComponent,
-    MessageComponent,
-    SingleMessageComponent,
     WriteMessageComponent,
     LikeComponent,
     DeletePostComponent,
@@ -76,7 +70,6 @@ export const ROUTES : Routes = [
     FontAwesomeModule,
     ScrollingModule,
     FormsModule,
-    NgbModule,
     AppRoutingModule,
 
   ],

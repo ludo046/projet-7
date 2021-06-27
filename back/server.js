@@ -2,6 +2,7 @@
 const express = require('express');
 const apiRouter = require('./apiRouter').router;
 const path = require('path');
+const helmet = require('helmet')
 
 
 
@@ -10,7 +11,8 @@ const server = express();
 
 //parser config
 server.use(express.urlencoded({ extended:true }));
-server.use(express.json())
+server.use(express.json());
+server.use(helmet());
 
 //configure routes
 server.use('/', function(req,res,next){
@@ -20,17 +22,17 @@ server.use('/', function(req,res,next){
     next();
 });
 
-const http = require('http');
-const httpServer = http.Server(server);
+let http = require('http');
+let httpServer = http.Server(server);
 
-const socketIO = require('socket.io');
-const io = socketIO(httpServer)
+let socketIO = require('socket.io');
+let io = socketIO(httpServer);
 
 server.use('/api/', apiRouter);
 server.use('/images', express.static(path.join(__dirname, 'images')));
 
 //launch server
-server.listen(8080, function(){
+httpServer.listen(8080, function(){
     console.log('Server en écoute :)');
 })
 
@@ -40,6 +42,9 @@ io.on('connection', (socket) => {
         socket.broadcast.to(data.room).emit('user joined')
     });
     socket.on('message', (data) => {
-        io.in(data.room).emit('new message', {user:data.user, message: data.message})
-    })
-})
+        io.in(data.room).emit('new message', {user:data.user, message: data.message});
+    });
+    socket.on('disconnect', (data) => {
+        console.log('user disconnect');
+    });
+});

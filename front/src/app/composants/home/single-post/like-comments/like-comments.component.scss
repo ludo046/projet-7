@@ -8,16 +8,44 @@ button{
     outline: none;
     background-color: rgb(18, 36, 65);
     height: 40px;
-    position: absolute;
-    right: -70px;
+    //position: absolute;
+    right: 20px;
+    top: 20px;
+    margin-top: 15px;
+    z-index: 1;
     @media only screen and (min-width : 1224px){
-        left: 470px;
+        right: 40px;
     }
     &:hover{
         transform: scale(1.1);
     }
     fa-icon{
         margin-top: 5px;
+        background-color: rgb(18, 36, 65);
+    }
+    .faHandRock{
+        transform: rotate(90deg);
     }
    
 }
+.likes-counter{
+    font-family: "montserrat-regular", Arial, Helvetica, sans-serif;
+    border: 1px solid rgb(209, 81, 90);
+    border-radius: 50%;
+    height: 10px;
+    width: 25px;
+    font-size: 14px;
+    padding: 5px 0px 20px 10px;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    z-index: 0;
+    color: white;
+    @media only screen and (min-width : 1224px){
+      right: 30px;
+    }
+  }
+  .truc-comment{
+    background-color: #6c81a3;
+  }
+
