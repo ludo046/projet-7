@@ -3,7 +3,7 @@ const express = require('express');
 const apiRouter = require('./apiRouter').router;
 const path = require('path');
 const helmet = require('helmet')
-
+require('dotenv').config();
 
 
 //instantiate server
@@ -16,7 +16,7 @@ server.use(helmet());
 
 //configure routes
 server.use('/', function(req,res,next){
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Origin', process.env.ORIGIN);
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
