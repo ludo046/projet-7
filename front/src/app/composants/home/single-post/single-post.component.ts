@@ -23,6 +23,7 @@ export class SinglePostComponent {
  public fileComment: File;
  public comments: [];
  public connectUserId = JSON.parse(sessionStorage.getItem('session')).userId;
+ public isAdmin = JSON.parse(sessionStorage.getItem('session')).isAdmin;
 
 
   constructor(private messageService: MessageService,
