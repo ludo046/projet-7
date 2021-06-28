@@ -189,9 +189,7 @@ module.exports = {
     const headerAuth  = req.headers['authorization'];
     const userId      = jwtUtils.getUserId(headerAuth);
     const messageId = parseInt(req.params.messageId);
-
-    console.log(userId);
-    console.log(messageId);
+    
     models.Likes.findAll(),
     
     models.Likes.findOne({
