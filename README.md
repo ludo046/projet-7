@@ -12,7 +12,9 @@ Cloner le projet, puis :
    # database:
    - créé une base de données SQL
    
-   - modifier les informations dans le fichier config.json 
+   - modifier les informations dans le fichier config.json
+
+   - modifier les informations dans le fichier .env_prod et renommer le en .env
    
    - pour créé un admin le front et le back doivent etre lancer créé un compte utilisateur, un fois l'utilisateur créé connectez vous a mysql et entrer                   cette commande `UPDATE Users  set isAdmin = '1' where id = 'id de l'utilisateur a passer admin'`
    
