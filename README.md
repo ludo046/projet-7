@@ -8,7 +8,7 @@ Base de données SQL
 Cloner le projet, puis :
   
    # database:
-   - créer une base de données SQL 
+   - créer une base de données SQL appeler `database_development_groupomania`
    
    - si vous avez `mySql WorKbench` allez dans `local instance` ouvrez le fichier `datebase_groupomania.sql` à l'interieur, et exécuter.
      toutes les tables seront automatiquement créées.
