@@ -8,7 +8,6 @@ Base de données SQL
 Cloner le projet, puis :
   
    # database:
-   - créer une base de données SQL appeler `database_development_groupomania`
    
    - si vous avez `mySql WorKbench` allez dans `local instance` ouvrez le fichier `datebase_groupomania.sql` à l'interieur, et exécuter.
      toutes les tables seront automatiquement créées.
@@ -18,8 +17,6 @@ Cloner le projet, puis :
 
    - modifier les informations dans le fichier .env_prod et renommer le en .env
    
-   - pour créé un admin le front et le back doivent etre lancer créé un compte utilisateur, un fois l'utilisateur créé connectez vous a mysql et entrer                   cette commande `UPDATE Users  set isAdmin = '1' where id = 'id de l'utilisateur a passer admin'`
-
 
    # backend
    
