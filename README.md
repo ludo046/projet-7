@@ -11,10 +11,9 @@ Cloner le projet, puis :
    
    - si vous avez `mySql WorKbench` allez dans `local instance` ouvrez le fichier `datebase_groupomania.sql` à l'interieur, et exécuter.
      toutes les tables seront automatiquement créées.
-   - si vous n'avez pas `mySql Workbench` ouvrez un termial et taper `SOURCE leCheminVers/leFichierDatabase_groupomania`et exécutez le.
+   - si vous n'avez pas `mySql Workbench` ouvrez un termial `SQL` et taper `SOURCE leCheminVers/leFichierDatabase_groupomania`et exécutez le.
      toutes les tables seront automatiquement créées.
  
-
    - modifier les informations dans le fichier .env_prod et renommer le en .env
    
 
