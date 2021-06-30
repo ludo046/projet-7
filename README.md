@@ -9,7 +9,7 @@ Cloner le projet, puis :
   
    # database:
    
-   - si vous avez `mySql WorKbench` allez dans `local instance` ouvrez le fichier `datebase_groupomania.sql` à l'interieur, et exécuter.
+   - si vous avez `mySql WorKbench` allez dans `local instance` ouvrez le fichier `database_groupomania.sql` à l'interieur, et exécuter.
      toutes les tables seront automatiquement créées.
    - si vous n'avez pas `mySql Workbench` ouvrez un termial `SQL` et taper `SOURCE leCheminVers/leFichierDatabase_groupomania`et exécutez le.
      toutes les tables seront automatiquement créées.
