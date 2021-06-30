@@ -169,9 +169,10 @@ ul{
         @media only screen and (min-width : 1224px){
           border: none;
           background-color: rgb(82, 100, 129);
-          padding: 17px 0 10px 40px;
+          padding: 17px 0 10px 450px;
+          margin-left: -600px;
           top: 96px;
-          width: 50%;
+          width: 15%;
         }
       }
       
@@ -444,7 +445,7 @@ ul{
               padding: 17px 0 10px 440px;
               top: 96px;
               width: 50%;
-              margin-left: -450px;
+              margin-left: -600px;
               top: 70px;
             }
           }
@@ -469,6 +470,7 @@ ul{
           #menuToggle input:checked ~ ul
           {
             transform: none;
+            background-color: rgb(82, 100, 129);
           }
           .likeComment{
             position: absolute;

@@ -1,4 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ne } from 'sequelize/types/lib/operators';
 import { CommentService } from 'src/app/service/comment.service';
 import { MessageService } from 'src/app/service/message.service';
 
@@ -10,6 +12,8 @@ import { MessageService } from 'src/app/service/message.service';
 export class HomeComponent implements OnInit {
   @Output() allPost: [];
   @Output() allComment: [];
+  //allposts = new BehaviorSubject()
+  
 
   constructor(
     private messageService: MessageService,
@@ -25,6 +29,7 @@ export class HomeComponent implements OnInit {
     //abonnement au service et recuperation de la repose du backend
     this.messageService.getPost().subscribe((posts) => {
       this.allPost = posts;
+      let allposts = new BehaviorSubject(posts)
     });
   }
   newComment(): void {
