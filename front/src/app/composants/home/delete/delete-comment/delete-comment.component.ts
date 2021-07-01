@@ -1,34 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input} from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { CommentService } from 'src/app/service/comment.service';
+import { MessageService } from 'src/app/service/message.service';
+import { HomeComponent } from '../../home.component';
+import { ModifyCommentComponent } from '../../modify/modify-comment/modify-comment.component';
 
 @Component({
   selector: 'app-delete-comment',
   templateUrl: './delete-comment.component.html',
   styleUrls: ['./delete-comment.component.scss']
 })
-export class DeleteCommentComponent implements OnInit {
+export class DeleteCommentComponent{
 
   @Input() commentId: number;
-  public allComment: [];
 
-  constructor(private commentService: CommentService) { }
 
-  ngOnInit(): void {
-    //this.deleteComment()
-    this.newComment()
-  }
+  constructor(private commentService: CommentService,
+              private messageService: MessageService,
+              private homeComponent: HomeComponent,
+) { }
+
   //fonction de suppression d'un commentaire 
-  deleteComment(){
+  deleteComment(){  
     //abonnement au service 
     this.commentService.deleteComment(this.commentId).subscribe(() => {
       //rappel de la fonction de recuperation des commentaires
-      this.newComment();
+      this.homeComponent.newComment();
+      console.log(this.homeComponent.newComment());
+      
     })
-  }
-  //fontion de recuperation des commentaire 
-  newComment(): void {
-    this.commentService.getComment().subscribe((comments) => {
-      this.allComment = comments;
-    });
   }
 }

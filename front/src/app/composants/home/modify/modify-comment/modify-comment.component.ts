@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { CommentService } from 'src/app/service/comment.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { CommentService } from 'src/app/service/comment.service';
 })
 export class ModifyCommentComponent implements OnInit {
 
-  modifyComment: FormGroup;
-  file: File;
-  oneComment: [];
+   public modifyComment: FormGroup;
+   public file: File;
+   public oneComment: {content: [object]};
 
   constructor(private formBuilder: FormBuilder,
               private commentService: CommentService) { }
@@ -27,7 +28,8 @@ export class ModifyCommentComponent implements OnInit {
     });
   }
   updateComment(){
-    //recupération des valeur du formulaire 
+    //recupération des valeur du formulaire
+    this.getOneComment();
     const content = this.modifyComment.get('content').value;
     const commentId = window.location.href.split('comment/')[1]
     const attachment = this.file
@@ -41,6 +43,7 @@ export class ModifyCommentComponent implements OnInit {
     //abonnement au service et recuperation de la reponse du backend
     this.commentService.getOneComment(commentId).subscribe(singlePost => {
       this.oneComment = singlePost;
+      let comment = new BehaviorSubject(singlePost);
     })
   }
 

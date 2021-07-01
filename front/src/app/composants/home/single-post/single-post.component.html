@@ -70,7 +70,7 @@
             </div>
             
         </div>
-        <div *ngFor='let comment of comments'>
+        <div *ngFor='let comment of allComment'>
         <div class="view-comment" *ngIf="comment.messageId === post.id">
             <div class="comment-container" *ngIf="post.id === comment.messageId">
                 

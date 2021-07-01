@@ -15,6 +15,7 @@ export class SinglePostComponent {
   
  fullPathname = 'assets/images/userPicture.png'
  @Input() allPost: [];
+ @Input() allComment: [];
  public userId: [];
  public oneUserProfil: [];
  public faComment = faChevronRight;
@@ -52,7 +53,7 @@ export class SinglePostComponent {
 
   newcomment():void{
     this.commentService.getComment().subscribe(comments => {
-      this.comments = comments
+      this.allComment = comments
     });
   }
 

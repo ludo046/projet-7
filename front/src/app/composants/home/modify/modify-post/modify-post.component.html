@@ -1,9 +1,9 @@
 <app-header></app-header>
 <app-nav></app-nav>
-  <form *ngFor="let post of onePost" [formGroup]="modifyPost" >
+  <form  [formGroup]="modifyPost" >
     <h1>Modifier votre publication : </h1>
     <div class="form-group"> 
-       <textarea class="message form-control" formControlName="modifycontent" [(ngModel)]="post.content" ></ng-content>></textarea>
+       <textarea class="message form-control" formControlName="modifycontent" [(ngModel)]="onePost.content" ></ng-content></textarea>
     </div>
     <div class="picture">
         <p>Pièce jointe : <img [src]="" alt=""></p>

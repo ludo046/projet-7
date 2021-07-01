@@ -9,10 +9,10 @@ import { MessageService } from 'src/app/service/message.service';
 })
 export class ModifyPostComponent implements OnInit {
 
-  private modifyPost: FormGroup;
+  public modifyPost: FormGroup;
   @Input() postId: number;
   public file: File;
-  public onePost:[];
+  public onePost: {content: [object]};
 
   constructor(private formBuilder: FormBuilder,
               private messageService: MessageService) { }

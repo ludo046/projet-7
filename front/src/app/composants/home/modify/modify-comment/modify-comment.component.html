@@ -1,9 +1,9 @@
 <app-header></app-header>
 <app-nav></app-nav>
-  <form [formGroup]="modifyComment" *ngFor="let comment of oneComment">
+  <form [formGroup]="modifyComment">
     <h1>Modifier votre commentaire : </h1>
     <div class="form-group"> 
-       <textarea class="message form-control" formControlName="content" [(ngModel)]="comment.content"></textarea>
+       <textarea class="message form-control" formControlName="content" [(ngModel)]="oneComment.content"></textarea>
     </div>
     <div class="picture">
         <p>Pièce jointe : <img [src]="" alt=""></p>

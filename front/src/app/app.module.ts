@@ -73,7 +73,7 @@ export const ROUTES : Routes = [
     AppRoutingModule,
 
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, UsersService, MessageService, FormBuilder, HttpClientModule, HttpClient, FooterComponent],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, UsersService, MessageService, FormBuilder, HttpClientModule, HttpClient, FooterComponent, ModifyCommentComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
