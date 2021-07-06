@@ -1,7 +1,7 @@
 
-<ul class="list-group">
+<ul>
     <cdk-virtual-scroll-viewport itemSize = "500" class = "viewport"> 
-    <li class="list-group-item">
+    <li>
         <div class="post" *cdkVirtualFor='let post of allPost' >
             <div class="top">
                 <div class="picture" *ngIf="post.User.picture">

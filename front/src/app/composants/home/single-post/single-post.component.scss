@@ -12,6 +12,7 @@ ul{
   .viewport{
     margin-top: 20px;
     height: 100vh;
+
     .post{
       background-color: $primarycolor;
       margin-bottom: 30px;
@@ -210,8 +211,10 @@ ul{
       width: 100%;
       display: flex;
       justify-content: center;
+      background-color: $primarycolor;
       img{
-        width: 100%;
+        //width: 100%;
+        max-width: 350px;
         border-radius: 10px;
         margin: 0 auto;
       }
@@ -233,7 +236,8 @@ ul{
      margin: 0 auto;   
     }
     .user-picture-profile{
-      background-color: rgb(18, 36, 65);
+      background-color: #a7bde0;
+      border-radius: 50% 0 0 50%;
     }
     .user-picture{
       width: 80px;
@@ -241,7 +245,7 @@ ul{
       border-radius: 50% 0 0 50%;
       border: 1px solid $bordercolor;
       border-right: none;
-      background-color: $primarycolor;
+      background-color: #a7bde0;
       img{
         width: 80px;
         height: 80px;
@@ -254,9 +258,9 @@ ul{
       width: 100%;
       background-color: $primarycolor;
       .message{
-        height: 80px;
-        width: 90%;
-        background-color: $primarycolor;
+        height: 83px;
+        width: 80%;
+        background-color: #a7bde0;
         border-top: 1px solid rgb(209, 81, 90);
         border-left:none;
         border-bottom: 1px solid rgb(209, 81, 90);
@@ -266,13 +270,13 @@ ul{
         color: white;
       }
       .button-comment{
-        margin-top: 1px;
+        margin-top: 5px;
         background-color: $primarycolor;
         .picture{
           background-color: $primarycolor;
         }
         .button{
-          background-color: $primarycolor;
+          background-color: #a7bde0;
         }
         label{
           color: white;
@@ -294,7 +298,7 @@ ul{
           border-radius: 5px;
           padding: 5px 12px;
           border: 1px solid rgb(209, 81, 90);
-          margin-bottom: 10px;
+          margin-top: 33px;
           color: $fontcolor;
           background-color: $primarycolor;
          }
@@ -525,4 +529,7 @@ fa-icon{
 }
 .svg-inline--fa.fa-w-14{
   background-color: $primarycolor;
+}
+.cdk-virtual-scroll-content-wrapper{
+  width: 100%;
 }
